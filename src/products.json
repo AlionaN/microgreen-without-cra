@@ -1,0 +1,110 @@
+[
+  {
+    "id": 10,
+    "categoryId": 0,
+    "title": "Arugula",
+    "description": "Arugula – also called salad rocket – is known mainly in Italian cuisine as a spicy salad ingredient. It belongs to the mucus-forming seeds and is a light germ, so you should not cover the seeds for germination and spray them daily with water.",
+    "size": 50,
+    "image": "arugula.jpg",
+    "price": 2
+  },
+  {
+    "id": 11,
+    "categoryId": 0,
+    "title": "Chia",
+    "description": "Best Chia seeds from European organic cultivation.",
+    "size": 100,
+    "image": "chia.jpg",
+    "price": 4.5
+  },
+  {
+    "id": 12,
+    "categoryId": 0,
+    "title": "Daikon Radish",
+    "description": "Daikon radish is an essential ingredient of Asian cuisine. It gained its popularity through its many different uses and its healthy ingredients.",
+    "size": 50,
+    "image": "daikon.jpg",
+    "price": 10
+  },
+  {
+    "id": 13,
+    "categoryId": 0,
+    "title": "Spinach",
+    "description": "Even if Popeye prefers the canned version, we can highly recommend spinach as a microgreen! The mild, slightly bitter-salty taste is simply great – and super healthy on top of that.",
+    "size": 75,
+    "image": "spinash.jpg",
+    "price": 8.6
+  },
+  {
+    "id": 14,
+    "categoryId": 1,
+    "title": "Hemp Mat",
+    "description": "It comes in dry and compressed form and can therefore be stored very well. Both as a growing medium for your private microgreen cultivation or for commercial microgreen projects, it offers a practical base. One hemp fiber mat fits perfectly in a 1010 tray.",
+    "amount": 10,
+    "image": "mat.jpg",
+    "price": 3.59
+  },
+  {
+    "id": 15,
+    "categoryId": 1,
+    "title": "Pressure sprayer",
+    "description": "High-quality pressure storage sprayer with a capacity of 1.75 litres for microgreen professionals. Spray in any position (360° function). Rotating and adjustable brass nozzle.",
+    "amount": 1,
+    "image": "sprayer.jpg",
+    "price": 16.9
+  },
+  {
+    "id": 16,
+    "categoryId": 1,
+    "title": "Coconut Soil Brick",
+    "description": "Coconut soil is a great alternative to the classic soil. It comes in dry and pressed form and can therefore be stored very well. It provides a practical basis for both your Grow-Grow Nut and other Microgreen projects.",
+    "amount": 10,
+    "image": "soilBricks.jpg",
+    "price": 4.9
+  },
+  {
+    "id": 17,
+    "categoryId": 1,
+    "title": "Miron Violet Glass Apothecary Bottle",
+    "description": "Our Mironglas Apothecary Bottles are ideal for storing your larger quantities of seeds.",
+    "amount": 1,
+    "image": "jar.jpg",
+    "price": 59.9
+  },
+  {
+    "id": 18,
+    "categoryId": 2,
+    "title": "Heimgart Microgreens Starter Kit",
+    "description": "Heimgart works without earth, additional watering and green thumbs. Only once watered, the first leaflets of the young seedlings sprout after only a few days.",
+    "amount": 1,
+    "image": "heimgartStarterPack.jpg",
+    "price": 29.9
+  },
+  {
+    "id": 19,
+    "categoryId": 2,
+    "title": "Grow-Grow Nut Refill Package “Asian Festival”",
+    "description": "Need a refill for your Grow-Grow Nut? This refill pack contains three coco soil bricks and the familiar seed varieties from your starter pack (Radish Daikon, Pak Choi & Kohlrabi Red).",
+    "amount": 1,
+    "image": "asianFestival.jpg",
+    "price": 10.9
+  },
+  {
+    "id": 20,
+    "categoryId": 2,
+    "title": "Grow-Grow Nut Refill Pack “The Mikro Greens”",
+    "description": "Need a refill for your Grow-Grow Nut? This refill pack contains three coco soil bricks and the familiar seed varieties from your starter pack (Mizuna, Cress & Red Cabbage).",
+    "amount": 1,
+    "image": "refillerTheMikroGreens.jpg",
+    "price": 10.9
+  },
+  {
+    "id": 21,
+    "categoryId": 2,
+    "title": "Grow-Grow Nut Starter Set",
+    "description": "From the shopping bag to the To Go cup to the cutlery – we produce an incredible amount of plastic waste. The Grow-Grow Nut allows you to grow Microgreens at home on your window sill – plastic-free! The Grow-Grow Nut is 100% biodegradable and just looks great. The first completely biodegradable microgreen breeding kit – Let’s grow!",
+    "amount": 1,
+    "image": "growGrowNut.jpg",
+    "price": 12.9
+  }
+]

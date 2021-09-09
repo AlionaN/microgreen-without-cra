@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noResolve": false,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "sourceMap": true,
+    "module": "ESNext",
+    "target": "ES6",
+    "allowJs": true,
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "jsx": "react-jsx",
+    "paths": {
+      "@components": ["./src/components/*"],
+      "@constants": ["./src/constants/*"],
+      "@enums": ["./src/enums/*"],
+      "@features": ["./src/features/*"],
+      "@interfaces": ["./src/interfaces/*"],
+      "@pages": ["./src/pages/*"],
+      "@router": ["./src/router/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,33 @@
+@import '../../../mixins.scss';
+.about {
+  display: flex;
+  @include container;
+  &Img {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+  }
+  &Info {
+    margin-left: 20px;
+    &Title {
+      @include title;
+      margin-bottom: 10px;
+    }
+  }
+}
+.products {
+  width: 90%;
+  margin: 20px auto;
+  text-align: center;
+  &Title {
+    @include title;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+}
+.toShop {
+  @include shadowedBtn;
+  &:hover {
+    @include shadowedBtnHover;
+  }
+}

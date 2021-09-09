@@ -1,0 +1,71 @@
+@import '../../../mixins.scss'; 
+.contacts {
+  @include container;
+  display: flex;
+  &Image {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+  }
+  &Info {
+    margin-left: 20px;
+    width: 45%;
+    &Title {
+      @include title;
+    }
+    &Wrap {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      a {
+        color: #000;
+      }
+    }
+  }
+  &Follow {
+    margin-top: 20px;
+    &Title {
+      @include title;
+      font-size: 1.4rem;
+    }
+    &Socials {
+      display: flex;
+      margin-top: 10px;
+      & > * + * {
+        margin-left: 10px;
+      }
+      img {
+        width: 40px;
+      }
+    }
+  }
+}
+
+.form {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  background-color: #eeeeee;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 20px;
+  &Input,
+  &Textarea {
+    background-color: transparent;
+    border: 1px #aeaeae solid;
+    padding: 4px 4px 2px;
+    border-radius: 3px;
+    width: 98%;
+    display: block;
+  }
+  &Textarea {
+    resize: none;
+  }
+  & > * + * {
+    margin-top: 10px;
+  }
+  &Btn {
+    width: 50%;
+  }
+}

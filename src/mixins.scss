@@ -1,0 +1,28 @@
+@mixin title {
+  font-weight: bold;
+  font-size: 2rem;
+  text-transform: capitalize;
+}
+
+@mixin shadowedBtn {
+  background-color: #ffffff;
+  color: #121212;
+  box-shadow: 1px 1px 4px #000;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  padding: 7px 15px;
+  text-decoration: none;
+  transition: .5s all;
+}
+
+@mixin shadowedBtnHover {
+  background-color: #6d9767;
+  color: #fff;
+  cursor: pointer;
+}
+
+@mixin container {
+  width: 90%;
+  margin: 20px auto;
+}

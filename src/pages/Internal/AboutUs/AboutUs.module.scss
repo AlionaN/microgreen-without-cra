@@ -1,0 +1,48 @@
+@import '../../../mixins.scss';
+.aboutUs {
+  @include container;
+}
+.team {
+  display: flex;
+  &Info {
+    margin-right: 20px;
+    &Title {
+      @include title;
+      margin-bottom: 10px;
+    }
+  }
+  &Image {
+    width: 50%;
+  }
+}
+.history {
+  padding: 20px 0;
+  &Title {
+    @include title;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  &Steps {
+    display: flex;
+    justify-content: space-around;
+    &Item {
+      border-radius: 100%;
+      background-color: #e8f9d9;
+      max-width: 300px;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 25px;
+      &Year {
+        font-weight: bold;
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+      &Descr {
+        text-align: center;
+      }
+    }
+  }
+}
