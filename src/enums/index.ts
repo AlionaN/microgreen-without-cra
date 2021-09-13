@@ -1,1 +1,1 @@
-export { default } from './routes.enum';
+export * from './routes.enum';

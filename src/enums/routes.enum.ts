@@ -1,7 +1,6 @@
-/* eslint-disable import/prefer-default-export */
 /* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
-enum Routes {
+export enum Routes {
   Root = '/',
   Error404 = '/404',
   AboutUs = '/about-us',
@@ -10,5 +9,3 @@ enum Routes {
   Payment = '/payment',
   Shop = '/shop',
 }
-
-export default Routes;

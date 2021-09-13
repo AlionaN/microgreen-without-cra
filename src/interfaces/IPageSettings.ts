@@ -1,4 +1,4 @@
-import Routes from '../enums';
+import { Routes } from '../enums';
 
 export interface IPageSettings {
   path: Routes;

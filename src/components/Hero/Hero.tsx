@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './Hero.module.scss';
-import IMG_PATH from '@constants';
+import { IMG_PATH } from '@constants';
 
-const Hero: React.FC = () => {
+export const Hero: React.FC = () => {
   const img = `${IMG_PATH}hero.jpg`;
   return (
     <div className={styles.hero} style={{ backgroundImage: `url(${img})` }}>
@@ -16,5 +16,3 @@ const Hero: React.FC = () => {
     </div>
   );
 }
-
-export default Hero;

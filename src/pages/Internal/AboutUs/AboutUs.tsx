@@ -1,9 +1,8 @@
-/* eslint-disable max-len */
 import React from 'react';
 import styles from './AboutUs.module.scss';
-import IMG_PATH from '@constants';
+import { IMG_PATH } from '@constants';
 
-const AboutUs: React.FC = () => {
+export const AboutUs: React.FC = () => {
   return (
     <div className={styles.aboutUs}>
       <div className={styles.team}>
@@ -33,5 +32,3 @@ const AboutUs: React.FC = () => {
     </div>
   );
 }
-
-export default AboutUs;

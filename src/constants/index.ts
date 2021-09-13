@@ -1,2 +1,2 @@
 export * from './page-settings';
-export { default } from './constants';
+export * from './constants';

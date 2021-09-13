@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Contacts.module.scss';
-import IMG_PATH from '@constants';
-import Button from '@components/Button';
+import { IMG_PATH } from '@constants';
+import { Button } from '@components/Button';
 
-const Contacts: React.FC = () => {
+export const Contacts: React.FC = () => {
   return (
     <div className={styles.contacts}>
       <img className={styles.contactsImage} src={`${IMG_PATH}contacts.jpg`} alt="Contacts" />
@@ -34,5 +34,3 @@ const Contacts: React.FC = () => {
     </div>
   );
 }
-
-export default Contacts;

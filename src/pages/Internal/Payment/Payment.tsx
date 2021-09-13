@@ -1,9 +1,8 @@
-/* eslint-disable max-len */
 import React from 'react';
 import styles from './Payment.module.scss';
-import IMG_PATH from '@constants';
+import { IMG_PATH } from '@constants';
 
-const Payment: React.FC = () => {
+export const Payment: React.FC = () => {
   return (
     <div className={styles.payment}>
       <div className={styles.paymentTitle}>Payment</div>
@@ -27,5 +26,3 @@ const Payment: React.FC = () => {
     </div>
   );
 }
-
-export default Payment;

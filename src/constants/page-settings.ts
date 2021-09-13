@@ -1,5 +1,5 @@
 import { IPageSettings } from '../interfaces';
-import Routes from '../enums';
+import { Routes } from '../enums';
 
 export const RootPageSettings: IPageSettings = Object.freeze({
   path: Routes.Root,

@@ -1,9 +1,8 @@
-/* eslint-disable max-len */
 import React from 'react';
 import styles from './Delivery.module.scss';
-import IMG_PATH from '@constants';
+import { IMG_PATH } from '@constants';
 
-const Delivery: React.FC = () => {
+export const Delivery: React.FC = () => {
   return (
     <div className={styles.delivery}>
       <div className={styles.deliveryTitle}>Delivery</div>
@@ -34,5 +33,3 @@ const Delivery: React.FC = () => {
     </div>
   );
 }
-
-export default Delivery;
