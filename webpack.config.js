@@ -132,13 +132,11 @@ module.exports = {
     },
   },
   optimization: optimization(),
+  target: 'web',
   devServer: {
     port: 4200,
-    hot: isDev,
-    historyApiFallback: true,
-    static: {
-      publicPath: '/',
-    }
+    static: true,
+    historyApiFallback: true
   },
   plugins: plugins(),
   module: {
