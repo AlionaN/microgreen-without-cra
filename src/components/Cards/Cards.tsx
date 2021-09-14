@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Cards.module.scss';
-import { Card } from '@components/Card';
-import { ICard } from '@interfaces/card.interface';
+import { Card } from '@/components/Card';
+import { ICard } from '@/interfaces/card.interface';
 
 interface IProps {
   cardsList: ICard[]

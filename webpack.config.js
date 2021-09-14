@@ -122,13 +122,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.ts', '.tsx', '.scss', '.json'],
     alias: {
-      '@components': path.resolve(__dirname, 'src/components'),
-      '@constants': path.resolve(__dirname, 'src/constants'),
-      '@enums': path.resolve(__dirname, 'src/enums'),
-      '@features': path.resolve(__dirname, 'src/features'),
-      '@interfaces': path.resolve(__dirname, 'src/interfaces'),
-      '@pages': path.resolve(__dirname, 'src/pages'),
-      '@router': path.resolve(__dirname, 'src/router'),
+      '@': path.resolve(__dirname, 'src'),
     },
   },
   optimization: optimization(),

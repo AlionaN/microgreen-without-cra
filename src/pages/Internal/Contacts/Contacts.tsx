@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Contacts.module.scss';
-import { IMG_PATH } from '@constants';
-import { Button } from '@components/Button';
+import { IMG_PATH } from '@/constants';
+import { Button } from '@/components/Button';
 
 export const Contacts: React.FC = () => {
   return (

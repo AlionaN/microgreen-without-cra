@@ -1,6 +1,6 @@
 import React from 'react';
-import { Main } from '@components/AppLayout';
-import { Button } from '@components/Button';
+import { Main } from '@/components/AppLayout';
+import { Button } from '@/components/Button';
 
 export const Error404: React.FC = () => {
   return (

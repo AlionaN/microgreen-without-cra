@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './Home.module.scss';
-import { Cards } from '@components/Cards';
-import { Hero } from '@components/Hero';
+import { Cards } from '@/components/Cards';
+import { Hero } from '@/components/Hero';
 import products from '../../../products';
-import { ICard } from '@interfaces/card.interface';
-import { IMG_PATH } from '@constants';
+import { ICard } from '@/interfaces/card.interface';
+import { IMG_PATH } from '@/constants';
 
 export const Home: React.FC = () => {
   const randomCards = (): ICard[] => {

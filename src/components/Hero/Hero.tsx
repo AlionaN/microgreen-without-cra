@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './Hero.module.scss';
-import { IMG_PATH } from '@constants';
+import { IMG_PATH } from '@/constants';
 
 export const Hero: React.FC = () => {
   const img = `${IMG_PATH}hero.jpg`;

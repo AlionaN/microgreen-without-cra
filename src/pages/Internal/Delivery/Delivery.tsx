@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Delivery.module.scss';
-import { IMG_PATH } from '@constants';
+import { IMG_PATH } from '@/constants';
 
 export const Delivery: React.FC = () => {
   return (

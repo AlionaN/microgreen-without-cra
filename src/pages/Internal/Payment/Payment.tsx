@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Payment.module.scss';
-import { IMG_PATH } from '@constants';
+import { IMG_PATH } from '@/constants';
 
 export const Payment: React.FC = () => {
   return (

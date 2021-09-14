@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./dist",
-    "baseUrl": "src",
+    "baseUrl": ".",
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
     "noUnusedLocals": true,
@@ -18,13 +18,7 @@
     "resolveJsonModule": true,
     "jsx": "react-jsx",
     "paths": {
-      "@components": ["components/*"],
-      "@constants": ["constants/*"],
-      "@enums": ["enums/*"],
-      "@features": ["features/*"],
-      "@interfaces": ["interfaces/*"],
-      "@pages": ["pages/*"],
-      "@router": ["router/*"]
+      "@/*": ["./src/*"],
     }
   },
   "exclude": ["node_modules"]
