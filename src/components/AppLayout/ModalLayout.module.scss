@@ -1,0 +1,14 @@
+
+.window {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  &Header {
+    display: flex;
+    justify-content: flex-end;
+    &Close {
+      cursor: pointer;
+    }
+  }
+}
+

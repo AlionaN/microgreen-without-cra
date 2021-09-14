@@ -1,15 +1,15 @@
 import React from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
-import { Routes } from '@enums';
-import { Logo } from '@components/Logo';
+import { Routes } from '@/enums';
+import { Logo } from '@/components/Logo';
 import styles from './Header.module.scss';
 
 interface IHeader {
-  onLogInClick?: () => void
+  onSignInClick?: () => void
 }
 
-export const Header: React.FC<IHeader> = ({ onLogInClick }: IHeader) => {
+export const Header: React.FC<IHeader> = ({ onSignInClick }: IHeader) => {
   return (
     <header className={styles.header}>
       <div className={styles.headerInner}>
@@ -34,7 +34,7 @@ export const Header: React.FC<IHeader> = ({ onLogInClick }: IHeader) => {
           </ul>
         </nav>
         <div className={styles.userFunc}>
-          <div className={styles.userFuncAuth} onClick={onLogInClick}>Log in</div>
+          <div className={styles.userFuncAuth} onClick={onSignInClick}>Sign in</div>
           <FaShoppingCart />
         </div>
       </div>
