@@ -1,0 +1,51 @@
+.header {
+  background-color: #e8f9d96e;
+  padding: 10px 0;
+  &Inner {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.nav {
+  &List {
+    display: flex;
+    list-style: none;
+    &Item {
+      a {
+        text-decoration: none;
+        color: #121212;
+        transition: 1s border;
+        &::after {
+          content: '';
+          display: block;
+          width: 100%;
+          height: 2px;
+          background-color: #121212;
+          opacity: 0;
+          margin-top: 2px;
+          transition: .5s all;
+        }
+        &:hover::after {
+          opacity: 1;
+        }
+      }
+    }
+    & > * + * {
+      margin-left: 20px;
+    }
+  }
+}
+.userFunc {
+  display: flex;
+  align-items: center;
+  &Auth {
+    cursor: pointer;
+  }
+}
+
+.cart {
+  margin-left: 20px;
+}

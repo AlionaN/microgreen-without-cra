@@ -1,0 +1,5 @@
+{
+  "port": 5000,
+  "microgreenDB": "mongodb+srv://aliona:568245@cluster0.tasew.mongodb.net/app?retryWrites=true&w=majority",
+  "jwtSecret": "microgreen online shop"
+}
