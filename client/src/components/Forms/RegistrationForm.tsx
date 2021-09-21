@@ -32,7 +32,7 @@ export const RegistrationForm: React.FC = () => {
     isSignIn: false,
   });
 
-  const onSubmit: SubmitHandler<IFormInput> = async () => {
+  const onSubmit: SubmitHandler<IFormInput> = () => {
     dispatch(registerSuccess(userInfo));
   }
 
