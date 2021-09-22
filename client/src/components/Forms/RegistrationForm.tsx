@@ -1,10 +1,11 @@
 import React, { ChangeEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styles from './Forms.module.scss';
-import { registerSuccess } from '@/store/actions';
+// import { registerSuccess } from '@/store/actions';
 import { IUser } from '@/interfaces';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { EMAIL_PATTERN } from '@/constants';
+import { useHttp } from '@/hooks';
 
 interface IFormInput {
   firstName: String,
@@ -19,6 +20,8 @@ export const RegistrationForm: React.FC = () => {
 
   const dispatch = useDispatch();
 
+  const { loading, error, request } = useHttp();
+
   const { register, handleSubmit, formState: { errors, isSubmitted } } = useForm<IFormInput>();
 
   const [userInfo, setUserInfo] = useState<IUser>({
@@ -32,9 +35,16 @@ export const RegistrationForm: React.FC = () => {
     isSignIn: false,
   });
 
-  const onSubmit: SubmitHandler<IFormInput> = () => {
-    dispatch(registerSuccess(userInfo));
-  }
+  // const onSubmit: SubmitHandler<IFormInput> = () => {
+  //   dispatch(registerSuccess(userInfo));
+  // };
+
+  const registerHandler = async () => {
+    try {
+      const data = await request('http://localhost:5000/api/auth/register', 'POST', {...userInfo});
+      console.log(data);
+    } catch(e) {}
+  };
 
   const onInputChange = (e: ChangeEvent): void => {
     const target = e.target as HTMLInputElement;
@@ -45,7 +55,6 @@ export const RegistrationForm: React.FC = () => {
       isSignIn: true,
       [target.name]: target.value
     });
-    console.log(userInfo);
   } 
 
   return (
@@ -54,7 +63,7 @@ export const RegistrationForm: React.FC = () => {
       ? <div className={styles.message}>You are successfully registered</div>
       : <>
       <div className={styles.title}>Registration form</div>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <form className={styles.form}>
         <input 
           className={styles.formInput} 
           {...register('firstName', { required: true, minLength: 2 })} 
@@ -102,7 +111,7 @@ export const RegistrationForm: React.FC = () => {
           onChange={(e) => onInputChange(e)}
         />
         <div className={styles.error}>{errors.password_confirm && "Password confirmation is required"}</div>
-        <input type="submit" className={styles.formBtn} />
+        <input type="submit" className={styles.formBtn} onClick={registerHandler} disabled={loading} />
       </form>
       <div className={styles.message}>If you have already registered, go to the <span className={styles.linkToLogIn}>log in form</span></div>
     </>}
