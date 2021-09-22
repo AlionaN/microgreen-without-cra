@@ -114,7 +114,7 @@ const plugins = () => {
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   mode: 'development',
-  entry:  './index.tsx',
+  entry:  ['babel-polyfill', './index.tsx'],
   output: {
     filename: filename('js'),
     path: path.resolve(__dirname, 'dist'),
