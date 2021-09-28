@@ -6,6 +6,7 @@ import { Hero } from '@/components/Hero';
 import products from '../../../products';
 import { ICard } from '@/interfaces/ICard';
 import { IMG_PATH } from '@/constants';
+import { AppLayout } from '@/components/AppLayout';
 
 export const Home: React.FC = () => {
   const randomCards = (): ICard[] => {
@@ -17,7 +18,7 @@ export const Home: React.FC = () => {
   };
 
   return (
-    <>
+    <AppLayout>
       <Hero />
       <div className={styles.about}>
         <img src={`${IMG_PATH}about.jpg`} className={styles.aboutImg} alt="About microgreen" />
@@ -33,6 +34,6 @@ export const Home: React.FC = () => {
         <Cards cardsList={randomCards()} />
         <NavLink to="/shop" className={styles.toShop}>Go To Shop</NavLink>
       </div>
-    </>
+    </AppLayout>
   );
 }
