@@ -1,5 +1,6 @@
 export interface ICard {
-  id: number,
+  _id: string,
+  __v: number,
   categoryId: number,
   title: string,
   description: string,
