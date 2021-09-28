@@ -1,10 +1,10 @@
-const { Router } = require('express');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const { check, validationResult } = require('express-validator');
-const User = require('../models/User');
-const config = require('config');
-const { imgToBase64 } = require('../utilities/imgToBase64');
+import Router from 'express';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import { check, validationResult } from 'express-validator';
+import User from '../models/User';
+import convertImgToBase64 from '../utilities/imgToBase64';
+import { StatusCodes } from 'http-status-codes';
 const router = Router();
 
 // /api/auth/register
@@ -18,9 +18,10 @@ router.post(
   async (req, res) => {
     try {
       const errors = validationResult(req);
+      console.log(req);
 
       if (errors.isEmpty()) {
-        return res.status(400).json({
+        return res.status(StatusCodes.BAD_REQUEST).json({
           errors: errors.array(),
           message: 'Incorrect data'
         });
@@ -31,12 +32,12 @@ router.post(
       const candidate = await User.findOne({ email });
 
       if (candidate) {
-        return res.status(400).json({ message: 'This user has already registered' });
+        return res.status(StatusCodes.BAD_REQUEST).json({ message: 'This user has already registered' });
       }
 
       const hashedPassword = await bcrypt.hash(password, 12);
 
-      const imgBase64 = imgToBase64(img);
+      const imgBase64 = convertImgToBase64(img);
 
       const user = new User({
         firstName,
@@ -50,9 +51,9 @@ router.post(
 
       await user.save();
 
-      res.status(201).json({ message: 'User successfuly created' });
+      res.status(StatusCodes.CREATED).json({ message: 'User successfuly created' });
     } catch(e) {
-      res.status(500).json({ message: 'Something went wrong. Try again.' })
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: `Something went wrong. Try again. ${e}` })
     }
   }
 );
@@ -69,7 +70,7 @@ router.post(
       const errors = validationResult(req);
   
       if (errors.isEmpty()) {
-        return res.status(400).json({
+        return res.status(StatusCodes.BAD_REQUEST).json({
           errors: errors.array(),
           message: 'Incorrect data'
         });
@@ -80,27 +81,27 @@ router.post(
       const user = await User.findOne({ email });
 
       if(!user) {
-        return res.status(400).json({ message: 'User not found' });
+        return res.status(StatusCodes.BAD_REQUEST).json({ message: 'User not found' });
       }
 
       const isMatch = await bcrypt.compare(password, user.password);
 
       if(!isMatch) {
-        return res.status(400).json({ message: 'Password is incorrect' });
+        return res.status(StatusCodes.BAD_REQUEST).json({ message: 'Password is incorrect' });
       }
 
       const token = jwt.sign(
         { userId: user.id },
-        config.get('jwtSecret'),
+        process.env.JWTSECRET,
         { expiresIn: '1h' }
       );
 
-      res.json({ token, userId });
+      res.json({ token, userId: user.id });
 
     } catch(e) {
-      res.status(500).json({ message: 'Something went wrong. Try again.' })
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Something went wrong. Try again.' })
     }
   }
 );
 
-module.exports = router;
+export default router;

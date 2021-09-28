@@ -1,4 +1,4 @@
-const imgToBase64 = (src) => {
+const convertImgToBase64 = (src) => {
   const img = new Image();
 
   img.crossOrigin = 'Anonymous';
@@ -18,4 +18,4 @@ const imgToBase64 = (src) => {
   return dataURL;
 }
 
-module.exports = imgToBase64;
+export default convertImgToBase64;
