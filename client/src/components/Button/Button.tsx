@@ -3,7 +3,7 @@ import styles from './Button.module.scss';
 import { MouseEvent } from 'react';
 
 interface IProps {
-  btnText: string,
+  btnText: string | JSX.Element,
   classes?: string,
   onClick: (e: MouseEvent<HTMLButtonElement | MouseEvent>) => void,
 }
