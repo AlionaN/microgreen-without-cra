@@ -24,6 +24,10 @@ export const routerConfig: Array<RouteConfig & BreadcrumbsRoute> = [
     component: Error404,
   },
   {
+    path: Routes.Error403,
+    component: Error403,
+  },
+  {
     path: Routes.AboutUs,
     component: AboutUs,
   },
@@ -46,5 +50,17 @@ export const routerConfig: Array<RouteConfig & BreadcrumbsRoute> = [
   {
     path: Routes.Product,
     component: Shop,
-  }
+  },
+  {
+    path: AdminRoutes.Admin,
+    component: Dashboard,
+  },
+  {
+    path: AdminRoutes.Categories,
+    component: Categories,
+  },
+  {
+    path: AdminRoutes.Products,
+    component: Products,
+  },
 ];
