@@ -1,5 +1,5 @@
 import React from 'react';
-import { appStore } from './store/store';
+import appStore from './store/store';
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
