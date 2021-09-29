@@ -1,0 +1,13 @@
+.formAdd {
+  margin-top: 20px;
+  display: flex;
+
+  &Input {
+    display: block;
+    height: 100%;
+  }
+
+  &Btn {
+    margin-left: 10px;
+  }
+}
