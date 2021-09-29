@@ -19,7 +19,6 @@ router.get(
 
     } catch(e) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Something went wrong. Try again.' });
-      console.log(e);
     }
   }
 );
@@ -96,7 +95,6 @@ router.put(
 
       res.status(StatusCodes.OK).send(result).json({ message: 'Category successfully updated' });
 
-      return updatedCategory;
     } catch(e) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Something went wrong. Try again.' });
       console.log(e);
