@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './Card.module.scss';
 import { Button } from '@/components/Button';
-import { ICard } from '@/interfaces/ICard';
+import { IProductFromDB } from '@/interfaces/IProductFromDB';
 import { IMG_PATH } from '@/constants';
 
 type IProps = {
-  card: ICard
+  card: IProductFromDB
 }
 
 export const Card: React.FC<IProps> = ({ card }: IProps) => {

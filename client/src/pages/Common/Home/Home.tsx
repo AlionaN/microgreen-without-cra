@@ -4,12 +4,12 @@ import styles from './Home.module.scss';
 import { Cards } from '@/components/Cards';
 import { Hero } from '@/components/Hero';
 import products from '../../../products';
-import { ICard } from '@/interfaces/ICard';
+import { IProductFromDB } from '@/interfaces/IProductFromDB';
 import { IMG_PATH } from '@/constants';
 import { AppLayout } from '@/components/AppLayout';
 
 export const Home: React.FC = () => {
-  const randomCards = (): ICard[] => {
+  const randomCards = (): IProductFromDB[] => {
     const res = [];
     for (let i = 0; i < products.length; i += 3) {
       res.push(products[i]);
