@@ -1,4 +1,4 @@
-export interface ICard {
+export interface IProductFromDB {
   _id: string,
   __v: number,
   categoryId: number,
