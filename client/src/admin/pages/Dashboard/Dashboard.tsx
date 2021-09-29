@@ -9,5 +9,5 @@ export const Dashboard: React.FC = () => {
         <h1 className={styles.title}>Dashboard</h1>
       </div>
     </AdminLayout>
-  )
-}
+  );
+};
