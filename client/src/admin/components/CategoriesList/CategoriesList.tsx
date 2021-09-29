@@ -1,39 +1,36 @@
 import { Button } from '@/components/Button';
-import { ICategory } from '@/interfaces';
-import React from 'react';
+import { ICategoryFromDB } from '@/interfaces';
+import React, { MouseEvent } from 'react';
 import styles from './CategoriesList.module.scss';
 import { MdModeEdit, MdDelete } from 'react-icons/md';
 
 interface ICategoriesList {
-  categories: ICategory[],
+  categories: ICategoryFromDB[],
+  onEditClick: (e: MouseEvent<HTMLButtonElement | JSX.Element | MouseEvent>) => void,
+  onDeleteClick: (e: MouseEvent<HTMLButtonElement | JSX.Element | MouseEvent>) => void,
 }
 
-export const CategoriesList: React.FC<ICategoriesList> = ({ categories }: ICategoriesList) => {
-
-  const onEditClick = (id: string): void => {
-
-  }
-
-  const onDeleteClick = (id: string): void => {
-    
-  }
+export const CategoriesList: React.FC<ICategoriesList> = ({ categories, onEditClick, onDeleteClick }: ICategoriesList) => {
 
   return (
     <div className={styles.categories}>
       <ul className={styles.categoriesList}>
-        {categories?.map((cat: ICategory) => {
+        {categories && categories.map((cat: ICategoryFromDB) => {
           return (
             <li 
-              className={styles.categoriesListItem}
+              className={`${styles.categoriesListItem} categoryItem`}
+              data-key={cat._id}
               key={cat._id} 
             >
               {cat.title}
-              <Button btnText={<MdModeEdit/>} onClick={() => onEditClick(cat._id)} />
-              <Button btnText={<MdDelete/>} onClick={() => onDeleteClick(cat._id)} />
+              <div className={styles.btns}>
+                <Button btnText={<MdModeEdit/>} onClick={(e) => onEditClick(e)} />
+                <Button btnText={<MdDelete/>} onClick={(e) => onDeleteClick(e)} />
+              </div>
             </li>
           );
         })}
       </ul>
     </div>
-  )
-}
+  );
+};
