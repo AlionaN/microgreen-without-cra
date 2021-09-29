@@ -15,7 +15,7 @@ router.get(
         return res.status(StatusCodes.NOT_FOUND).json({ message: 'There are no categories' });
       }
 
-      res.status(StatusCodes.OK).json({ message: 'Categories successfully found', content: categories });
+      res.status(StatusCodes.OK).send(categories).json({ message: 'Categories successfully found'});
 
     } catch(e) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Something went wrong. Try again.' });
