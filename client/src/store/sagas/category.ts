@@ -9,6 +9,22 @@ import * as actions from '@/store/actions';
 import * as types from '@/store/actionTypes';
 import { ICategory } from '@/interfaces';
 
+interface IPostCategory {
+  type: typeof types.POST_CATEGORY, 
+  payload: ICategory
+}
+
+interface IDeleteCategory {
+  type: typeof types.DELETE_CATEGORY, 
+  payload: string
+}
+
+interface IEditCategory {
+  type: typeof types.EDIT_CATEGORY, 
+  id: string, 
+  payload: ICategory
+}
+
 export function* getCategories() {
   try {
     const response: Response = yield call(api.getCategories);
@@ -19,7 +35,7 @@ export function* getCategories() {
   }
 }
 
-export function* postCategory({type, payload }: { type: typeof types.POST_CATEGORY, payload: ICategory }) {
+export function* postCategory({type, payload }: IPostCategory) {
   try {
     yield api.postCategory(payload);
 
@@ -31,7 +47,7 @@ export function* postCategory({type, payload }: { type: typeof types.POST_CATEGO
   }
 }
 
-export function* deleteCategory({type, payload }: { type: typeof types.DELETE_CATEGORY, payload: string }) {
+export function* deleteCategory({type, payload }: IDeleteCategory) {
   try {
     yield api.deleteCategory(payload);
 
@@ -43,7 +59,7 @@ export function* deleteCategory({type, payload }: { type: typeof types.DELETE_CA
   }
 }
 
-export function* editCategory({type, id, payload }: { type: typeof types.EDIT_CATEGORY, id: string, payload: ICategory }) {
+export function* editCategory({type, id, payload }: IEditCategory) {
   try {
     yield api.editCategory(id, payload);
 
