@@ -15,12 +15,10 @@ router.get(
         return res.status(StatusCodes.NOT_FOUND).json({ message: 'There are no products' });
       }
 
-      res.status(StatusCodes.OK).json({ message: 'Products successfully found' });
+      res.status(StatusCodes.OK).send(products).json({ message: 'Products successfully found' });
 
-      return products;
     } catch(e) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Something went wrong. Try again.' });
-      console.log(e);
     }
   }
 );
@@ -31,19 +29,17 @@ router.get(
   '/:id',
   async (req, res) => {
     try {
-      const { id } = req.query;
-      const product = await Product.findById({ id });
+      const { id } = req.params;
+      const product = await Product.findById({ _id: id });
 
       if (!product) {
         return res.status(StatusCodes.NOT_FOUND).json({ message: 'This product not found' });
       }
 
-      res.status(StatusCodes.OK).json({ message: 'Product successfully found' });
+      res.status(StatusCodes.OK).send(product).json({ message: 'Product successfully found' });
 
-      return product;
     } catch(e) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Something went wrong. Try again.' });
-      console.log(e);
     }
   }
 );
@@ -69,14 +65,12 @@ router.post(
         price,
       });
 
-      await newProduct.save();
+      const result = await newProduct.save();
 
-      res.status(StatusCodes.OK).json({ message: 'Product successfully created' });
+      res.status(StatusCodes.OK).send(result).json({ message: 'Product successfully created' });
 
-      return newProduct;
     } catch(e) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Something went wrong. Try again.' });
-      console.log(e);
     }
   }
 );
@@ -87,7 +81,7 @@ router.put(
   '/:id',
   async (req, res) => {
     try {
-      const { id } = req.query;
+      const { id } = req.params;
       const { categoryId, title, description, amount, image, price } = req.body;
       const product = await Product.findById({ id });
 
@@ -104,38 +98,35 @@ router.put(
         price,
       });
 
-      await Product.findByIdAndUpdate(id, updatedProduct);
+      const result = await Product.findByIdAndUpdate(id, updatedProduct);
 
-      res.status(StatusCodes.OK).json({ message: 'Product successfully updated' });
+      res.status(StatusCodes.OK).send(result).json({ message: 'Product successfully updated' });
 
-      return updatedProduct;
     } catch(e) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Something went wrong. Try again.' });
-      console.log(e);
     }
   }
 );
 
 
-// /api/products
+// /api/products/:id
 router.delete(
-  '',
+  '/:id',
   async (req, res) => {
     try {
-      const { id } = req.body;
-      const product = await Product.findById({ id });
+      const { id } = req.params;
+      const product = await Product.findById({ _id: id });
 
       if (!product) {
         return res.status(StatusCodes.NOT_FOUND).json({ message: 'This product not found' });
       }
 
-      await Product.findByIdAndDelete(id);
+      const result = await Product.findByIdAndDelete(id);
 
-      res.status(StatusCodes.OK).json({ message: 'Product successfully deleted' });
+      res.status(StatusCodes.OK).send(result).json({ message: 'Product successfully deleted' });
 
     } catch(e) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Something went wrong. Try again.' });
-      console.log(e);
     }
   }
 );
