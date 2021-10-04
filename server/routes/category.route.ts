@@ -91,13 +91,12 @@ router.put(
         title
       };
 
-      const result = await Category.updateOne({ _id: id }, updatedCategory);
+      const result = await Category.findByIdAndUpdate({ _id: id }, updatedCategory);
 
       res.status(StatusCodes.OK).send(result).json({ message: 'Category successfully updated' });
 
     } catch(e) {
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Something went wrong. Try again.' });
-      console.log(e);
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Something went wrong. Try again.', });
     }
   }
 );
