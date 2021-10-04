@@ -19,6 +19,25 @@ export const clearGetCategoriesStatus = () => ({
   type: types.CLEAR_GET_CATEGORIES_STATUS,
 });
 
+export const getCategory = (payload: string) => ({ 
+  type: types.GET_CATEGORY,
+  payload
+});
+
+export const getCategorySuccess = (payload: any) => ({ 
+  type: types.GET_CATEGORY_SUCCESS,
+  payload
+});
+
+export const getCategoryFailure = (payload: Error) => ({ 
+  type: types.GET_CATEGORY_FAILURE,
+  payload
+});
+
+export const clearGetCategoryStatus = () => ({ 
+  type: types.CLEAR_GET_CATEGORY_STATUS,
+});
+
 export const postCategory = (payload: ICategory) => ({ 
   type: types.POST_CATEGORY,
   payload
@@ -56,9 +75,10 @@ export const clearDeleteCategoryStatus = () => ({
   type: types.CLEAR_DELETE_CATEGORY_STATUS,
 });
 
-export const editCategory = (payload: string) => ({ 
+export const editCategory = (id: string, payload: any) => ({ 
   type: types.EDIT_CATEGORY,
-  payload
+  payload,
+  id
 });
 
 export const editCategorySuccess = () => ({ 

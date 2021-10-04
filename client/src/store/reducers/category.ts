@@ -5,6 +5,8 @@ import { AnyAction, Reducer } from 'redux';
 
 interface IInitialState {
   categories: ICategory[],
+  category: ICategory | null,
+  getCategoryStatus: IStatus,
   getCategoriesStatus: IStatus,
   postCategoryStatus: IStatus,
   deleteCategoryStatus: IStatus,
@@ -13,6 +15,8 @@ interface IInitialState {
 
 const initialState: IInitialState = {
   categories: [],
+  category: null,
+  getCategoryStatus: helpers.getDefaultState(),
   getCategoriesStatus: helpers.getDefaultState(),
   postCategoryStatus: helpers.getDefaultState(),
   deleteCategoryStatus: helpers.getDefaultState(),
@@ -46,7 +50,35 @@ export const categoryReducer: Reducer = (state: IInitialState = initialState, ac
       return {
         ...state,
         getCategoriesStatus: helpers.getDefaultState(),
-        categories: [],
+      };
+    };
+    case types.GET_CATEGORY: {
+      const { payload } = action;
+      return {
+        ...state,
+        getCategoryStatus: helpers.getRequestState(),
+        category: payload,
+      };
+    };
+    case types.GET_CATEGORY_SUCCESS: {
+      const { payload } = action;
+      return {
+        ...state,
+        getCategorYStatus: helpers.getSuccessState('Action success'),
+        category: payload,
+      };
+    };
+    case types.GET_CATEGORY_FAILURE: {
+      const { payload } = action;
+      return {
+        ...state,
+        getCategoryStatus: helpers.getErrorState(payload),
+      };
+    };
+    case types.CLEAR_GET_CATEGORY_STATUS: {
+      return {
+        ...state,
+        getCategoryStatus: helpers.getDefaultState(),
       };
     };
     case types.POST_CATEGORY: {
@@ -72,7 +104,6 @@ export const categoryReducer: Reducer = (state: IInitialState = initialState, ac
       return {
         ...state,
         postCategoryStatus: helpers.getDefaultState(),
-        categories: [],
       };
     };
     case types.DELETE_CATEGORY: {
@@ -98,7 +129,6 @@ export const categoryReducer: Reducer = (state: IInitialState = initialState, ac
       return {
         ...state,
         deleteCategoryStatus: helpers.getDefaultState(),
-        categories: [],
       };
     };
     case types.EDIT_CATEGORY: {
@@ -124,7 +154,6 @@ export const categoryReducer: Reducer = (state: IInitialState = initialState, ac
       return {
         ...state,
         editCategoryStatus: helpers.getDefaultState(),
-        categories: [],
       };
     };
     default: 

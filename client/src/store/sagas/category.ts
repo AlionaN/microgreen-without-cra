@@ -25,6 +25,11 @@ interface IEditCategory {
   payload: ICategory
 }
 
+interface IGetCategory {
+  type: typeof types.GET_CATEGORY,
+  id: string
+}
+
 export function* getCategories() {
   try {
     const response: Response = yield call(api.getCategories);
@@ -32,6 +37,16 @@ export function* getCategories() {
     yield put(actions.getCategoriesSuccess(response));
   } catch (error) {
     yield put(actions.getCategoriesFailure(error));
+  }
+}
+
+export function* getCategory({type, id }: IGetCategory) {
+  try {
+    const response: Response = yield api.getCategory(id);
+    yield put(actions.clearGetCategoryStatus());
+    yield put(actions.getCategorySuccess(response));
+  } catch (error) {
+    yield put(actions.getCategoryFailure(error));
   }
 }
 
@@ -74,6 +89,7 @@ export function* editCategory({type, id, payload }: IEditCategory) {
 export default function* categorySaga() {
   yield all([
     takeEvery(types.GET_CATEGORIES, getCategories),
+    takeEvery(types.GET_CATEGORY, getCategory),
     takeEvery(types.POST_CATEGORY, postCategory),
     takeEvery(types.DELETE_CATEGORY, deleteCategory),
     takeEvery(types.EDIT_CATEGORY, editCategory),
