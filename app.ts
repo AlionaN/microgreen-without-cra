@@ -18,7 +18,7 @@ app.use(express.json());
 
 app.use('/api/auth', AuthRoutes);
 app.use('/api/categories', CategoryRoutes);
-app.use('./api/products', ProductRoutes);
+app.use('/api/products', ProductRoutes);
 
 // app.all('*', (req, res) => {
 //   res.sendStatus(StatusCodes.NOT_FOUND);
