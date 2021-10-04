@@ -37,12 +37,10 @@ export const Categories: React.FC = () => {
   const onAddClick = (e: MouseEvent<HTMLButtonElement | JSX.Element | MouseEvent>): void => {
     e.preventDefault();
     categoryInputs && dispatch(actions.postCategory(categoryInputs as ICategory));
-    
+
     Array.from(document.querySelectorAll('.addInput')).forEach((item) => {
       const inputItem = item as HTMLInputElement;
-      console.log(inputItem.value);
       inputItem.value = '';
-      console.log(inputItem.value);
     });
   };
 
