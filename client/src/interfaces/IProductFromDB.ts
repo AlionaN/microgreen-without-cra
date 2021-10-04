@@ -1,7 +1,7 @@
 export interface IProductFromDB {
   _id: string,
   __v: number,
-  categoryId: number,
+  categoryId: string,
   title: string,
   description: string,
   amount?: number,
