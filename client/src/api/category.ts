@@ -8,6 +8,12 @@ export const getCategories = async (): Promise<Response> => {
   return result;
 };
 
+export const getCategory = async (id: string): Promise<Response> => {
+  const response = await fetch(`${apiURL}/categories/${id}`);
+  const result = await response.json();
+  return result;
+} 
+
 export const postCategory = async (data: ICategory) => {
   const response = await fetch(`${apiURL}/categories`, {
     method: 'POST',
@@ -18,7 +24,6 @@ export const postCategory = async (data: ICategory) => {
   });
 
   const result = await response.json();
-  console.log(result);
   
   return result;
 };
@@ -29,7 +34,6 @@ export const deleteCategory = async (id: string) => {
   });
 
   const result = await response.json();
-  console.log(result);
 
   return result;
 };
@@ -38,7 +42,7 @@ export const editCategory = async(id: string, data: ICategory) => {
   const response = await fetch(`${apiURL}/categories/${id}`, {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
   });
