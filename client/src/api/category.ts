@@ -12,7 +12,7 @@ export const getCategory = async (id: string): Promise<Response> => {
   const response = await fetch(`${apiURL}/categories/${id}`);
   const result = await response.json();
   return result;
-} 
+};
 
 export const postCategory = async (data: ICategory) => {
   const response = await fetch(`${apiURL}/categories`, {
