@@ -5,7 +5,7 @@ export interface IProduct {
   title: string,
   description: string,
   amount?: number,
-  size?: number,
+  size?: string,
   image: string,
   price: number
 }
@@ -15,7 +15,7 @@ const schema = new Schema<IProduct>({
   title: { type: String, required: true },
   description: { type: String, required: true },
   amount: { type: Number, required: false },
-  size: { type: Number, required: false },
+  size: { type: String, required: false },
   image: { type: String, required: false },
   price: { type: Number, required: true }
 });
