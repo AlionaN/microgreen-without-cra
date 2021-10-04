@@ -53,18 +53,16 @@ export const categoryReducer: Reducer = (state: IInitialState = initialState, ac
       };
     };
     case types.GET_CATEGORY: {
-      const { payload } = action;
       return {
         ...state,
         getCategoryStatus: helpers.getRequestState(),
-        category: payload,
       };
     };
     case types.GET_CATEGORY_SUCCESS: {
       const { payload } = action;
       return {
         ...state,
-        getCategorYStatus: helpers.getSuccessState('Action success'),
+        getCategoryStatus: helpers.getSuccessState('Action success'),
         category: payload,
       };
     };

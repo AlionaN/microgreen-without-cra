@@ -19,9 +19,9 @@ export const clearGetCategoriesStatus = () => ({
   type: types.CLEAR_GET_CATEGORIES_STATUS,
 });
 
-export const getCategory = (payload: string) => ({ 
+export const getCategory = (id: string) => ({ 
   type: types.GET_CATEGORY,
-  payload
+  id
 });
 
 export const getCategorySuccess = (payload: any) => ({ 
