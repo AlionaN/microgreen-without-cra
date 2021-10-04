@@ -41,7 +41,6 @@ router.get(
       return category;
     } catch(e) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Something went wrong. Try again.' });
-      console.log(e);
     }
   }
 );
@@ -69,7 +68,6 @@ router.post(
       return newCategory;
     } catch(e) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Something went wrong. Try again.' });
-      console.log(e);
     }
   }
 );
@@ -113,13 +111,12 @@ router.delete(
         return res.status(StatusCodes.NOT_FOUND).json({ message: 'This category not found' });
       }
 
-      await Category.deleteOne({_id: id});
+      const result = await Category.findByIdAndDelete(id);
 
-      res.status(StatusCodes.NO_CONTENT).json({ message: 'Category successfully deleted' });
+      res.status(StatusCodes.OK).send(result).json({ message: 'Category successfully deleted' });
 
     } catch(e) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Something went wrong. Try again.' });
-      console.log(e);
     }
   }
 );
