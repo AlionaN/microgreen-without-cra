@@ -5,7 +5,7 @@ export interface IProductFromDB {
   title: string,
   description: string,
   amount?: number,
-  size?:number,
+  size?: string,
   image: string,
   price: number
 }
