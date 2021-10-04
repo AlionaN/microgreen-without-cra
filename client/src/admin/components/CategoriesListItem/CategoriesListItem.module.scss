@@ -1,0 +1,24 @@
+.categoriesListItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  .btns {
+    margin-left: 30px;
+
+    & > * + * {
+      margin-left: 10px;
+    }
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #232;
+    border-radius: 5px;
+    margin: 10px 0;
+  }
+}

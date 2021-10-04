@@ -1,4 +1,4 @@
-import { CategoriesList } from '@/admin/components/CategoriesList/CategoriesList';
+import { CategoriesList } from '@/admin/components/CategoriesList';
 import { AdminLayout } from '@/components/AppLayout';
 import { Button } from '@/components/Button';
 import { ICategory, ICategoryFromDB } from '@/interfaces';
@@ -28,8 +28,6 @@ export const Categories: React.FC = () => {
   const statuses = [getLoadingStatus, postLoadingStatus, deleteLoadingStatus, editLoadingStatus];
   const isLoading = statuses.some((item) => item === true);
 
-  console.log(categories);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,8 +36,14 @@ export const Categories: React.FC = () => {
 
   const onAddClick = (e: MouseEvent<HTMLButtonElement | JSX.Element | MouseEvent>): void => {
     e.preventDefault();
-    
     categoryInputs && dispatch(actions.postCategory(categoryInputs as ICategory));
+    
+    Array.from(document.querySelectorAll('.addInput')).forEach((item) => {
+      const inputItem = item as HTMLInputElement;
+      console.log(inputItem.value);
+      inputItem.value = '';
+      console.log(inputItem.value);
+    });
   };
 
   const onChange = (e: ChangeEvent): void => {
@@ -52,17 +56,6 @@ export const Categories: React.FC = () => {
     });
   };
 
-  const onEditClick = (id: string) => {
-
-  };
-
-  const onDeleteClick = (e: MouseEvent<HTMLButtonElement | JSX.Element | MouseEvent>): void => {
-    const target = e.target as HTMLButtonElement;
-    const id = target.closest('.categoryItem')?.getAttribute('data-key') as string;
-    console.log(id);
-    dispatch(actions.deleteCategory(id));
-  };
-
   return (
     <AdminLayout>
       <div>
@@ -70,7 +63,7 @@ export const Categories: React.FC = () => {
         <form className={styles.formAdd}>
           <div>
             <input 
-              className={styles.formAddInput} 
+              className={`${styles.formAddInput} addInput`} 
               {...register('title', { required: true, minLength: 2 })} 
               type="text" 
               placeholder="Category title"
@@ -83,9 +76,7 @@ export const Categories: React.FC = () => {
         {isLoading
           ? <Loader />
           : <CategoriesList 
-              categories={categories} 
-              onEditClick={onEditClick}
-              onDeleteClick={(e) => onDeleteClick(e)}
+              categories={categories}
             />}
       </div>
     </AdminLayout>
