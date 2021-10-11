@@ -6,7 +6,7 @@ export interface IProduct {
   description: string,
   amount?: number,
   size?: string,
-  image: string,
+  image?: string,
   price: number
 }
 
@@ -20,6 +20,6 @@ const schema = new Schema<IProduct>({
   price: { type: Number, required: true }
 });
 
-const ProductModel = model<IProduct>('Product', schema)
+const ProductModel = model<IProduct>('Product', schema);
 
 export default ProductModel;
