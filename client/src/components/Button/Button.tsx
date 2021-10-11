@@ -10,6 +10,14 @@ interface IProps {
 
 export const Button: React.FC<IProps> = ({ btnText, classes, onClick }: IProps) => {
   return (
-    <button className={`${styles.btn} ${classes}`} onClick={(e) => onClick(e)}>{btnText}</button>
+    <button 
+      className={`${styles.btn} ${classes}`}
+      onClick={(e) => {
+        e.preventDefault();
+        return onClick(e);
+      }}  
+    >
+      {btnText}
+    </button>
   );
 }
