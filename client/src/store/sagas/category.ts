@@ -8,7 +8,6 @@ import * as api from '@/api';
 import * as actions from '@/store/actions';
 import * as types from '@/store/actionTypes';
 import { ICategory } from '@/interfaces';
-
 interface IPostCategory {
   type: typeof types.POST_CATEGORY, 
   payload: ICategory
@@ -40,7 +39,7 @@ export function* getCategories() {
   }
 }
 
-export function* getCategory({type, id }: IGetCategory) {
+export function* getCategory({ type, id }: IGetCategory) {
   try {
     const response: Response = yield api.getCategory(id);
     yield put(actions.clearGetCategoryStatus());
@@ -50,7 +49,7 @@ export function* getCategory({type, id }: IGetCategory) {
   }
 }
 
-export function* postCategory({type, payload }: IPostCategory) {
+export function* postCategory({ type, payload }: IPostCategory) {
   try {
     yield api.postCategory(payload);
 
@@ -62,7 +61,7 @@ export function* postCategory({type, payload }: IPostCategory) {
   }
 }
 
-export function* deleteCategory({type, payload }: IDeleteCategory) {
+export function* deleteCategory({ type, payload }: IDeleteCategory) {
   try {
     yield api.deleteCategory(payload);
 
@@ -74,7 +73,7 @@ export function* deleteCategory({type, payload }: IDeleteCategory) {
   }
 }
 
-export function* editCategory({type, id, payload }: IEditCategory) {
+export function* editCategory({ type, id, payload }: IEditCategory) {
   try {
     yield api.editCategory(id, payload);
 
