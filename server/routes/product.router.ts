@@ -1,6 +1,5 @@
 import { Router } from 'express';
 const router = Router();
-import convertImgToBase64 from '../utilities/imgToBase64';
 import Product from '../models/Product';
 import { StatusCodes } from 'http-status-codes';
 
@@ -9,16 +8,40 @@ router.get(
   '',
   async (req, res) => {
     try {
-      const products = await Product.find();
+      const { minPrice, maxPrice, category } = req.query;
 
+      let products = [];
+
+      if (minPrice) {
+        products = await Product.find()
+          .where('price')
+          .gte(Number(minPrice));
+      } else if (maxPrice) {
+        products = await Product.find()
+          .where('price')
+          .lte(Number(maxPrice));
+      } else if (category) {
+        products = await Product.find()
+          .where('categoryId', category);
+      } else {
+        products = await Product.find();
+      }
+      
       if (!products) {
         return res.status(StatusCodes.NOT_FOUND).json({ message: 'There are no products' });
       }
 
+      let generalMinPrice = Number.MAX_SAFE_INTEGER;
+      products.forEach((item) => {
+        if (item.price < generalMinPrice) { 
+          generalMinPrice = item.price 
+        }
+      });
+
       res.status(StatusCodes.OK).send(products).json({ message: 'Products successfully found' });
 
     } catch(e) {
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Something went wrong. Try again.' });
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: `Something went wrong. Try again. ${e}` });
     }
   }
 );
@@ -49,7 +72,7 @@ router.post(
   '',
   async (req, res) => {
     try {
-      const { categoryId, title, description, amount, image, price } = req.body;
+      const { categoryId, title, description, amount, size, image, price } = req.body;
       const product = await Product.findOne({ title });
 
       if (product) {
@@ -61,7 +84,8 @@ router.post(
         title,
         description,
         amount,
-        image: convertImgToBase64(image),
+        size,
+        image,
         price,
       });
 
@@ -70,7 +94,7 @@ router.post(
       res.status(StatusCodes.OK).send(result).json({ message: 'Product successfully created' });
 
     } catch(e) {
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Something went wrong. Try again.' });
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Something went wrong. Try again.', e });
     }
   }
 );
@@ -82,28 +106,29 @@ router.put(
   async (req, res) => {
     try {
       const { id } = req.params;
-      const { categoryId, title, description, amount, image, price } = req.body;
-      const product = await Product.findById({ id });
+      const { categoryId, title, description, amount, size, image, price } = req.body;
+      const product = await Product.findById({ _id: id });
 
       if (!product) {
-        return res.status(StatusCodes.BAD_REQUEST).json({ message: 'This product not found' });
+        return res.status(StatusCodes.NOT_FOUND).json({ message: 'This product not found' });
       }
 
-      const updatedProduct = new Product({
+      const updatedProduct = {
         categoryId,
         title,
         description,
         amount,
-        image: convertImgToBase64(image),
+        image,
+        size,
         price,
-      });
+      };
 
-      const result = await Product.findByIdAndUpdate(id, updatedProduct);
+      const result = await Product.findByIdAndUpdate({ _id: id }, updatedProduct);
 
       res.status(StatusCodes.OK).send(result).json({ message: 'Product successfully updated' });
 
     } catch(e) {
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Something went wrong. Try again.' });
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: `Something went wrong. Try again. ${e}` });
     }
   }
 );
