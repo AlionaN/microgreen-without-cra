@@ -71,7 +71,7 @@ export function* editProduct({type, id, payload }: IEditProduct) {
   }
 }
 
-export default function* categorySaga() {
+export default function* productSaga() {
   yield all([
     takeEvery(types.GET_PRODUCTS, getProducts),
     takeEvery(types.POST_PRODUCT, postProduct),
