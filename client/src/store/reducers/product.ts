@@ -23,7 +23,7 @@ const initialState: IInitialState = {
   editProductStatus: helpers.getDefaultState(),
 };
 
-export const categoryReducer: Reducer = (state: IInitialState = initialState, action: AnyAction) => {
+export const productReducer: Reducer = (state: IInitialState = initialState, action: AnyAction) => {
   switch(action.type) {
     case types.GET_PRODUCTS: {
       return {
@@ -50,7 +50,6 @@ export const categoryReducer: Reducer = (state: IInitialState = initialState, ac
       return {
         ...state,
         getProductsStatus: helpers.getDefaultState(),
-        products: [],
       };
     };
     case types.GET_PRODUCT: {
@@ -78,7 +77,6 @@ export const categoryReducer: Reducer = (state: IInitialState = initialState, ac
       return {
         ...state,
         getProductStatus: helpers.getDefaultState(),
-        product: [],
       };
     };
     case types.POST_PRODUCT: {
@@ -104,7 +102,6 @@ export const categoryReducer: Reducer = (state: IInitialState = initialState, ac
       return {
         ...state,
         postProductStatus: helpers.getDefaultState(),
-        products: [],
       };
     };
     case types.DELETE_PRODUCT: {
@@ -130,7 +127,6 @@ export const categoryReducer: Reducer = (state: IInitialState = initialState, ac
       return {
         ...state,
         deleteProductStatus: helpers.getDefaultState(),
-        products: [],
       };
     };
     case types.EDIT_PRODUCT: {
@@ -156,7 +152,6 @@ export const categoryReducer: Reducer = (state: IInitialState = initialState, ac
       return {
         ...state,
         editProductStatus: helpers.getDefaultState(),
-        products: [],
       };
     };
     default: 
