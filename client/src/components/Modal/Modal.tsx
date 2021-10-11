@@ -4,7 +4,7 @@ import styles from './Modal.module.scss';
 import { ModalLayout } from '@/components/AppLayout';
 
 interface IModal {
-  form: JSX.Element;
+  children: JSX.Element;
   el: JSX.Element;
   isModalOpen: boolean;
   onCloseModal: () => void;
@@ -29,7 +29,7 @@ export class Modal extends React.Component {
 
     return (
       ReactDOM.createPortal(
-        <ModalLayout content={this.props.form} onCloseModal={this.props.onCloseModal}/>,
+        <ModalLayout content={this.props.children} onCloseModal={this.props.onCloseModal}/>,
         el
       )
     )

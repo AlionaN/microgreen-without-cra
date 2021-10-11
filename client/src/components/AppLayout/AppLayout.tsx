@@ -22,7 +22,7 @@ export const AppLayout: React.FC = ({ children }) => {
       <Header onSignInClick={onSignInClick} />
         {children}
       <Footer />
-      <Modal isModalOpen={isModalOpen} onCloseModal={onCloseModalClick} form={<RegistrationForm />} />
+      <Modal isModalOpen={isModalOpen} onCloseModal={onCloseModalClick} content={<RegistrationForm />} />
     </section>
   );
 };
