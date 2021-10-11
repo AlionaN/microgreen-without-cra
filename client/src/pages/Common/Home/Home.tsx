@@ -1,20 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import styles from './Home.module.scss';
 import { Cards } from '@/components/Cards';
 import { Hero } from '@/components/Hero';
-import products from '../../../products';
 import { IProductFromDB } from '@/interfaces/IProductFromDB';
 import { IMG_PATH } from '@/constants';
 import { AppLayout } from '@/components/AppLayout';
+import { RootState } from '@/store/reducers';
+import * as actions from '@/store/actions';
 
 export const Home: React.FC = () => {
-  const randomCards = (): IProductFromDB[] => {
-    const res = [];
-    for (let i = 0; i < products.length; i += 3) {
-      res.push(products[i]);
-    }
-    return res;
+  const dispatch = useDispatch();
+  const products = useSelector((state: RootState) => state.productReducer.products);
+
+  useEffect(() => {
+    dispatch(actions.getProducts());
+  }, []);
+
+  const getCertainAmountCards = (amount: number): IProductFromDB[] => {
+    return products.filter((item: IProductFromDB, index: number) => index < amount && item);
   };
 
   return (
@@ -31,9 +36,9 @@ export const Home: React.FC = () => {
       </div>
       <div className={styles.products}>
         <div className={styles.productsTitle}>Products</div>
-        <Cards cardsList={randomCards()} />
+        <Cards cardsList={getCertainAmountCards(4)} />
         <NavLink to="/shop" className={styles.toShop}>Go To Shop</NavLink>
       </div>
     </AppLayout>
   );
-}
+};
