@@ -1,5 +1,4 @@
 import * as types from '../actionTypes/product';
-import { IProduct } from '@/interfaces';
 
 export const getProducts = () => ({ 
   type: types.GET_PRODUCTS,
@@ -37,8 +36,9 @@ export const clearGetProductStatus = () => ({
   type: types.CLEAR_GET_PRODUCT_STATUS,
 });
 
-export const postProduct = () => ({ 
+export const postProduct = (payload: any) => ({ 
   type: types.POST_PRODUCT,
+  payload
 });
 
 export const postProductSuccess = (payload: any) => ({ 
@@ -55,8 +55,10 @@ export const clearPostProductStatus = () => ({
   type: types.CLEAR_POST_PRODUCT_STATUS,
 });
 
-export const editProduct = () => ({ 
+export const editProduct = (id: string, payload: any) => ({ 
   type: types.EDIT_PRODUCT,
+  id,
+  payload
 });
 
 export const editProductSuccess = (payload: any) => ({ 
@@ -73,8 +75,9 @@ export const clearEditProductStatus = () => ({
   type: types.CLEAR_EDIT_PRODUCT_STATUS,
 });
 
-export const deleteProduct = () => ({ 
+export const deleteProduct = (payload: string) => ({ 
   type: types.DELETE_PRODUCT,
+  payload
 });
 
 export const deleteProductSuccess = () => ({ 
