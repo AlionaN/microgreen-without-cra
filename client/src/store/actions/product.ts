@@ -1,7 +1,8 @@
 import * as types from '../actionTypes/product';
 
-export const getProducts = () => ({ 
+export const getProducts = (filters?: any) => ({ 
   type: types.GET_PRODUCTS,
+  filters
 });
 
 export const getProductsSuccess = (payload: any) => ({ 

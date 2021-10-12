@@ -7,7 +7,12 @@ import {
 import * as api from '@/api';
 import * as actions from '@/store/actions';
 import * as types from '@/store/actionTypes';
-import { IProduct } from '@/interfaces';
+import { IProduct, IProductFilters } from '@/interfaces';
+
+interface IGetProducts {
+  type: typeof types.GET_PRODUCTS, 
+  filters?: IProductFilters
+}
 
 interface IPostProduct {
   type: typeof types.POST_PRODUCT, 
@@ -25,9 +30,9 @@ interface IEditProduct {
   payload: IProduct
 }
 
-export function* getProducts() {
+export function* getProducts({ type, filters }: IGetProducts) {
   try {
-    const response: Response = yield call(api.getProducts);
+    const response: Response = yield api.getProducts(filters && filters);
     yield put(actions.clearGetProductsStatus());
     yield put(actions.getProductsSuccess(response));
   } catch (error) {
@@ -35,7 +40,7 @@ export function* getProducts() {
   }
 }
 
-export function* postProduct({type, payload }: IPostProduct) {
+export function* postProduct({ type, payload }: IPostProduct) {
   try {
     yield api.postProduct(payload);
 

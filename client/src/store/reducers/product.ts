@@ -1,6 +1,6 @@
 import * as types from '@/store/actionTypes/product';
 import * as helpers from '@/store/helpers';
-import { IProduct, IStatus } from '@/interfaces';
+import { IProduct, IStatus, IProductFilters } from '@/interfaces';
 import { AnyAction, Reducer } from 'redux';
 
 interface IInitialState {
@@ -11,6 +11,7 @@ interface IInitialState {
   postProductStatus: IStatus,
   deleteProductStatus: IStatus,
   editProductStatus: IStatus,
+  filters: IProductFilters,
 }
 
 const initialState: IInitialState = {
@@ -21,14 +22,21 @@ const initialState: IInitialState = {
   postProductStatus: helpers.getDefaultState(),
   deleteProductStatus: helpers.getDefaultState(),
   editProductStatus: helpers.getDefaultState(),
+  filters: {
+    category: '',
+    maxPrice: 0,
+    minPrice: 0,
+  },
 };
 
 export const productReducer: Reducer = (state: IInitialState = initialState, action: AnyAction) => {
   switch(action.type) {
     case types.GET_PRODUCTS: {
+      const { filters } = action;
       return {
         ...state,
-        getProductsStatus: helpers.getRequestState()
+        getProductsStatus: helpers.getRequestState(),
+        filters
       };
     };
     case types.GET_PRODUCTS_SUCCESS: {

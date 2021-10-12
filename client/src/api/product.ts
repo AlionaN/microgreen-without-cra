@@ -1,8 +1,18 @@
-import { IProduct } from '@/interfaces';
+import { IProduct, IProductFilters } from '@/interfaces';
 import { apiURL } from './apiConfig';
 
-export const getProducts = async () => {
-  const response = await fetch(`${apiURL}/products`);
+export const getProducts = async (filters?: IProductFilters) => {
+  const query = [];
+
+  if (filters) {
+    const filtersObj = Object.entries(JSON.parse(JSON.stringify(filters)));
+
+    for (const [key, value] of (filtersObj)) {
+      query.push(`${key}=${value}`);
+    }
+  }
+  
+  const response = await fetch(`${apiURL}/products?${query && query.join('&')}`);
   const result = await response.json();
 
   return result;
