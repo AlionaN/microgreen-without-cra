@@ -32,6 +32,7 @@ export const AddProductForm: React.FC = () => {
         type="text" 
         placeholder="Title" 
         defaultValue={getValues('title')}
+        autoComplete="off"
       />
       <div className={styles.error}>{errors.title && "Field is required and must be at least 2 characters length"}</div>
       <label htmlFor='image' className={styles.formLabel}>Image path:</label>
@@ -40,6 +41,7 @@ export const AddProductForm: React.FC = () => {
         {...register('image', { required: false, pattern: /(\.png|\.jpg|\.jpeg)$/ })} 
         type="text" 
         placeholder="Image path (like assets/images/example.png)"
+        autoComplete="off"
       />
       <div className={styles.error}>{errors.image && "It is allow to use only images in PNG, JPG and JPEG format"}</div>
       <label htmlFor='description' className={styles.formLabel}>Description:</label>
@@ -48,6 +50,7 @@ export const AddProductForm: React.FC = () => {
         {...register('description', { required: true, minLength: 10 })} 
         placeholder="Description" 
         defaultValue={getValues('description')}
+        autoComplete="off"
       />
       <div className={styles.error}>{errors.title && "Field is required and must be at least 10 characters length"}</div>
       <label htmlFor='categoryId' className={styles.formLabel}>Category:</label>
@@ -66,6 +69,7 @@ export const AddProductForm: React.FC = () => {
         type="text" 
         placeholder="Amount" 
         defaultValue={getValues('amount')}
+        autoComplete="off"
       />
       <div className={styles.error}>{errors.amount && "Field must be at least 1"}</div>
       <label htmlFor='size' className={styles.formLabel}>Size:</label>
@@ -75,6 +79,7 @@ export const AddProductForm: React.FC = () => {
         type="text" 
         placeholder="Size" 
         defaultValue={getValues('size')}
+        autoComplete="off"
       />
       <div className={styles.error}>{errors.size && "Field must be at least 1 characters length"}</div>
       <label htmlFor='price' className={styles.formLabel}>Price:</label>
@@ -84,6 +89,7 @@ export const AddProductForm: React.FC = () => {
         type="text" 
         placeholder="Price" 
         defaultValue={getValues('price')}
+        autoComplete="off"
       />
       <div className={styles.error}>{errors.price && "Field is required and must to be at least 1"}</div>
       <input type="submit" className={styles.btn} />
