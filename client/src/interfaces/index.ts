@@ -5,3 +5,4 @@ export * from './ICategory';
 export * from './ICategoryFromDB';
 export * from './IUser';
 export * from './IStatus';
+export * from './IProductFilters';
