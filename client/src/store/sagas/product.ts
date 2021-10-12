@@ -11,7 +11,8 @@ import { IProduct, IProductFilters } from '@/interfaces';
 
 interface IGetProducts {
   type: typeof types.GET_PRODUCTS, 
-  filters?: IProductFilters
+  filters: IProductFilters,
+  sorting: string
 }
 
 interface IPostProduct {
@@ -30,9 +31,9 @@ interface IEditProduct {
   payload: IProduct
 }
 
-export function* getProducts({ type, filters }: IGetProducts) {
+export function* getProducts({ type, filters, sorting }: IGetProducts) {
   try {
-    const response: Response = yield api.getProducts(filters && filters);
+    const response: Response = yield api.getProducts(filters, sorting);
     yield put(actions.clearGetProductsStatus());
     yield put(actions.getProductsSuccess(response));
   } catch (error) {

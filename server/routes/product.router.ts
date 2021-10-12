@@ -8,7 +8,7 @@ router.get(
   '',
   async (req, res) => {
     try {
-      const { minPrice, maxPrice, category } = req.query;
+      const { minPrice, maxPrice, category, sortField = 'title', sortMethod = 'asc' } = req.query;
 
       if (Number(minPrice) < 0 ||
           Number(minPrice) > Number.MAX_SAFE_INTEGER ||
@@ -18,13 +18,16 @@ router.get(
       }
 
       const query = {
-        ...(minPrice && Number(minPrice) > 0 && {price: { $gte: Number(minPrice) }}),
-        ...(maxPrice && Number(maxPrice) > Number(minPrice) && {price: { $lte: Number(maxPrice) }}),
-        ...(category && {categoryId: category})
+        $and: [
+          {...(minPrice && Number(minPrice) > 0 && {price: { $gte: Number(minPrice) }})},
+          {...(maxPrice && Number(maxPrice) > Number(minPrice) && {price: { $lte: Number(maxPrice) }})},
+          {...(category && {categoryId: category})}
+        ]
       };
 
       const products = await Product.find()
-        .where(query);
+        .where(query)
+        .sort({ [String(sortField)]: sortMethod });
       
       if (!products) {
         return res.status(StatusCodes.NOT_FOUND).json({ message: 'There are no products' });
