@@ -77,6 +77,7 @@ export const categoryReducer: Reducer = (state: IInitialState = initialState, ac
       return {
         ...state,
         getCategoryStatus: helpers.getDefaultState(),
+        category: null
       };
     };
     case types.POST_CATEGORY: {
