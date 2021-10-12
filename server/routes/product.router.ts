@@ -10,22 +10,21 @@ router.get(
     try {
       const { minPrice, maxPrice, category } = req.query;
 
-      let products = [];
-
-      if (minPrice) {
-        products = await Product.find()
-          .where('price')
-          .gte(Number(minPrice));
-      } else if (maxPrice) {
-        products = await Product.find()
-          .where('price')
-          .lte(Number(maxPrice));
-      } else if (category) {
-        products = await Product.find()
-          .where('categoryId', category);
-      } else {
-        products = await Product.find();
+      if (Number(minPrice) < 0 ||
+          Number(minPrice) > Number.MAX_SAFE_INTEGER ||
+          Number(maxPrice) < 0 ||
+          Number(maxPrice) > Number.MAX_SAFE_INTEGER) {
+        return res.status(StatusCodes.BAD_REQUEST);
       }
+
+      const query = {
+        ...(minPrice && Number(minPrice) > 0 && {price: { $gte: Number(minPrice) }}),
+        ...(maxPrice && Number(maxPrice) > Number(minPrice) && {price: { $lte: Number(maxPrice) }}),
+        ...(category && {categoryId: category})
+      };
+
+      const products = await Product.find()
+        .where(query);
       
       if (!products) {
         return res.status(StatusCodes.NOT_FOUND).json({ message: 'There are no products' });
