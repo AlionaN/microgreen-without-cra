@@ -8,6 +8,12 @@ import * as api from '@/api';
 import * as actions from '@/store/actions';
 import * as types from '@/store/actionTypes';
 import { ICategory } from '@/interfaces';
+
+interface IGetCategories {
+  type: typeof types.GET_CATEGORIES,
+  sorting: string
+}
+
 interface IPostCategory {
   type: typeof types.POST_CATEGORY, 
   payload: ICategory
@@ -29,9 +35,9 @@ interface IGetCategory {
   id: string
 }
 
-export function* getCategories() {
+export function* getCategories({ type, sorting }: IGetCategories) {
   try {
-    const response: Response = yield call(api.getCategories);
+    const response: Response = yield api.getCategories(sorting);
     yield put(actions.clearGetCategoriesStatus());
     yield put(actions.getCategoriesSuccess(response));
   } catch (error) {

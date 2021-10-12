@@ -9,7 +9,9 @@ router.get(
   '',
   async (req, res) => {
     try {
-      const categories = await Category.find({}, {});
+      const { sortField = 'title', sortMethod = 'asc' } = req.query;
+
+      const categories = await Category.find({}, {}).sort({ [String(sortField)]: sortMethod });
 
       if (!categories) {
         return res.status(StatusCodes.NOT_FOUND).json({ message: 'There are no categories' });

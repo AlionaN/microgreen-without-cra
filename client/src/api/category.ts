@@ -1,8 +1,8 @@
 import { ICategory } from '@/interfaces';
 import { apiURL } from './apiConfig';
 
-export const getCategories = async (): Promise<Response> => {
-  const response = await fetch(`${apiURL}/categories`);
+export const getCategories = async (sorting?: string): Promise<Response> => {
+  const response = await fetch(`${apiURL}/categories?${sorting ? sorting : ''}`);
   const result = await response.json();
   
   return result;

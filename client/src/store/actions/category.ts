@@ -1,8 +1,9 @@
 import * as types from '../actionTypes/category';
 import { ICategory } from '@/interfaces';
 
-export const getCategories = () => ({ 
+export const getCategories = (sorting?: string) => ({ 
   type: types.GET_CATEGORIES,
+  sorting
 });
 
 export const getCategoriesSuccess = (payload: any) => ({ 
