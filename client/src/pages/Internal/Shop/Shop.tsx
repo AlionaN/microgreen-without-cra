@@ -5,6 +5,7 @@ import { AppLayout } from '@/components/AppLayout';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/reducers';
 import * as actions from '@/store/actions';
+import { Filters } from '@/admin/components/Filters';
 
 export const Shop: React.FC = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ export const Shop: React.FC = () => {
 
   return (
     <AppLayout>
+      <Filters />
       <div className={styles.shop}>
         <Cards cardsList={products} />
       </div>
