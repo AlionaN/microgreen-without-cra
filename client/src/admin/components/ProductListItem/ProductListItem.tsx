@@ -19,9 +19,11 @@ export const ProductListItem: React.FC<IProps> = ({ product }: IProps) => {
 
   const dispatch = useDispatch();
   const categories = useSelector((state: RootState) => state.categoryReducer.categories);
-  const category = useSelector((state: RootState) => state.categoryReducer.category);
+  const category = categories.filter((item: ICategoryFromDB) =>  item._id === product.categoryId);
   const [editMode, setEditMode] = useState<boolean>(false);
   const { image, title, categoryId, amount, size, price, description } = product;
+  const { register, formState: { errors } } = useForm<IProduct>();
+
   const [productInfo, setProductInfo] = useState<IProduct>({
     image,
     title,
@@ -31,15 +33,13 @@ export const ProductListItem: React.FC<IProps> = ({ product }: IProps) => {
     price,
     description
   });
-  const { register, formState: { errors } } = useForm<IProduct>();
 
   useEffect(() => {
-    dispatch(actions.getCategory(product.categoryId));
     dispatch(actions.getCategories());
   }, []);
 
   const onInputChange = (e: ChangeEvent): void => {
-    const target = e.target as HTMLInputElement | HTMLTextAreaElement;
+    const target = e.target as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
     setProductInfo({
       ...productInfo,
       [target.name]: target.value
@@ -77,7 +77,7 @@ export const ProductListItem: React.FC<IProps> = ({ product }: IProps) => {
               {...register('image', { required: false })}
               onChange={(e) => onInputChange(e)}
               type="text"
-              defaultValue={product.image}
+              defaultValue={productInfo.image}
             />
             </>
           : null}      
@@ -91,7 +91,7 @@ export const ProductListItem: React.FC<IProps> = ({ product }: IProps) => {
         type="text" 
         placeholder="Title" 
         onChange={(e) => onInputChange(e)}
-        defaultValue={product.title}
+        defaultValue={productInfo.title}
         readOnly={!editMode}
       />
       <div className={styles.error}>{errors.title && "Field is required and minimal length is 2 characters"}</div>
@@ -100,28 +100,36 @@ export const ProductListItem: React.FC<IProps> = ({ product }: IProps) => {
         className={styles.cardTextarea}
         {...register('description', { required: true, minLength: 10, maxLength: 250 })}
         onChange={(e) => onInputChange(e)}
-        defaultValue={product.description}
+        defaultValue={productInfo.description}
         readOnly={!editMode}
       />
       <div className={styles.error}>{errors.description && "Field is required and length might be between 10 and 250 characters"}</div>
       <label htmlFor='categoryId' className={styles.cardLabel}>Category</label>
-      <select
-        defaultValue={product.categoryId}
-        {...register('categoryId')}
-        className={styles.cardSelect}
-      >
-        {editMode 
-          ? categories.map((cat: ICategoryFromDB) => 
+      {editMode 
+        ? <select
+            defaultValue={productInfo.categoryId}
+            {...register('categoryId')}
+            className={styles.cardSelect}
+            onChange={onInputChange}
+          >
+          {categories.map((cat: ICategoryFromDB) => 
               <option key={cat._id} value={cat._id}>{cat.title}</option>
             )
-          : <option key={category?._id} value={category?._id}>{category?.title}</option>}
-      </select>
+          }
+          </select>
+        : <input
+            type="text"
+            value={category[0].title}
+            readOnly={true}
+            className={styles.cardInput}
+          />
+      }
       <label htmlFor='size' className={styles.cardLabel}>Product size</label>
       <input
         className={styles.cardInput}
         {...register('size', { required: false, minLength: 1 })}
         onChange={(e) => onInputChange(e)}
-        defaultValue={product.size}
+        defaultValue={productInfo.size}
         readOnly={!editMode}
       />
       <div className={styles.error}>{errors.size && "Field is required and minimal length is 1 character"}</div>
@@ -130,7 +138,7 @@ export const ProductListItem: React.FC<IProps> = ({ product }: IProps) => {
         className={styles.cardInput}
         {...register('amount', { required: false, min: 1 })}
         onChange={(e) => onInputChange(e)}
-        defaultValue={product.amount}
+        defaultValue={productInfo.amount}
         readOnly={!editMode}
       />
       <div className={styles.error}>{errors.amount && "Field is required and minimal length is 1 character"}</div>
@@ -141,7 +149,7 @@ export const ProductListItem: React.FC<IProps> = ({ product }: IProps) => {
         type="text" 
         placeholder="Price" 
         onChange={(e) => onInputChange(e)}
-        defaultValue={product.price}
+        defaultValue={productInfo.price}
         readOnly={!editMode}
       />
       <div className={styles.error}>{errors.price && "Field is required and minimal length is 2 characters"}</div>
