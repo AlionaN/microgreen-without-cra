@@ -1,21 +1,41 @@
 import * as types from '../actionTypes/user';
-import { IUser } from '@/interfaces';
+import { IUserLoginResponse, IUserLoginRequest, IUserRegisterRequest } from '@/interfaces';
 
-export const register = (payload: IUser) => ({ 
+export const register = (payload: IUserRegisterRequest) => ({ 
   type: types.REGISTER,
   payload
 });
 
-export const registerSuccess = (payload: IUser) => ({ 
+export const registerSuccess = () => ({ 
   type: types.REGISTER_SUCCESS,
-  payload
 });
 
-export const registerFailure = (payload: Error) => ({ 
+export const registerFailure = () => ({ 
   type: types.REGISTER_FAILURE,
-  payload
 });
 
 export const clearRegisterStatus = () => ({ 
   type: types.CLEAR_REGISTER_STATUS,
 });
+
+export const login = (payload: IUserLoginRequest) => ({ 
+  type: types.LOGIN,
+  payload
+});
+
+export const loginSuccess = () => ({ 
+  type: types.LOGIN_SUCCESS
+});
+
+export const loginFailure = () => ({ 
+  type: types.LOGIN_FAILURE,
+});
+
+export const clearLoginStatus = () => ({ 
+  type: types.CLEAR_LOGIN_STATUS,
+});
+
+export const logout = () => ({ 
+  type: types.LOGOUT,
+});
+

@@ -1,10 +1,32 @@
-import { useHttp } from '@/hooks';
-import { IUser } from '@/interfaces';
+import { IUserLoginRequest, IUserRegisterRequest } from '@/interfaces';
+import { apiURL } from './apiConfig';
 
-export const register = async (user: IUser) => {
-  const { loading, error, request } = useHttp();
-  try {
-    const data = await request('/api/auth/register', 'POST', user);
-    console.log(data);
-  } catch (e) {}
-}
+export const register = async (user: IUserRegisterRequest) => {
+  console.log(user);
+  const response = await fetch(`${apiURL}/auth/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: JSON.stringify(user),
+  });
+
+  const result = await response.json();
+
+  return result;
+};
+
+export const login = async (user: IUserLoginRequest) => {
+  const response = await fetch(`${apiURL}/auth/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: JSON.stringify(user),
+  });
+
+  const result = await response.json();
+  console.log(result);
+
+  return result;
+};

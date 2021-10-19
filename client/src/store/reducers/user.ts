@@ -1,44 +1,85 @@
-import { imgToBase64 } from 'server/utilities/imgToBase64';
-import * as ACTIONS_TYPES from '@/store/actionTypes/user';
+import { IStatus, IUserLoginResponse } from '@/interfaces';
+import * as types from '@/store/actionTypes/user';
 import { AnyAction, Reducer } from 'redux';
 import * as helpers from '../helpers';
 
+interface IInitialState {
+  user: IUserLoginResponse["user"] | null,
+  isLogIn: boolean,
+  registerStatus: IStatus,
+  loginStatus: IStatus
+};
 
-const initialState = {
-  user: {},
-  registerStatus: helpers.getDefaultState()
-}
+const initialState: IInitialState = {
+  user: null,
+  isLogIn: false,
+  registerStatus: helpers.getDefaultState(),
+  loginStatus: helpers.getDefaultState(),
+};
 
 export const userReducer: Reducer = (state = initialState, action: AnyAction) => {
 
   switch(action.type) {
-    case ACTIONS_TYPES.REGISTER:
-      console.log(action.payload);
+    case types.REGISTER:
       return {
         ...state,
         registerStatus: helpers.getRequestState()
-      }
+      };
     
-    case ACTIONS_TYPES.REGISTER_SUCCESS:
+    case types.REGISTER_SUCCESS:
       return {
         ...state,
-        user: action.payload,
-        registerStatus: helpers.getSuccessState(action.payload)
-      }
+        registerStatus: helpers.getSuccessState('You are successfully registered'),
+        isLogIn: true
+      };
 
-    case ACTIONS_TYPES.REGISTER_FAILURE:
+    case types.REGISTER_FAILURE:
       return {
         ...state,
-        registerStatus: helpers.getErrorState('Something went wrong')
-      }
+        registerStatus: helpers.getErrorState('Something went wrong. Try again.')
+      };
 
-    case ACTIONS_TYPES.CLEAR_REGISTER_STATUS:
+    case types.CLEAR_REGISTER_STATUS:
       return {
         ...state,
-        user: {},
         registerStatus: helpers.getDefaultState()
-      }
+      };
+
+    case types.LOGIN:
+      return {
+        ...state,
+        loginStatus: helpers.getRequestState()
+      };
+    
+    case types.LOGIN_SUCCESS:
+      return {
+        ...state,
+        loginStatus: helpers.getSuccessState('You are successfully login'),
+        isLogIn: true,
+      };
+
+    case types.LOGIN_FAILURE:
+      return {
+        ...state,
+        loginStatus: helpers.getErrorState('Something went wrong. Try again')
+      };
+
+    case types.CLEAR_LOGIN_STATUS:
+      return {
+        ...state,
+        loginStatus: helpers.getDefaultState(),
+      };
+      
+    case types.LOGOUT:
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      return {
+        ...state,
+        logoutStatus: helpers.getRequestState(),
+        isLogIn: false
+      };
+
     default:
       return state;
-  }
-}
+  };
+};
