@@ -9,7 +9,9 @@ import './general.scss';
 ReactDOM.render(
   <Provider store={appStore}>
     <BrowserRouter>
-      <App />
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
     </BrowserRouter>
   </Provider>,
   document.getElementById('root'),
