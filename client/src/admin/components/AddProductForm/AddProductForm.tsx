@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, useEffect, MouseEvent } from 'react';
+import React, { useEffect } from 'react';
 import styles from './AddProductForm.module.scss';
 import { useForm } from 'react-hook-form';
 import { ICategoryFromDB, IProduct } from '@/interfaces';
@@ -31,7 +31,7 @@ export const AddProductForm: React.FC = () => {
         {...register('title', { required: true, minLength: 2 })} 
         type="text" 
         placeholder="Title" 
-        defaultValue={getValues('title')}
+        value={getValues('title')}
         autoComplete="off"
       />
       <div className={styles.error}>{errors.title && "Field is required and must be at least 2 characters length"}</div>
@@ -49,7 +49,7 @@ export const AddProductForm: React.FC = () => {
         className={styles.formInput} 
         {...register('description', { required: true, minLength: 10 })} 
         placeholder="Description" 
-        defaultValue={getValues('description')}
+        value={getValues('description')}
         autoComplete="off"
       />
       <div className={styles.error}>{errors.title && "Field is required and must be at least 10 characters length"}</div>
@@ -57,7 +57,7 @@ export const AddProductForm: React.FC = () => {
       <select 
         className={styles.formInput} 
         {...register('categoryId', { required: true})} 
-        defaultValue={getValues('categoryId')}
+        value={getValues('categoryId')}
       >
         {categories.map((category: ICategoryFromDB) => <option key={category._id} value={category._id}>{category.title}</option>)}
       </select>
@@ -68,7 +68,7 @@ export const AddProductForm: React.FC = () => {
         {...register('amount', { required: false, min: 1 })} 
         type="text" 
         placeholder="Amount" 
-        defaultValue={getValues('amount')}
+        value={getValues('amount')}
         autoComplete="off"
       />
       <div className={styles.error}>{errors.amount && "Field must be at least 1"}</div>
@@ -78,7 +78,7 @@ export const AddProductForm: React.FC = () => {
         {...register('size', { required: false, minLength: 1 })} 
         type="text" 
         placeholder="Size" 
-        defaultValue={getValues('size')}
+        value={getValues('size')}
         autoComplete="off"
       />
       <div className={styles.error}>{errors.size && "Field must be at least 1 characters length"}</div>
@@ -88,7 +88,7 @@ export const AddProductForm: React.FC = () => {
         {...register('price', { required: true, min: 1 })} 
         type="text" 
         placeholder="Price" 
-        defaultValue={getValues('price')}
+        value={getValues('price')}
         autoComplete="off"
       />
       <div className={styles.error}>{errors.price && "Field is required and must to be at least 1"}</div>
