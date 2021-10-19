@@ -4,19 +4,21 @@ import { NavLink } from 'react-router-dom';
 import { Routes } from '@/enums';
 import { Logo } from '@/components/Logo';
 import styles from './Header.module.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/reducers';
+import * as actions from '@/store/actions';
 
 interface IHeader {
   onSignInClick?: () => void,
 }
 
 export const Header: React.FC<IHeader> = ({ onSignInClick }: IHeader) => {
-
-  const user = useSelector((state: RootState) => state.userReducer.user);
+  const dispatch = useDispatch();
+  const isSignIn = useSelector((state: RootState) => state.userReducer.isLogIn);
+  const user = JSON.parse(localStorage.getItem('user') as string);
 
   const onSignOutClick = ():void => {
-    console.log('log out');
+    dispatch(actions.logout());
   };
 
   return (
@@ -43,14 +45,16 @@ export const Header: React.FC<IHeader> = ({ onSignInClick }: IHeader) => {
           </ul>
         </nav>
         <div className={styles.userFunc}>
-          {user.isSignIn
-            ? <div className={styles.userFuncAuth}>
+          {isSignIn
+            ? <>
+              <div className={styles.userFuncAuth}>
                 <div>Hello, {user.firstName}</div>
                 <div onClick={onSignOutClick}>Sign out</div>
               </div>
+              <div className={styles.userImg}><img src={user.img}/></div>
+              </>
             : <div className={styles.userFuncAuth} onClick={onSignInClick}>Sign in</div>
           }
-          <div className={styles.userImg}><img src={user.img}/></div>
           <div className={styles.cart}><FaShoppingCart /></div>
         </div>
       </div>
