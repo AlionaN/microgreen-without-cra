@@ -3,10 +3,13 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import styles from './AppLayout.module.scss';
 import { Modal } from '@/components/Modal';
-import { RegistrationForm } from '@/components/Forms';
+import { RegistrationForm, SignInForm } from '@/components/Forms';
+import { useDispatch } from 'react-redux';
+import * as actions from '@/store/actions';
 
 export const AppLayout: React.FC = ({ children }) => {
-
+  const dispatch = useDispatch();
+  const [modalContent, setModalContent] = useState<string>('login');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const onSignInClick = () => {
@@ -15,14 +18,24 @@ export const AppLayout: React.FC = ({ children }) => {
 
   const onCloseModalClick = () => {
     setIsModalOpen(false);
-  }
+    dispatch(actions.clearLoginStatus());
+    dispatch(actions.clearRegisterStatus());
+  };
+
+  const onFormChange = () => {
+    modalContent === 'register' ? setModalContent('login') : setModalContent('register');
+  };
 
   return (
     <section className={styles.section}>
       <Header onSignInClick={onSignInClick} />
         {children}
       <Footer />
-      <Modal isModalOpen={isModalOpen} onCloseModal={onCloseModalClick} content={<RegistrationForm />} />
+      <Modal isModalOpen={isModalOpen} onCloseModal={onCloseModalClick}>
+        {modalContent === 'register' 
+          ? <RegistrationForm onFormChange={onFormChange} />
+          : <SignInForm onFormChange={onFormChange} />}
+      </Modal>
     </section>
   );
 };
