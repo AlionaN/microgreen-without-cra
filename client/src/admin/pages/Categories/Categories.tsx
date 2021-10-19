@@ -9,6 +9,7 @@ import styles from './Categories.module.scss';
 import { useForm } from 'react-hook-form';
 import * as actions from '@/store/actions';
 import { Loader } from '@/components/Loader';
+import { Sorting } from '@/admin/components/Sorting';
 
 interface IFormInput {
   title: string,
@@ -16,19 +17,24 @@ interface IFormInput {
 
 
 export const Categories: React.FC = () => {
+  const dispatch = useDispatch();
 
-  const [categoryInputs, setCategoryInputs] = useState({});
+
+  const [categoryInputs, setCategoryInputs] = useState({
+    title: ''
+  });
   const { register, formState: { errors } } = useForm<IFormInput>();
   const categories: ICategoryFromDB[] = useSelector((state: RootState) => state.categoryReducer.categories);
   const getLoadingStatus: boolean = useSelector((state: RootState) => state.categoryReducer.getCategoriesStatus.loading);
   const postLoadingStatus: boolean = useSelector((state: RootState) => state.categoryReducer.postCategoryStatus.loading);
   const deleteLoadingStatus: boolean = useSelector((state: RootState) => state.categoryReducer.deleteCategoryStatus.loading);
   const editLoadingStatus: boolean = useSelector((state: RootState) => state.categoryReducer.editCategoryStatus.loading);
-
   const statuses = [getLoadingStatus, postLoadingStatus, deleteLoadingStatus, editLoadingStatus];
   const isLoading = statuses.some((item) => item === true);
-
-  const dispatch = useDispatch();
+  const sortOptions = [
+    {title: 'Title (A - Z)', value: 'sortField=title&sortMethod=asc'},
+    {title: 'Title (Z - A)', value: 'sortField=title&sortMethod=desc'},
+  ]
 
   useEffect(() => {
     dispatch(actions.getCategories());
@@ -37,11 +43,10 @@ export const Categories: React.FC = () => {
   const onAddClick = (e: MouseEvent<HTMLButtonElement | JSX.Element | MouseEvent>): void => {
     e.preventDefault();
     categoryInputs && dispatch(actions.postCategory(categoryInputs as ICategory));
-
-    Array.from(document.querySelectorAll('.addInput')).forEach((item) => {
-      const inputItem = item as HTMLInputElement;
-      inputItem.value = '';
-    });
+    setCategoryInputs({
+      ...categoryInputs,
+      title: ''
+    }); 
   };
 
   const onChange = (e: ChangeEvent): void => {
@@ -65,12 +70,19 @@ export const Categories: React.FC = () => {
               {...register('title', { required: true, minLength: 2 })} 
               type="text" 
               placeholder="Category title"
+              defaultValue={categoryInputs.title}
               onChange={(e) => onChange(e)}
             />
             <div className={styles.error}>{errors.title && "Title is required and must be at least 2 characters length"}</div>
           </div>
           <Button btnText="Add category" onClick={onAddClick} classes={styles.formAddBtn} />
         </form>
+        <div className={styles.panel}>
+          <Sorting
+            options={sortOptions}
+            sortObject='category'
+          />
+        </div>
         {isLoading
           ? <Loader />
           : <CategoriesList 
