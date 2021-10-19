@@ -15,6 +15,7 @@ export const Filters: React.FC<IProps> = () => {
   const { register, handleSubmit } = useForm<IProductFilters>();
   const categories = useSelector((state: RootState) => state.categoryReducer.categories);
   const filters = useSelector((state: RootState) => state.productReducer.filters);
+  const productSorting = useSelector((state: RootState) => state.productReducer.sorting);
   const [filtersData, setFiltersData] = useState<IProductFilters>({
     category: filters?.category || '',
     minPrice: filters?.minPrice || 0,
@@ -35,7 +36,7 @@ export const Filters: React.FC<IProps> = () => {
   }
 
   const onFiltersSubmit = (data: IProductFilters): void => {
-    dispatch(actions.getProducts(data));
+    dispatch(actions.getProducts(data, productSorting));
   };
 
   return (

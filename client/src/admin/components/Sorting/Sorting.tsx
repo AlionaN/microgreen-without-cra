@@ -1,8 +1,9 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './Sorting.module.scss';
 import * as actions from '@/store/actions';
 import { ChangeEvent } from 'react';
+import { RootState } from '@/store/reducers';
 
 interface IOption {
   value: string,
@@ -16,11 +17,12 @@ interface IProps {
 
 export const Sorting: React.FC<IProps> = ({ options, sortObject }: IProps) => {
   const dispatch = useDispatch();
+  const productSorting = useSelector((state: RootState) => state.productReducer.sorting);
   
   const onSortChange = (e: ChangeEvent): void => {
     const target = e.target as HTMLSelectElement;
-    console.log(target.value);
-    sortObject === 'product' && dispatch(actions.getProducts('', target.value));
+
+    sortObject === 'product' && dispatch(actions.getProducts(productSorting, target.value));
     sortObject === 'category' && dispatch(actions.getCategories(target.value));
   };
 
