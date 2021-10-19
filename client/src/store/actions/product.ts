@@ -11,9 +11,8 @@ export const getProductsSuccess = (payload: any) => ({
   payload
 });
 
-export const getProductsFailure = (payload: Error) => ({ 
+export const getProductsFailure = () => ({ 
   type: types.GET_PRODUCTS_FAILURE,
-  payload
 });
 
 export const clearGetProductsStatus = () => ({ 
@@ -29,9 +28,8 @@ export const getProductSuccess = (payload: any) => ({
   payload
 });
 
-export const getProductFailure = (payload: Error) => ({ 
+export const getProductFailure = () => ({ 
   type: types.GET_PRODUCT_FAILURE,
-  payload
 });
 
 export const clearGetProductStatus = () => ({ 
@@ -48,9 +46,8 @@ export const postProductSuccess = (payload: any) => ({
   payload
 });
 
-export const postProductFailure = (payload: Error) => ({ 
+export const postProductFailure = () => ({ 
   type: types.POST_PRODUCT_FAILURE,
-  payload
 });
 
 export const clearPostProductStatus = () => ({ 
@@ -68,9 +65,8 @@ export const editProductSuccess = (payload: any) => ({
   payload
 });
 
-export const editProductFailure = (payload: Error) => ({ 
+export const editProductFailure = () => ({ 
   type: types.EDIT_PRODUCT_FAILURE,
-  payload
 });
 
 export const clearEditProductStatus = () => ({ 
@@ -86,9 +82,8 @@ export const deleteProductSuccess = () => ({
   type: types.DELETE_PRODUCT_SUCCESS,
 });
 
-export const deleteProductFailure = (payload: Error) => ({ 
+export const deleteProductFailure = () => ({ 
   type: types.DELETE_PRODUCT_FAILURE,
-  payload
 });
 
 export const clearDeleteProductStatus = () => ({ 

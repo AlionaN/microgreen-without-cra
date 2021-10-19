@@ -1,5 +1,5 @@
 export interface IStatus {
   loading: boolean,
-  success: any | null,
+  success: string | null,
   error: string | Error | null,
 }

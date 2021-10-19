@@ -6,7 +6,7 @@ export const getRequestState = (): IStatus => ({
   error: null
 });
 
-export const getSuccessState = (success: any): IStatus => ({
+export const getSuccessState = (success: string): IStatus => ({
   loading: false,
   success,
   error: null

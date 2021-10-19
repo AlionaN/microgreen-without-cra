@@ -37,7 +37,7 @@ export function* getProducts({ type, filters, sorting }: IGetProducts) {
     yield put(actions.clearGetProductsStatus());
     yield put(actions.getProductsSuccess(response));
   } catch (error) {
-    yield put(actions.getProductsFailure(error));
+    yield put(actions.getProductsFailure());
   }
 }
 
@@ -49,7 +49,7 @@ export function* postProduct({ type, payload }: IPostProduct) {
     yield put(actions.clearPostProductStatus());
     yield put(actions.getProducts());
   } catch (error) {
-    yield put(actions.postProductFailure(error));
+    yield put(actions.postProductFailure());
   }
 }
 
@@ -61,7 +61,7 @@ export function* deleteProduct({type, payload }: IDeleteProduct) {
     yield put(actions.clearDeleteProductStatus());
     yield put(actions.getProducts());
   } catch (error) {
-    yield put(actions.deleteProductFailure(error));
+    yield put(actions.deleteProductFailure());
   }
 }
 
@@ -73,7 +73,7 @@ export function* editProduct({type, id, payload }: IEditProduct) {
     yield put(actions.clearEditProductStatus());
     yield put(actions.getProducts());
   } catch (error) {
-    yield put(actions.editProductFailure(error));
+    yield put(actions.editProductFailure());
   }
 }
 

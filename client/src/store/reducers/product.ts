@@ -12,6 +12,7 @@ interface IInitialState {
   deleteProductStatus: IStatus,
   editProductStatus: IStatus,
   filters: IProductFilters,
+  sorting: string,
 }
 
 const initialState: IInitialState = {
@@ -27,31 +28,32 @@ const initialState: IInitialState = {
     maxPrice: 0,
     minPrice: 0,
   },
+  sorting: '',
 };
 
 export const productReducer: Reducer = (state: IInitialState = initialState, action: AnyAction) => {
   switch(action.type) {
     case types.GET_PRODUCTS: {
-      const { filters } = action;
+      const { filters, sorting } = action;
       return {
         ...state,
         getProductsStatus: helpers.getRequestState(),
-        filters
+        filters,
+        sorting
       };
     };
     case types.GET_PRODUCTS_SUCCESS: {
       const { payload } = action;
       return {
         ...state,
-        getProductsStatus: helpers.getSuccessState('Action success'),
+        getProductsStatus: helpers.getSuccessState('Products successfully found'),
         products: payload,
       };
     };
     case types.GET_PRODUCTS_FAILURE: {
-      const { payload } = action;
       return {
         ...state,
-        getProductsStatus: helpers.getErrorState(payload),
+        getProductsStatus: helpers.getErrorState('Products not found'),
       };
     };
     case types.CLEAR_GET_PRODUCTS_STATUS: {
@@ -70,15 +72,14 @@ export const productReducer: Reducer = (state: IInitialState = initialState, act
       const { payload } = action;
       return {
         ...state,
-        getProductStatus: helpers.getSuccessState('Action success'),
+        getProductStatus: helpers.getSuccessState('Product successfully found'),
         product: payload,
       };
     };
     case types.GET_PRODUCT_FAILURE: {
-      const { payload } = action;
       return {
         ...state,
-        getProductStatus: helpers.getErrorState(payload),
+        getProductStatus: helpers.getErrorState('Product not found'),
       };
     };
     case types.CLEAR_GET_PRODUCT_STATUS: {
@@ -96,14 +97,13 @@ export const productReducer: Reducer = (state: IInitialState = initialState, act
     case types.POST_PRODUCT_SUCCESS: {
       return {
         ...state,
-        postProductStatus: helpers.getSuccessState('Action success'),
+        postProductStatus: helpers.getSuccessState('Product successfully created'),
       };
     };
     case types.POST_PRODUCT_FAILURE: {
-      const { payload } = action;
       return {
         ...state,
-        postProductStatus: helpers.getErrorState(payload),
+        postProductStatus: helpers.getErrorState('Product not created'),
       };
     };
     case types.CLEAR_POST_PRODUCT_STATUS: {
@@ -121,14 +121,13 @@ export const productReducer: Reducer = (state: IInitialState = initialState, act
     case types.DELETE_PRODUCT_SUCCESS: {
       return {
         ...state,
-        deleteProductStatus: helpers.getSuccessState('Action success'),
+        deleteProductStatus: helpers.getSuccessState('Product successfully deleted'),
       };
     };
     case types.DELETE_PRODUCT_FAILURE: {
-      const { payload } = action;
       return {
         ...state,
-        deleteProductStatus: helpers.getErrorState(payload),
+        deleteProductStatus: helpers.getErrorState('Product not deleted'),
       };
     };
     case types.CLEAR_DELETE_PRODUCT_STATUS: {
@@ -146,14 +145,13 @@ export const productReducer: Reducer = (state: IInitialState = initialState, act
     case types.EDIT_PRODUCT_SUCCESS: {
       return {
         ...state,
-        editProductStatus: helpers.getSuccessState('Action success'),
+        editProductStatus: helpers.getSuccessState('Product successfully edited'),
       };
     };
     case types.EDIT_PRODUCT_FAILURE: {
-      const { payload } = action;
       return {
         ...state,
-        editProductStatus: helpers.getErrorState(payload),
+        editProductStatus: helpers.getErrorState('Product not edited'),
       };
     };
     case types.CLEAR_EDIT_PRODUCT_STATUS: {

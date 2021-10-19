@@ -41,7 +41,7 @@ export function* getCategories({ type, sorting }: IGetCategories) {
     yield put(actions.clearGetCategoriesStatus());
     yield put(actions.getCategoriesSuccess(response));
   } catch (error) {
-    yield put(actions.getCategoriesFailure(error));
+    yield put(actions.getCategoriesFailure());
   }
 }
 
@@ -51,7 +51,7 @@ export function* getCategory({ type, id }: IGetCategory) {
     yield put(actions.clearGetCategoryStatus());
     yield put(actions.getCategorySuccess(response));
   } catch (error) {
-    yield put(actions.getCategoryFailure(error));
+    yield put(actions.getCategoryFailure());
   }
 }
 
@@ -63,7 +63,7 @@ export function* postCategory({ type, payload }: IPostCategory) {
     yield put(actions.clearPostCategoryStatus());
     yield put(actions.getCategories());
   } catch (error) {
-    yield put(actions.postCategoryFailure(error));
+    yield put(actions.postCategoryFailure());
   }
 }
 
@@ -75,7 +75,7 @@ export function* deleteCategory({ type, payload }: IDeleteCategory) {
     yield put(actions.clearDeleteCategoryStatus());
     yield put(actions.getCategories());
   } catch (error) {
-    yield put(actions.deleteCategoryFailure(error));
+    yield put(actions.deleteCategoryFailure());
   }
 }
 
@@ -87,7 +87,7 @@ export function* editCategory({ type, id, payload }: IEditCategory) {
     yield put(actions.clearEditCategoryStatus());
     yield put(actions.getCategories());
   } catch (error) {
-    yield put(actions.editCategoryFailure(error));
+    yield put(actions.editCategoryFailure());
   }
 }
 
