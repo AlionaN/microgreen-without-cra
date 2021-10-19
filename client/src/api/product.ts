@@ -2,7 +2,6 @@ import { IProduct, IProductFilters } from '@/interfaces';
 import { apiURL } from './apiConfig';
 
 export const getProducts = async (filters?: IProductFilters, sorting?: string) => {
-  console.log(sorting);
   const query = [];
 
   if (filters) {
@@ -17,7 +16,7 @@ export const getProducts = async (filters?: IProductFilters, sorting?: string) =
 
   const sortingQuery = filters && sorting ? `&${sorting}` : sorting;
 
-  const response = await fetch(`${apiURL}/products?${query && query.join('&')}${sorting ? sortingQuery : ''}`);
+  const response = await fetch(`${apiURL}/products${filters || sorting ? '?' : ''}${query && query.join('&')}${sorting ? sortingQuery : ''}`);
   const result = await response.json();
 
   return result;
