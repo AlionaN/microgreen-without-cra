@@ -3,9 +3,13 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { check, validationResult } from 'express-validator';
 import User from '../models/User';
-import convertImgToBase64 from '../utilities/imgToBase64';
 import { StatusCodes } from 'http-status-codes';
 const router = Router();
+
+enum UserRoles {
+  admin = 'ADMIN',
+  user = 'USER'
+};
 
 // /api/auth/register
 router.post(
@@ -20,14 +24,18 @@ router.post(
       const errors = validationResult(req);
       console.log(req);
 
-      if (errors.isEmpty()) {
+      if (!errors.isEmpty()) {
         return res.status(StatusCodes.BAD_REQUEST).json({
           errors: errors.array(),
           message: 'Incorrect data'
         });
       }
 
-      const { firstName, secondName, email, img, password, password_confirm, isSignIn } = req.body;
+      const { firstName, secondName, email, img, password, password_confirm, role = UserRoles.user } = req.body;
+
+      if (password !== password_confirm) {
+        return res.status(StatusCodes.BAD_REQUEST);
+      }
 
       const candidate = await User.findOne({ email });
 
@@ -37,21 +45,21 @@ router.post(
 
       const hashedPassword = await bcrypt.hash(password, 12);
 
-      const imgBase64 = convertImgToBase64(img);
-
       const user = new User({
         firstName,
         secondName,
         email,
-        img: imgBase64,
+        img,
         password: hashedPassword,
         password_confirm: hashedPassword,
-        isSignIn: true,
+        role
       });
 
       await user.save();
 
-      res.status(StatusCodes.CREATED).json({ message: 'User successfuly created' });
+      const registeredUser = await User.findOne({ email });
+
+      res.status(StatusCodes.CREATED).send({ userId: registeredUser.id }).json({ message: 'User successfuly created' });
     } catch(e) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: `Something went wrong. Try again. ${e}` })
     }
@@ -69,7 +77,7 @@ router.post(
     try {
       const errors = validationResult(req);
   
-      if (errors.isEmpty()) {
+      if (!errors.isEmpty()) {
         return res.status(StatusCodes.BAD_REQUEST).json({
           errors: errors.array(),
           message: 'Incorrect data'
@@ -96,7 +104,18 @@ router.post(
         { expiresIn: '1h' }
       );
 
-      res.json({ token, userId: user.id });
+      const { _id, firstName, secondName, img = '', cart = [], favourites = [], role } = user;
+
+      res.send({ token, user: { 
+        _id,
+        firstName,
+        secondName,
+        email: user.email,
+        img,
+        cart,
+        favourites,
+        role
+      }});
 
     } catch(e) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Something went wrong. Try again.' })
