@@ -3,6 +3,7 @@ export * from './IProductFromDB';
 export * from './IProduct';
 export * from './ICategory';
 export * from './ICategoryFromDB';
-export * from './IUser';
+export * from './IUserRegister';
 export * from './IStatus';
 export * from './IProductFilters';
+export * from './IUserLogin';
