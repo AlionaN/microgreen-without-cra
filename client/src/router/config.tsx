@@ -12,6 +12,7 @@ import { Error403 } from '@/components/Error403';
 import { Dashboard } from '@/admin/pages/Dashboard';
 import { Categories } from '@/admin/pages/Categories';
 import { Products } from '@/admin/pages/Products';
+import { UserIsAdmin } from './userIsAdmin';
 
 export const routerConfig: Array<RouteConfig & BreadcrumbsRoute> = [
   {
@@ -53,14 +54,14 @@ export const routerConfig: Array<RouteConfig & BreadcrumbsRoute> = [
   },
   {
     path: AdminRoutes.Admin,
-    component: Dashboard,
+    component: UserIsAdmin(Dashboard) as unknown as React.ComponentClass,
   },
   {
     path: AdminRoutes.Categories,
-    component: Categories,
+    component: UserIsAdmin(Categories) as unknown as React.ComponentClass,
   },
   {
     path: AdminRoutes.Products,
-    component: Products,
+    component: UserIsAdmin(Products) as unknown as React.ComponentClass,
   },
 ];
