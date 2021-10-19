@@ -1,49 +1,35 @@
 import React, { ChangeEvent, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './Forms.module.scss';
-// import { registerSuccess } from '@/store/actions';
-import { IUser } from '@/interfaces';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import * as actions from '@/store/actions';
+import { IUserRegisterRequest } from '@/interfaces';
+import { useForm } from 'react-hook-form';
 import { EMAIL_PATTERN } from '@/constants';
-import { useHttp } from '@/hooks';
+import { RootState } from '@/store/reducers';
 
-interface IFormInput {
-  firstName: String,
-  secondName: String,
-  email: String,
-  img: String,
-  password: String,
-  password_confirm: String
-}
+interface IProps {
+  onFormChange: () => void,
+};
 
-export const RegistrationForm: React.FC = () => {
-
+export const RegistrationForm: React.FC<IProps> = ({ onFormChange }: IProps) => {
   const dispatch = useDispatch();
+  const { register, handleSubmit, formState: { errors } } = useForm<IUserRegisterRequest>();
+  const registerStatus = useSelector((state: RootState) => state.userReducer.registerStatus);
 
-  const { loading, error, request } = useHttp();
-
-  const { register, handleSubmit, formState: { errors, isSubmitted } } = useForm<IFormInput>();
-
-  const [userInfo, setUserInfo] = useState<IUser>({
-    userId: '',
+  const [userInfo, setUserInfo] = useState<IUserRegisterRequest>({
     firstName: '',
     secondName: '',
     email: '',
     img: '',
     password: '',
     password_confirm: '',
-    isSignIn: false,
   });
 
-  // const onSubmit: SubmitHandler<IFormInput> = () => {
-  //   dispatch(registerSuccess(userInfo));
-  // };
-
-  const registerHandler = async () => {
-    try {
-      const data = await request('http://localhost:5000/api/auth/register', 'POST', {...userInfo});
-      console.log(data);
-    } catch(e) {}
+  const onRegister = () => {
+    console.log(userInfo);
+    console.log(registerStatus);
+    dispatch(actions.register(userInfo));
+    console.log(registerStatus);
   };
 
   const onInputChange = (e: ChangeEvent): void => {
@@ -51,25 +37,24 @@ export const RegistrationForm: React.FC = () => {
   
     setUserInfo({
       ...userInfo,
-      userId: new Date().toString(),
-      isSignIn: true,
       [target.name]: target.value
     });
-  } 
+  };
 
   return (
     <>
-    {isSubmitted 
+    {registerStatus.success
       ? <div className={styles.message}>You are successfully registered</div>
       : <>
       <div className={styles.title}>Registration form</div>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit(onRegister)}>
         <input 
           className={styles.formInput} 
           {...register('firstName', { required: true, minLength: 2 })} 
           type="text" 
           placeholder="First name" 
           onChange={(e) => onInputChange(e)}
+          autoComplete="off"
         />
         <div className={styles.error}>{errors.firstName && "First name is required and must be at least 2 characters length"}</div>
         <input 
@@ -78,6 +63,7 @@ export const RegistrationForm: React.FC = () => {
           type="text"
           placeholder="Second name" 
           onChange={(e) => onInputChange(e)}
+          autoComplete="off"
         />
         <div className={styles.error}>{errors.secondName && "Second name is required and must be at least 2 characters length"}</div>
         <input 
@@ -86,11 +72,12 @@ export const RegistrationForm: React.FC = () => {
           type="email" 
           placeholder="Email"
           onChange={(e) => onInputChange(e)}
+          autoComplete="off"
         />
         <div className={styles.error}>{errors.email && "Email is required"}</div>
         <input 
           className={`${styles.formInput} ${styles.formInputFile}`} 
-          {...register('img', { required: true })} 
+          {...register('img', { required: false })} 
           type="file"
           onChange={(e) => onInputChange(e)}
         />
@@ -101,6 +88,7 @@ export const RegistrationForm: React.FC = () => {
           type="password" 
           placeholder="Password"
           onChange={(e) => onInputChange(e)}
+          autoComplete="off"
         />
         <div className={styles.error}>{errors.password && "Password is required"}</div>
         <input 
@@ -109,11 +97,12 @@ export const RegistrationForm: React.FC = () => {
           type="password" 
           placeholder="Password confirmation" 
           onChange={(e) => onInputChange(e)}
+          autoComplete="off"
         />
         <div className={styles.error}>{errors.password_confirm && "Password confirmation is required"}</div>
-        <input type="submit" className={styles.formBtn} onClick={registerHandler} disabled={loading} />
+        <input type="submit" className={styles.formBtn} disabled={registerStatus.loading} />
       </form>
-      <div className={styles.message}>If you have already registered, go to the <span className={styles.linkToLogIn}>log in form</span></div>
+      <div className={styles.message}>If you have already registered, go to the <span className={styles.linkToLogIn} onClick={onFormChange}>log in form</span></div>
     </>}
     </>
   )
