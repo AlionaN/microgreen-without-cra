@@ -3,7 +3,7 @@ import React, { useState, ChangeEvent, useEffect, MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/reducers';
 import styles from './ProductListItem.module.scss';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import * as actions from '@/store/actions';
 import defaultImg from '@/assets/images/default.jpg';
 import { Button } from '@/components/Button';
@@ -77,7 +77,7 @@ export const ProductListItem: React.FC<IProps> = ({ product }: IProps) => {
               {...register('image', { required: false })}
               onChange={(e) => onInputChange(e)}
               type="text"
-              defaultValue={productInfo.image}
+              value={productInfo.image}
             />
             </>
           : null}      
@@ -91,7 +91,7 @@ export const ProductListItem: React.FC<IProps> = ({ product }: IProps) => {
         type="text" 
         placeholder="Title" 
         onChange={(e) => onInputChange(e)}
-        defaultValue={productInfo.title}
+        value={productInfo.title}
         readOnly={!editMode}
       />
       <div className={styles.error}>{errors.title && "Field is required and minimal length is 2 characters"}</div>
@@ -100,14 +100,14 @@ export const ProductListItem: React.FC<IProps> = ({ product }: IProps) => {
         className={styles.cardTextarea}
         {...register('description', { required: true, minLength: 10, maxLength: 250 })}
         onChange={(e) => onInputChange(e)}
-        defaultValue={productInfo.description}
+        value={productInfo.description}
         readOnly={!editMode}
       />
       <div className={styles.error}>{errors.description && "Field is required and length might be between 10 and 250 characters"}</div>
       <label htmlFor='categoryId' className={styles.cardLabel}>Category</label>
       {editMode 
         ? <select
-            defaultValue={productInfo.categoryId}
+            value={productInfo.categoryId}
             {...register('categoryId')}
             className={styles.cardSelect}
             onChange={onInputChange}
@@ -129,7 +129,7 @@ export const ProductListItem: React.FC<IProps> = ({ product }: IProps) => {
         className={styles.cardInput}
         {...register('size', { required: false, minLength: 1 })}
         onChange={(e) => onInputChange(e)}
-        defaultValue={productInfo.size}
+        value={productInfo.size}
         readOnly={!editMode}
       />
       <div className={styles.error}>{errors.size && "Field is required and minimal length is 1 character"}</div>
@@ -138,7 +138,7 @@ export const ProductListItem: React.FC<IProps> = ({ product }: IProps) => {
         className={styles.cardInput}
         {...register('amount', { required: false, min: 1 })}
         onChange={(e) => onInputChange(e)}
-        defaultValue={productInfo.amount}
+        value={productInfo.amount}
         readOnly={!editMode}
       />
       <div className={styles.error}>{errors.amount && "Field is required and minimal length is 1 character"}</div>
@@ -149,7 +149,7 @@ export const ProductListItem: React.FC<IProps> = ({ product }: IProps) => {
         type="text" 
         placeholder="Price" 
         onChange={(e) => onInputChange(e)}
-        defaultValue={productInfo.price}
+        value={productInfo.price}
         readOnly={!editMode}
       />
       <div className={styles.error}>{errors.price && "Field is required and minimal length is 2 characters"}</div>

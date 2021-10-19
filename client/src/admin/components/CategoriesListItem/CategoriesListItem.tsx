@@ -53,7 +53,7 @@ export const CategoriesListItem: React.FC<IProps> = ({ category }: IProps) => {
         ? <input 
             type="text"
             name="title"
-            defaultValue={category.title}
+            value={category.title}
             onChange={(e) => onInputChange(e)}
             className='addInput'
           />
