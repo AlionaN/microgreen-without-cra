@@ -6,6 +6,8 @@ import morgan from 'morgan';
 import AuthRoutes from './server/routes/auth.route';
 import CategoryRoutes from './server/routes/category.route';
 import ProductRoutes from './server/routes/product.router';
+import CartRoutes from './server/routes/cart.route';
+import UserRoutes from './server/routes/user.route';
 // import { StatusCodes } from 'http-status-codes';
 
 dotenv.config();
@@ -20,6 +22,8 @@ app.use(express.urlencoded({ limit: '25mb' }));
 app.use('/api/auth', AuthRoutes);
 app.use('/api/categories', CategoryRoutes);
 app.use('/api/products', ProductRoutes);
+app.use('/api/cart', CartRoutes);
+app.use('/api/user', UserRoutes);
 
 // app.all('*', (req, res) => {
 //   res.sendStatus(StatusCodes.NOT_FOUND);
