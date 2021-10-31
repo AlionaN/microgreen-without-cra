@@ -1,7 +1,7 @@
-import { IProduct, IProductFilters } from '@/interfaces';
+import { IProduct, IProductFilters, IProductPaginate } from '@/interfaces';
 import { apiURL } from './apiConfig';
 
-export const getProducts = async (filters?: IProductFilters, sorting?: string) => {
+export const getProducts = async ( filters?: IProductFilters, sorting?: string, paginate?: IProductPaginate ) => {
   const query = [];
 
   if (filters) {
@@ -15,8 +15,10 @@ export const getProducts = async (filters?: IProductFilters, sorting?: string) =
   }
 
   const sortingQuery = filters && sorting ? `&${sorting}` : sorting;
+  
+  const paginateQuery = `&page=${paginate?.page}&limit=${paginate?.limit}`;
 
-  const response = await fetch(`${apiURL}/products${filters || sorting ? '?' : ''}${query && query.join('&')}${sorting ? sortingQuery : ''}`);
+  const response = await fetch(`${apiURL}/products${filters || sorting || paginate ? '?' : ''}${query && query.join('&')}${sorting ? sortingQuery : ''}${paginate?.page && paginate?.limit ? paginateQuery : ''}`);
   const result = await response.json();
 
   return result;
