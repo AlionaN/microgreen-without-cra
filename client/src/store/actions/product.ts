@@ -21,8 +21,9 @@ export const clearGetProductsStatus = () => ({
   type: types.CLEAR_GET_PRODUCTS_STATUS,
 });
 
-export const getProduct = () => ({ 
+export const getProduct = (productId: string) => ({ 
   type: types.GET_PRODUCT,
+  productId
 });
 
 export const getProductSuccess = (payload: any) => ({ 

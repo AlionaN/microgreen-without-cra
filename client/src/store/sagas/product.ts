@@ -49,19 +49,28 @@ export function* getProducts({ type, filters, paginate, sorting }: IGetProducts)
 
 export function* postProduct({ type, payload }: IPostProduct) {
   try {
-    yield api.postProduct(payload);
+    yield call(api.postProduct, payload);
 
     yield put(actions.postProductSuccess(payload));
-    yield put(actions.clearPostProductStatus());
     yield put(actions.getProducts());
   } catch (error) {
     yield put(actions.postProductFailure());
   }
 }
 
+export function* getProduct({ type, productId }: IGetProduct) {
+  try {
+    const response: IProductFromDB = yield call(api.getProduct, productId);
+
+    yield put(actions.getProductSuccess(response));
+  } catch (error) {
+    yield put(actions.getProductFailure());
+  }
+}
+
 export function* deleteProduct({type, payload }: IDeleteProduct) {
   try {
-    yield api.deleteProduct(payload);
+    yield call(api.deleteProduct, payload);
 
     yield put(actions.deleteProductSuccess());
     yield put(actions.clearDeleteProductStatus());
@@ -73,7 +82,7 @@ export function* deleteProduct({type, payload }: IDeleteProduct) {
 
 export function* editProduct({type, id, payload }: IEditProduct) {
   try {
-    const response: IProduct = yield api.editProduct(id, payload);
+    const response: IProduct = yield call(api.editProduct, id, payload);
 
     yield put(actions.editProductSuccess(response));
     yield put(actions.clearEditProductStatus());
