@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Forms.module.scss';
 import * as actions from '@/store/actions';
@@ -31,7 +31,7 @@ export const SignInForm: React.FC<IProps> = ({ onFormChange }: IProps) => {
         password: ''
       });
     } catch (e) {
-      setLoginErrors(loginStatus.errors);
+      setLoginErrors(loginStatus.error);
     }
   };
 
@@ -46,7 +46,7 @@ export const SignInForm: React.FC<IProps> = ({ onFormChange }: IProps) => {
 
   return (
     <>
-    {isLogin
+    {isLogin && loginStatus.success
       ? <div className={styles.message}>You are successfully logged in</div>
       : <>
         <div className={styles.title}>Sign In</div>
@@ -67,7 +67,7 @@ export const SignInForm: React.FC<IProps> = ({ onFormChange }: IProps) => {
             onChange={(e) => onInputChange(e)}
           />
           <div className={styles.error}>{errors.password && "Field is required"}</div>
-          {loginStatus.errors && <div className={styles.errors}>{loginErrors}</div>}
+          {loginStatus.error !== null && <div className={styles.error}>{loginStatus.error}</div>}
           <input type="submit" className={styles.formBtn} disabled={loginStatus.loading} />
         </form>
         <div className={styles.message}>If you have not registered yet, go to the <span className={styles.linkToRegistration} onClick={onFormChange}>registration form</span></div>
