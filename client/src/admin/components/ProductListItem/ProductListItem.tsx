@@ -28,8 +28,8 @@ export const ProductListItem: React.FC<IProps> = ({ product }: IProps) => {
     image,
     title,
     categoryId,
-    size,
-    amount,
+    size: size || '',
+    amount: amount || 0,
     price,
     description
   });
