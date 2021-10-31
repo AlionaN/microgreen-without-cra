@@ -6,4 +6,4 @@ export interface IProduct {
   size?: string,
   image: string,
   price: number
-}
+};

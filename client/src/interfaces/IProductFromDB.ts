@@ -8,4 +8,4 @@ export interface IProductFromDB {
   size?: string,
   image: string,
   price: number
-}
+};
