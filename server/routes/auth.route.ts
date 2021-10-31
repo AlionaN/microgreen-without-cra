@@ -5,6 +5,7 @@ import { check, validationResult } from 'express-validator';
 import User from '../models/User';
 import { StatusCodes } from 'http-status-codes';
 const router = Router();
+import Cart from '../models/Cart';
 
 enum UserRoles {
   admin = 'ADMIN',
@@ -22,7 +23,6 @@ router.post(
   async (req, res) => {
     try {
       const errors = validationResult(req);
-      console.log(req);
 
       if (!errors.isEmpty()) {
         return res.status(StatusCodes.BAD_REQUEST).json({
@@ -45,11 +45,20 @@ router.post(
 
       const hashedPassword = await bcrypt.hash(password, 12);
 
+      const cartRequest = new Cart({
+        items: [],
+        totalQuantity: 0,
+        totalPrice: 0,
+      });
+
+      const cart = await cartRequest.save();
+
       const user = new User({
         firstName,
         secondName,
         email,
         img,
+        cart: cart._id,
         password: hashedPassword,
         password_confirm: hashedPassword,
         role
@@ -104,18 +113,7 @@ router.post(
         { expiresIn: '1h' }
       );
 
-      const { _id, firstName, secondName, img = '', cart = [], favourites = [], role } = user;
-
-      res.send({ token, user: { 
-        _id,
-        firstName,
-        secondName,
-        email: user.email,
-        img,
-        cart,
-        favourites,
-        role
-      }});
+      res.status(StatusCodes.OK).send({ token, userId: user._id });
 
     } catch(e) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Something went wrong. Try again.' })
