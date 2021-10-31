@@ -8,7 +8,7 @@ router.get(
   '',
   async (req, res) => {
     try {
-      const { minPrice, maxPrice, category, sortField = 'title', sortMethod = 'asc' } = req.query;
+      const { minPrice, maxPrice, category, sortField = 'title', sortMethod = 'asc', page = 0, limit = 8 } = req.query;
 
       if (Number(minPrice) < 0 ||
           Number(minPrice) > Number.MAX_SAFE_INTEGER ||
@@ -25,9 +25,15 @@ router.get(
         ]
       };
 
+      const skip = +page * +limit;
+
       const products = await Product.find()
         .where(query)
-        .sort({ [String(sortField)]: sortMethod });
+        .sort({ [String(sortField)]: sortMethod })
+        .skip(skip)
+        .limit(+limit);
+
+      const productsCount = await Product.find().where(query).countDocuments();
       
       if (!products) {
         return res.status(StatusCodes.NOT_FOUND).json({ message: 'There are no products' });
@@ -40,7 +46,7 @@ router.get(
         }
       });
 
-      res.status(StatusCodes.OK).send(products).json({ message: 'Products successfully found' });
+      res.status(StatusCodes.OK).send({ products, quantity: productsCount }).json({ message: 'Products successfully found' });
 
     } catch(e) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: `Something went wrong. Try again. ${e}` });
