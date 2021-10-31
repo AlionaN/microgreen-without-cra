@@ -1,5 +1,4 @@
-import React from 'react';
-import { FaShoppingCart } from 'react-icons/fa';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Routes } from '@/enums';
 import { Logo } from '@/components/Logo';
@@ -7,6 +6,7 @@ import styles from './Header.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/reducers';
 import * as actions from '@/store/actions';
+import { Cart } from '@/components/Cart';
 
 interface IHeader {
   onSignInClick?: () => void,
@@ -15,10 +15,16 @@ interface IHeader {
 export const Header: React.FC<IHeader> = ({ onSignInClick }: IHeader) => {
   const dispatch = useDispatch();
   const isSignIn = useSelector((state: RootState) => state.userReducer.isLogIn);
-  const user = JSON.parse(localStorage.getItem('user') as string);
+  const user = useSelector((state: RootState) => state.userReducer.user);
+  const userId = String(localStorage.getItem('userId'));
+
+  useEffect(() => {
+    userId && userId !== null && userId !== 'null' && dispatch(actions.getUser(userId));
+  }, [userId]);
 
   const onSignOutClick = ():void => {
     dispatch(actions.logout());
+    dispatch(actions.removeCart());
   };
 
   return (
@@ -45,17 +51,17 @@ export const Header: React.FC<IHeader> = ({ onSignInClick }: IHeader) => {
           </ul>
         </nav>
         <div className={styles.userFunc}>
-          {isSignIn
+          {isSignIn && user !== null
             ? <>
               <div className={styles.userFuncAuth}>
                 <div>Hello, {user.firstName}</div>
                 <div onClick={onSignOutClick}>Sign out</div>
               </div>
-              <div className={styles.userImg}><img src={user.img}/></div>
+              {user.img && <div className={styles.userImg}><img src={user.img}/></div>}
               </>
             : <div className={styles.userFuncAuth} onClick={onSignInClick}>Sign in</div>
           }
-          <div className={styles.cart}><FaShoppingCart /></div>
+          <Cart />
         </div>
       </div>
     </header>
