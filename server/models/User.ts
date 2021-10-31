@@ -13,7 +13,7 @@ interface IUser {
   img?: string,
   password: string,
   password_confirm: string,
-  cart: IProduct[],
+  cart: typeof Types.ObjectId,
   favourites: IProduct[],
   role: UserRoles,
 };
@@ -25,7 +25,7 @@ const schema = new Schema<IUser>({
   img: {  type: String, required: false },
   password: {  type: String, required: true },
   password_confirm: {  type: String, required: true },
-  cart: [{ type: Types.ObjectId, ref: 'Product' }],
+  cart: { type: Types.ObjectId, ref: 'Cart' },
   favourites: [{ type: Types.ObjectId, ref: 'Product' }],
   role: [{ type: String, required: true }]
 });
