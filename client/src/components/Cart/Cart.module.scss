@@ -1,0 +1,45 @@
+.cart {
+  cursor: pointer;
+}
+
+.cartWrapper {
+  position: relative;
+}
+
+.cartWindow {
+  position: absolute;
+  width: 350px;
+  height: 500px;
+  z-index: 10;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px #ccc;
+  padding: .5rem;
+
+  &[data-hidden="true"] {
+    display: block;
+  }
+
+  &[data-hidden="false"] {
+    display: none;
+  }
+}
+
+.cartCloseWrapper {
+  text-align: right;
+}
+
+.cartClose {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.cartMessage {
+  padding: 1rem 0 2rem;
+  text-align: center;
+  font-weight: bold;
+}
