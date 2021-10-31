@@ -9,16 +9,19 @@ import { Button } from '@/components/Button';
 import { Modal } from '@/components/Modal';
 import { Loader } from '@/components/Loader';
 import { AddProductForm } from '@/admin/components/AddProductForm';
+import { PRODUCTS_PER_PAGE } from '@/constants';
+import { Pagination } from '@/components/Pagination';
+import styles from './Products.module.scss';
 
 export const Products: React.FC = () => {
   const dispatch = useDispatch();
   const products: IProductFromDB[] = useSelector((state: RootState) => state.productReducer.products);
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
-  const getLoadingStatus: boolean = useSelector((state: RootState) => state.categoryReducer.getCategoriesStatus.loading);
-  const deleteLoadingStatus: boolean = useSelector((state: RootState) => state.categoryReducer.deleteCategoryStatus.loading);
-  const editLoadingStatus: boolean = useSelector((state: RootState) => state.categoryReducer.editCategoryStatus.loading);
+  const getLoadingStatus: boolean = useSelector((state: RootState) => state.productReducer.getProductsStatus.loading);
+  const deleteLoadingStatus: boolean = useSelector((state: RootState) => state.productReducer.deleteProductStatus.loading);
+  const productsQuantity = useSelector((state: RootState) => state.productReducer.productsQuantity);
 
-  const statuses = [getLoadingStatus, deleteLoadingStatus, editLoadingStatus];
+  const statuses = [getLoadingStatus, deleteLoadingStatus];
   const isLoading = statuses.some((item) => item === true);
 
   useEffect(() => {
@@ -31,6 +34,7 @@ export const Products: React.FC = () => {
 
   const onAddModalClose = (): void => {
     setIsAddModalOpen(false);
+    dispatch(actions.clearPostProductStatus());
   };
 
   return (
@@ -41,15 +45,18 @@ export const Products: React.FC = () => {
           btnText="Add new product"
           onClick={onAddClick}
         />
-        <ProductsList
+        {/* <ProductsList
           products={products}
-        />
-        {/* {isLoading
+        /> */}
+        {isLoading
           ? <Loader />
-          : <ProductsList
-              products={products}
-            />
-        } */}
+          : !products || products?.length !== 0
+            ? <ProductsList
+                products={products}
+              />
+            : <div className={styles.message}>There are no products yet</div>
+        }
+        <Pagination pagesQuantity={Math.ceil(productsQuantity / PRODUCTS_PER_PAGE)} />
       </div>
       <Modal
         isModalOpen={isAddModalOpen}
