@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, useEffect, MouseEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import styles from './AddProductForm.module.scss';
 import { useForm } from 'react-hook-form';
 import { ICategoryFromDB, IProduct } from '@/interfaces';
