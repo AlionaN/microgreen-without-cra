@@ -9,7 +9,7 @@ export enum Routes {
   Delivery = '/delivery',
   Payment = '/payment',
   Shop = '/shop',
-  Product = '/shop/:id',
+  ProductId = '/shop/:productId'
 }
 
 export enum AdminRoutes {
