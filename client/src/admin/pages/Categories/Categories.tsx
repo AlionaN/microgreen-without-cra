@@ -9,7 +9,7 @@ import styles from './Categories.module.scss';
 import { useForm } from 'react-hook-form';
 import * as actions from '@/store/actions';
 import { Loader } from '@/components/Loader';
-import { Sorting } from '@/admin/components/Sorting';
+import { Sorting } from '@/components/Sorting';
 
 interface IFormInput {
   title: string,
@@ -85,9 +85,12 @@ export const Categories: React.FC = () => {
         </div>
         {isLoading
           ? <Loader />
-          : <CategoriesList 
-              categories={categories}
-            />}
+          : !categories || categories?.length !== 0
+            ? <CategoriesList 
+                categories={categories}
+              />
+            : <div className={styles.message}>There are no categories</div>
+        }
       </div>
     </AdminLayout>
   )
