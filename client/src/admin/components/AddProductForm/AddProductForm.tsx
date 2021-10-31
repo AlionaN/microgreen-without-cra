@@ -8,9 +8,22 @@ import { RootState } from '@/store/reducers';
 // import { Button } from '@/components/Button';
 
 export const AddProductForm: React.FC = () => {
-  const dispatch = useDispatch();
-  const { register, handleSubmit, getValues, formState: { errors, isSubmitSuccessful } } = useForm<IProduct>();
+    const dispatch = useDispatch();
+  const { register, handleSubmit, getValues, formState: { errors } } = useForm<IProduct>();
   const categories = useSelector((state: RootState) => state.categoryReducer.categories);
+  const postProductStatus = useSelector((state: RootState) => state.productReducer.postProductStatus);
+
+  const defaultProductInputs = {
+    title: '',
+    categoryId: categories[0],
+    description: '',
+    image: '',
+    amount: 0,
+    size: '',
+    price: 0
+  }
+
+  const [productInputs, setProductInputs] = useState<IProduct>(defaultProductInputs);
 
   useEffect(() => {
     dispatch(actions.getCategories());
@@ -18,11 +31,25 @@ export const AddProductForm: React.FC = () => {
 
   const onAddSubmitClick = (data: IProduct) => {
     dispatch(actions.postProduct(data));
+
+    setProductInputs({
+      ...productInputs,
+      ...defaultProductInputs
+    });
+  };
+
+  const onInputChange = (e: ChangeEvent): void => {
+    const target = e.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+
+    setProductInputs({
+      ...productInputs,
+      [target.name]: target.value
+    });
   };
 
   return (
     <>
-    {isSubmitSuccessful
+    {postProductStatus.success
       ? <div className={styles.success}>Product successfully added</div>
       : <form className={styles.form} onSubmit={handleSubmit(onAddSubmitClick)}>
       <label htmlFor='title' className={styles.formLabel}>Title:</label>
