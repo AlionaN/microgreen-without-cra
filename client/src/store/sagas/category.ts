@@ -37,7 +37,7 @@ interface IGetCategory {
 
 export function* getCategories({ type, sorting }: IGetCategories) {
   try {
-    const response: Response = yield api.getCategories(sorting);
+    const response: Response = yield call(api.getCategories, sorting);
     yield put(actions.clearGetCategoriesStatus());
     yield put(actions.getCategoriesSuccess(response));
   } catch (error) {
@@ -47,7 +47,7 @@ export function* getCategories({ type, sorting }: IGetCategories) {
 
 export function* getCategory({ type, id }: IGetCategory) {
   try {
-    const response: Response = yield api.getCategory(id);
+    const response: Response = yield call(api.getCategory, id);
     yield put(actions.clearGetCategoryStatus());
     yield put(actions.getCategorySuccess(response));
   } catch (error) {
@@ -57,7 +57,7 @@ export function* getCategory({ type, id }: IGetCategory) {
 
 export function* postCategory({ type, payload }: IPostCategory) {
   try {
-    yield api.postCategory(payload);
+    yield call(api.postCategory, payload);
 
     yield put(actions.postCategorySuccess(payload));
     yield put(actions.clearPostCategoryStatus());
@@ -69,7 +69,7 @@ export function* postCategory({ type, payload }: IPostCategory) {
 
 export function* deleteCategory({ type, payload }: IDeleteCategory) {
   try {
-    yield api.deleteCategory(payload);
+    yield call(api.deleteCategory, payload);
 
     yield put(actions.deleteCategorySuccess());
     yield put(actions.clearDeleteCategoryStatus());
@@ -81,7 +81,7 @@ export function* deleteCategory({ type, payload }: IDeleteCategory) {
 
 export function* editCategory({ type, id, payload }: IEditCategory) {
   try {
-    yield api.editCategory(id, payload);
+    yield call(api.editCategory, id, payload);
 
     yield put(actions.editCategorySuccess());
     yield put(actions.clearEditCategoryStatus());
