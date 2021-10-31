@@ -31,8 +31,9 @@ export const AddProductForm: React.FC = () => {
         {...register('title', { required: true, minLength: 2 })} 
         type="text" 
         placeholder="Title" 
-        defaultValue={getValues('title')}
+        value={productInputs.title}
         autoComplete="off"
+        onChange={(e) => onInputChange(e)}
       />
       <div className={styles.error}>{errors.title && "Field is required and must be at least 2 characters length"}</div>
       <label htmlFor='image' className={styles.formLabel}>Image path:</label>
@@ -41,7 +42,9 @@ export const AddProductForm: React.FC = () => {
         {...register('image', { required: false, pattern: /(\.png|\.jpg|\.jpeg)$/ })} 
         type="text" 
         placeholder="Image path (like assets/images/example.png)"
+        value={productInputs.image}
         autoComplete="off"
+        onChange={(e) => onInputChange(e)}
       />
       <div className={styles.error}>{errors.image && "It is allow to use only images in PNG, JPG and JPEG format"}</div>
       <label htmlFor='description' className={styles.formLabel}>Description:</label>
@@ -49,15 +52,17 @@ export const AddProductForm: React.FC = () => {
         className={styles.formInput} 
         {...register('description', { required: true, minLength: 10 })} 
         placeholder="Description" 
-        defaultValue={getValues('description')}
+        value={productInputs.description}
         autoComplete="off"
+        onChange={(e) => onInputChange(e)}
       />
       <div className={styles.error}>{errors.title && "Field is required and must be at least 10 characters length"}</div>
       <label htmlFor='categoryId' className={styles.formLabel}>Category:</label>
       <select 
         className={styles.formInput} 
         {...register('categoryId', { required: true})} 
-        defaultValue={getValues('categoryId')}
+        value={productInputs.categoryId}
+        onChange={(e) => onInputChange(e)}
       >
         {categories.map((category: ICategoryFromDB) => <option key={category._id} value={category._id}>{category.title}</option>)}
       </select>
@@ -68,8 +73,9 @@ export const AddProductForm: React.FC = () => {
         {...register('amount', { required: false, min: 1 })} 
         type="text" 
         placeholder="Amount" 
-        defaultValue={getValues('amount')}
+        value={productInputs.amount}
         autoComplete="off"
+        onChange={(e) => onInputChange(e)}
       />
       <div className={styles.error}>{errors.amount && "Field must be at least 1"}</div>
       <label htmlFor='size' className={styles.formLabel}>Size:</label>
@@ -78,8 +84,9 @@ export const AddProductForm: React.FC = () => {
         {...register('size', { required: false, minLength: 1 })} 
         type="text" 
         placeholder="Size" 
-        defaultValue={getValues('size')}
+        value={productInputs.size}
         autoComplete="off"
+        onChange={(e) => onInputChange(e)}
       />
       <div className={styles.error}>{errors.size && "Field must be at least 1 characters length"}</div>
       <label htmlFor='price' className={styles.formLabel}>Price:</label>
@@ -88,8 +95,9 @@ export const AddProductForm: React.FC = () => {
         {...register('price', { required: true, min: 1 })} 
         type="text" 
         placeholder="Price" 
-        defaultValue={getValues('price')}
+        value={productInputs.price}
         autoComplete="off"
+        onChange={(e) => onInputChange(e)}
       />
       <div className={styles.error}>{errors.price && "Field is required and must to be at least 1"}</div>
       <input type="submit" className={styles.btn} />
