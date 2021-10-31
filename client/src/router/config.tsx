@@ -13,6 +13,7 @@ import { Dashboard } from '@/admin/pages/Dashboard';
 import { Categories } from '@/admin/pages/Categories';
 import { Products } from '@/admin/pages/Products';
 import { UserIsAdmin } from './userIsAdmin';
+import { Product } from '@/pages/Internal/Product';
 
 export const routerConfig: Array<RouteConfig & BreadcrumbsRoute> = [
   {
@@ -46,11 +47,12 @@ export const routerConfig: Array<RouteConfig & BreadcrumbsRoute> = [
   },
   {
     path: Routes.Shop,
+    exact: true,
     component: Shop,
   },
   {
-    path: Routes.Product,
-    component: Shop,
+    path: Routes.ProductId,
+    component: Product,
   },
   {
     path: AdminRoutes.Admin,
