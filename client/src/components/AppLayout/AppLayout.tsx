@@ -20,6 +20,7 @@ export const AppLayout: React.FC = ({ children }) => {
     setIsModalOpen(false);
     dispatch(actions.clearLoginStatus());
     dispatch(actions.clearRegisterStatus());
+    setModalContent('login');
   };
 
   const onFormChange = () => {
