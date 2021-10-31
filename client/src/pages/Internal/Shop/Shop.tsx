@@ -5,12 +5,17 @@ import { AppLayout } from '@/components/AppLayout';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/reducers';
 import * as actions from '@/store/actions';
-import { Filters } from '@/admin/components/Filters';
-import { Sorting } from '@/admin/components/Sorting';
+import { Filters } from '@/components/Filters';
+import { Sorting } from '@/components/Sorting';
+import { Pagination } from '@/components/Pagination';
+import { PRODUCTS_PER_PAGE } from '@/constants';
+import { Loader } from '@/components/Loader';
 
 export const Shop: React.FC = () => {
   const dispatch = useDispatch();
   const products = useSelector((state: RootState) => state.productReducer.products);
+  const productsQuantity = useSelector((state: RootState) => state.productReducer.productsQuantity);
+  const getProductsStatus = useSelector((state: RootState) => state.productReducer.getProductsStatus);
   const sortOptions = [
     {title: 'Title (A - Z)', value: 'sortField=title&sortMethod=asc'},
     {title: 'Title (Z - A)', value: 'sortField=title&sortMethod=desc'},
@@ -30,8 +35,14 @@ export const Shop: React.FC = () => {
         sortObject='product'
       />
       <div className={styles.shop}>
-        <Cards cardsList={products} />
+        {getProductsStatus.loading
+          ? <Loader />
+          : !products || products?.length !== 0
+            ? <Cards cardsList={products} />
+            : <div className={styles.message}>There are no products yet</div>
+        }
       </div>
+      <Pagination pagesQuantity={Math.ceil(productsQuantity / PRODUCTS_PER_PAGE)} />
     </AppLayout>
   );
 }
