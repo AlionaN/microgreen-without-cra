@@ -16,6 +16,7 @@ export const Filters: React.FC<IProps> = () => {
   const categories = useSelector((state: RootState) => state.categoryReducer.categories);
   const filters = useSelector((state: RootState) => state.productReducer.filters);
   const productSorting = useSelector((state: RootState) => state.productReducer.sorting);
+  const productPaginate = useSelector((state: RootState) => state.productReducer.paginate);
   const [filtersData, setFiltersData] = useState<IProductFilters>({
     category: filters?.category || '',
     minPrice: filters?.minPrice || 0,
@@ -36,7 +37,7 @@ export const Filters: React.FC<IProps> = () => {
   }
 
   const onFiltersSubmit = (data: IProductFilters): void => {
-    dispatch(actions.getProducts(data, productSorting));
+    dispatch(actions.getProducts(data, productSorting, productPaginate));
   };
 
   return (

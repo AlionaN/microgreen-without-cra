@@ -17,12 +17,13 @@ interface IProps {
 
 export const Sorting: React.FC<IProps> = ({ options, sortObject }: IProps) => {
   const dispatch = useDispatch();
-  const productSorting = useSelector((state: RootState) => state.productReducer.sorting);
+  const productFilters = useSelector((state: RootState) => state.productReducer.filters);
+  const productPaginate = useSelector((state: RootState) => state.productReducer.paginate);
   
   const onSortChange = (e: ChangeEvent): void => {
     const target = e.target as HTMLSelectElement;
 
-    sortObject === 'product' && dispatch(actions.getProducts(productSorting, target.value));
+    sortObject === 'product' && dispatch(actions.getProducts(productFilters, target.value, productPaginate));
     sortObject === 'category' && dispatch(actions.getCategories(target.value));
   };
 
