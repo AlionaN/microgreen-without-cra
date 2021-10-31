@@ -1,25 +1,45 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import styles from './Card.module.scss';
 import { Button } from '@/components/Button';
-import { IProductFromDB } from '@/interfaces/IProductFromDB';
+import { IProductFromDB, ICartItem } from '@/interfaces';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/store/reducers';
+import * as actions from '@/store/actions';
+import { Link } from 'react-router-dom';
+import { Routes } from '@/enums';
 
 type IProps = {
   card: IProductFromDB
 }
 
 export const Card: React.FC<IProps> = ({ card }: IProps) => {
-  const { image, title, price } = card;
+  const dispatch = useDispatch();
+  const guestCart = useSelector((state: RootState) => state.guestCartReducer.guestCart);
+  const cart = useSelector((state: RootState) => state.cartReducer.cart);
+  const { image, title, price, _id } = card;
+
+  const onAddToCartClick = (e: MouseEvent<HTMLButtonElement | JSX.Element | MouseEvent>) => {
+    e.stopPropagation();
+    if (cart) {
+      dispatch(actions.addProductToCart(cart._id, _id, 1))
+    } else if (guestCart) {
+      dispatch(actions.addProductToGuestCart(card, 1));
+    }
+  };
+
   return (
-    <li className={styles.card}>
-      <img src={image} className={styles.cardImg} alt={title} />
-      <div className={styles.cardInfo}>
-        <div className={styles.cardInfoTitle}>{title}</div>
-        <div className={styles.cardInfoPrice}>
-          {price.toFixed(2)}
-          $
+    <Link to={`${Routes.Shop}/${card._id}`}>
+      <li className={styles.card}>
+        <img src={image} className={styles.cardImg} alt={title} />
+        <div className={styles.cardInfo}>
+          <div className={styles.cardInfoTitle}>{title}</div>
+          <div className={styles.cardInfoPrice}>
+            {price.toFixed(2)}
+            $
+          </div>
         </div>
-      </div>
-      <Button btnText="Add to cart" />
-    </li>
+        <Button btnText="Add to cart" onClick={(e) => onAddToCartClick(e)} />
+      </li>
+    </Link>
   );
 }
