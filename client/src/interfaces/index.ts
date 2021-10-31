@@ -5,5 +5,6 @@ export * from './ICategory';
 export * from './ICategoryFromDB';
 export * from './IUserRegister';
 export * from './IStatus';
-export * from './IProductFilters';
+export * from './IProductQuery';
 export * from './IUserLogin';
+export * from './ICartItem';
