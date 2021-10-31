@@ -1,5 +1,5 @@
 import * as types from '../actionTypes/user';
-import { IUserLoginResponse, IUserLoginRequest, IUserRegisterRequest } from '@/interfaces';
+import { IUserLoginResponse, IUserLoginRequest, IUserRegisterRequest, IUser } from '@/interfaces';
 
 export const register = (payload: IUserRegisterRequest) => ({ 
   type: types.REGISTER,
@@ -24,7 +24,7 @@ export const login = (payload: IUserLoginRequest) => ({
 });
 
 export const loginSuccess = () => ({ 
-  type: types.LOGIN_SUCCESS
+  type: types.LOGIN_SUCCESS,
 });
 
 export const loginFailure = () => ({ 
@@ -39,3 +39,20 @@ export const logout = () => ({
   type: types.LOGOUT,
 });
 
+export const getUser = (userId: string) => ({
+  type: types.GET_USER,
+  userId
+});
+
+export const getUserSuccess = (payload: IUser) => ({
+  type: types.GET_USER_SUCCESS,
+  payload
+});
+
+export const getUserFailure = () => ({
+  type: types.GET_USER_FAILURE
+});
+
+export const clearGetUserStatus = () => ({
+  type: types.CLEAR_GET_USER_STATUS
+});

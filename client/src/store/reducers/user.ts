@@ -4,10 +4,11 @@ import { AnyAction, Reducer } from 'redux';
 import * as helpers from '../helpers';
 
 interface IInitialState {
-  user: IUserLoginResponse["user"] | null,
+  user: IUserLoginResponse | null,
   isLogIn: boolean,
   registerStatus: IStatus,
-  loginStatus: IStatus
+  loginStatus: IStatus,
+  getUserStatus: IStatus,
 };
 
 const initialState: IInitialState = {
@@ -15,6 +16,7 @@ const initialState: IInitialState = {
   isLogIn: false,
   registerStatus: helpers.getDefaultState(),
   loginStatus: helpers.getDefaultState(),
+  getUserStatus: helpers.getDefaultState(),
 };
 
 export const userReducer: Reducer = (state = initialState, action: AnyAction) => {
@@ -51,17 +53,19 @@ export const userReducer: Reducer = (state = initialState, action: AnyAction) =>
         loginStatus: helpers.getRequestState()
       };
     
-    case types.LOGIN_SUCCESS:
+    case types.LOGIN_SUCCESS: {
       return {
         ...state,
         loginStatus: helpers.getSuccessState('You are successfully login'),
         isLogIn: true,
       };
+    }
 
     case types.LOGIN_FAILURE:
       return {
         ...state,
-        loginStatus: helpers.getErrorState('Something went wrong. Try again')
+        loginStatus: helpers.getErrorState('Login or password is incorrect'),
+        isLogIn: false
       };
 
     case types.CLEAR_LOGIN_STATUS:
@@ -72,12 +76,44 @@ export const userReducer: Reducer = (state = initialState, action: AnyAction) =>
       
     case types.LOGOUT:
       localStorage.removeItem('token');
-      localStorage.removeItem('user');
+      localStorage.removeItem('userId');
+      localStorage.removeItem('role');
       return {
         ...state,
         logoutStatus: helpers.getRequestState(),
-        isLogIn: false
+        isLogIn: false,
+        user: null
       };
+    
+    case types.GET_USER: {
+      return {
+        ...state,
+        getUserStatus: helpers.getRequestState(),
+      }
+    };
+
+    case types.GET_USER_SUCCESS: {
+      const { payload } = action;
+      return {
+        ...state,
+        getUserStatus: helpers.getSuccessState('User successfully found'),
+        user: payload
+      }
+    };
+
+    case types.GET_USER_FAILURE: {
+      return {
+        ...state,
+        getUserStatus: helpers.getErrorState('User not found'),
+      }
+    };
+
+    case types.CLEAR_GET_USER_STATUS: {
+      return {
+        ...state,
+        getUserStatus: helpers.getDefaultState(),
+      }
+    };
 
     default:
       return state;
