@@ -16,25 +16,42 @@ export const RegistrationForm: React.FC<IProps> = ({ onFormChange }: IProps) => 
   const { register, handleSubmit, formState: { errors } } = useForm<IUserRegisterRequest>();
   const registerStatus = useSelector((state: RootState) => state.userReducer.registerStatus);
 
-  const [userInfo, setUserInfo] = useState<IUserRegisterRequest>({
+  const userInfoDefault = {
     firstName: '',
     secondName: '',
     email: '',
     img: '',
     password: '',
     password_confirm: '',
-  });
-
-  const onRegister = () => {
-    console.log(userInfo);
-    console.log(registerStatus);
-    dispatch(actions.register(userInfo));
-    console.log(registerStatus);
   };
 
-  const onInputChange = (e: ChangeEvent): void => {
+  const [userInfo, setUserInfo] = useState<IUserRegisterRequest>(userInfoDefault);
+
+  const onRegister = () => {
+    dispatch(actions.register(userInfo));
+
+    setUserInfo({
+      ...userInfo,
+      ...userInfoDefault
+    })
+  };
+
+  const onInputChange = async (e: ChangeEvent) => {
     const target = e.target as HTMLInputElement;
-  
+
+    if (target.name === 'img') {
+      const file = (target.files && target.files[0]) as File;
+      const blob = new Blob([new Uint8Array(await file.arrayBuffer())], {type: file.type });
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onload = () => {
+        setUserInfo({
+          ...userInfo,
+          img: String(reader.result)
+        });
+      }
+    }
+    
     setUserInfo({
       ...userInfo,
       [target.name]: target.value
