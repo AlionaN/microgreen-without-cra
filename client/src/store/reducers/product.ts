@@ -1,10 +1,13 @@
 import * as types from '@/store/actionTypes/product';
 import * as helpers from '@/store/helpers';
-import { IProduct, IStatus, IProductFilters } from '@/interfaces';
+import { IProduct, IStatus, IProductPaginate, IProductFilters } from '@/interfaces';
 import { AnyAction, Reducer } from 'redux';
+
+
 
 interface IInitialState {
   products: IProduct[],
+  productsQuantity: number,
   getProductsStatus: IStatus,
   product: IProduct | null,
   getProductStatus: IStatus,
@@ -13,10 +16,12 @@ interface IInitialState {
   editProductStatus: IStatus,
   filters: IProductFilters,
   sorting: string,
-}
+  paginate: IProductPaginate
+};
 
 const initialState: IInitialState = {
   products: [],
+  productsQuantity: 0,
   getProductsStatus: helpers.getDefaultState(),
   product: null,
   getProductStatus: helpers.getDefaultState(),
@@ -29,25 +34,31 @@ const initialState: IInitialState = {
     minPrice: 0,
   },
   sorting: '',
+  paginate: {
+    page: 0,
+    limit: 8
+  }
 };
 
 export const productReducer: Reducer = (state: IInitialState = initialState, action: AnyAction) => {
   switch(action.type) {
     case types.GET_PRODUCTS: {
-      const { filters, sorting } = action;
+      const { filters, paginate, sorting } = action;
       return {
         ...state,
         getProductsStatus: helpers.getRequestState(),
         filters,
+        paginate,
         sorting
       };
     };
     case types.GET_PRODUCTS_SUCCESS: {
-      const { payload } = action;
+      const { products, quantity } = action.payload;
       return {
         ...state,
         getProductsStatus: helpers.getSuccessState('Products successfully found'),
-        products: payload,
+        products,
+        productsQuantity: quantity
       };
     };
     case types.GET_PRODUCTS_FAILURE: {

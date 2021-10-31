@@ -1,9 +1,11 @@
 import * as types from '../actionTypes/product';
+import { IProductFilters, IProductPaginate } from '@/interfaces';
 
-export const getProducts = (filters?: any, sorting?: string) => ({ 
+export const getProducts = (filters?: IProductFilters, sorting?: string, paginate?: IProductPaginate) => ({ 
   type: types.GET_PRODUCTS,
   filters,
-  sorting
+  sorting,
+  paginate
 });
 
 export const getProductsSuccess = (payload: any) => ({ 
