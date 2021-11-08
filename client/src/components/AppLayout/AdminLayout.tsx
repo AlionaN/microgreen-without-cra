@@ -6,7 +6,7 @@ import styles from './AppLayout.module.scss';
 export const AdminLayout: React.FC = ({ children }) => {
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${styles.admin}`}>
       <AdminHeader />
         <main className={styles.main}>
           {children}
