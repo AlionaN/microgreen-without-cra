@@ -3,19 +3,20 @@ import React, { useEffect, useState, MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Pagination.module.scss';
 import * as actions from '@/store/actions';
-import { PRODUCTS_PER_PAGE } from '@/constants';
 
 interface IProps {
   pagesQuantity: number,
+  productsPerPage: number,
+  classes?: string
 };
 
-export const Pagination: React.FC<IProps> = ({ pagesQuantity }: IProps) => {
+export const Pagination: React.FC<IProps> = ({ pagesQuantity, productsPerPage, classes }: IProps) => {
   const dispatch = useDispatch();
   const productSorting = useSelector((state: RootState) => state.productReducer.sorting);
   const productFilters = useSelector((state: RootState) => state.productReducer.filters);
   const [paginationConfig, setPaginationConfig] = useState({
     page: 0,
-    limit: PRODUCTS_PER_PAGE
+    limit: productsPerPage
   });
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export const Pagination: React.FC<IProps> = ({ pagesQuantity }: IProps) => {
   pagesQuantity > 1 && [...Array(pagesQuantity)]
     .map((item, index) => item = index)
     .forEach((page) => {
-      pBtns.push(<li key={page}><button className={styles.paginationBtn} onClick={(e) => onPageBtnClick(e)} data-page={page}>{page + 1}</button></li>);
+      pBtns.push(<li key={page}><button className={`${styles.paginationBtn} ${page === paginationConfig.page ? styles.current : ''}`} onClick={(e) => onPageBtnClick(e)} disabled={page === paginationConfig.page} data-page={page}>{page + 1}</button></li>);
     });
 
 
@@ -38,12 +39,12 @@ export const Pagination: React.FC<IProps> = ({ pagesQuantity }: IProps) => {
       page: Number(target.getAttribute('data-page'))
     });
 
-    dispatch(actions.getProducts(productFilters, productSorting, { page: paginationConfig.page, limit: PRODUCTS_PER_PAGE }));
+    dispatch(actions.getProducts(productFilters, productSorting, { page: paginationConfig.page, limit: productsPerPage }));
   };
 
   return (
-    <div className={styles.pagination}>
-      <ul>{pagesQuantity > 0 && pBtns}</ul>
+    <div className={`${styles.pagination} ${classes}`}>
+      <ul className={styles.paginationList}>{pagesQuantity > 0 && pBtns}</ul>
     </div>
   );
 };
