@@ -1,4 +1,35 @@
+@import '@/mixins.scss';
+
 .pagination {
   display: flex;
   justify-content: center;
+
+  &List {
+    @include contentBlock;
+    display: flex;
+    list-style-type: none;
+    border-radius: 50%;
+  }
+
+  &Btn {
+    font-weight: bold;
+    font-size: 1.2rem;
+    background: transparent;
+    border: none;
+    padding: 0 8px;
+    cursor: pointer;
+    transition: all .5s;
+
+    &:hover {
+      color: #41be3a;
+    }
+
+    &[disabled] {
+      cursor: default;
+    }
+  }
+}
+
+.current {
+  color: #41be3a;
 }

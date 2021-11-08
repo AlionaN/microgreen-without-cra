@@ -1,10 +1,12 @@
 .header {
-  width: 20vw;
+  width: 230px;
   height: 100vh;
-  background-color: #051C04;
+  background-color: #185815;
+  border-radius: 0 15px 15px 0;
   color: #acacac;
   padding: 20px;
   box-sizing: border-box;
+  position: fixed;
   &Title {
     text-transform: uppercase;
     text-align: center;
@@ -24,6 +26,15 @@
     &List {
       list-style-type: none;
       &Item {
+        margin: 20px 0;
+        & a {
+          color: #acacac;
+          text-decoration: none;
+          transition: color .5s;
+          &:hover {
+            color: #fff;
+          }
+        }
         &Text {
           text-transform: uppercase;
         }

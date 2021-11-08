@@ -8,8 +8,17 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+
+  &.admin {
+    background-color: #f2f2f2;
+  }
 }
 .main {
-  width: 77vw;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(3, min-content);
+  grid-gap: 1rem;
+  width: calc(100% - 230px);
   padding: 20px;
+  margin-left: auto;
 }

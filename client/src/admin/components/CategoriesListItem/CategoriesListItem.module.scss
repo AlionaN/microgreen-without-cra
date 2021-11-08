@@ -10,6 +10,26 @@
     & > * + * {
       margin-left: 10px;
     }
+
+    .editBtn,
+    .checkBtn {
+      background-color: #185815;
+
+      &:hover {
+        background-color: #61ca5c;
+      }
+    }
+  }
+
+  .deleteBtn {
+    background-color: transparent;
+    color: #cacaca;
+    border: 1px solid #cacaca;
+
+    &:hover {
+      background-color: #cacaca;
+      color: #fff;
+    }
   }
 
   &::after {
@@ -17,7 +37,7 @@
     display: block;
     width: 100%;
     height: 1px;
-    background-color: #232;
+    background-color: #ececec;
     border-radius: 5px;
     margin: 10px 0;
   }

@@ -1,0 +1,13 @@
+.title {
+  grid-area: 1 / 1 / 2 / 6;
+}
+
+.addProductBtnWrap {
+  grid-area: 1 / 6 / 2 / 13;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.productsPagination {
+  grid-area: 4 / 1 / 5 / 13;
+}
