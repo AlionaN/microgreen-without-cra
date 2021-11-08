@@ -9,6 +9,7 @@ export const AdminHeader: React.FC = () => {
       <div className={styles.headerTitle}>Microgreen Admin Panel</div>
       <nav className={styles.headerNav}>
         <ul className={styles.headerNavList}>
+          <li className={styles.headerNavListItem}><span className={styles.headerNavListItemText}><NavLink to={AdminRoutes.Admin}>Dashboard</NavLink></span></li>
           <li className={styles.headerNavListItem}><span className={styles.headerNavListItemText}>Shop</span>
             <ul className={styles.headerNavSublist}>
               <li className={styles.headerNavSublistItem}><NavLink to={AdminRoutes.Categories}>Categories</NavLink></li>
