@@ -61,37 +61,39 @@ export const Categories: React.FC = () => {
 
   return (
     <AdminLayout>
-      <div>
-        <h1>Categories</h1>
-        <form className={styles.formAdd}>
-          <div>
-            <input 
-              className={`${styles.formAddInput} addInput`} 
-              {...register('title', { required: true, minLength: 2 })} 
-              type="text" 
-              placeholder="Category title"
-              defaultValue={categoryInputs.title}
-              onChange={(e) => onChange(e)}
-            />
-            <div className={styles.error}>{errors.title && "Title is required and must be at least 2 characters length"}</div>
-          </div>
-          <Button btnText="Add category" onClick={onAddClick} classes={styles.formAddBtn} />
-        </form>
-        <div className={styles.panel}>
-          <Sorting
-            options={sortOptions}
-            sortObject='category'
+      <h1 className={styles.title}>Categories</h1>
+      <form className={styles.formAdd}>
+        <p className={styles.formAddDescription}>To add category, just write title below and click Add Category button</p>
+        <div>
+          <input 
+            className={`${styles.formAddInput} addInput`} 
+            {...register('title', { required: true, minLength: 2 })} 
+            type="text" 
+            placeholder="Category title"
+            defaultValue={categoryInputs.title}
+            onChange={(e) => onChange(e)}
           />
+          <div className={styles.error}>{errors.title && "Title is required and must be at least 2 characters length"}</div>
         </div>
-        {isLoading
-          ? <Loader />
-          : !categories || categories?.length !== 0
-            ? <CategoriesList 
-                categories={categories}
-              />
-            : <div className={styles.message}>There are no categories</div>
-        }
+        <Button btnText="Add category" onClick={(e) => onAddClick(e)} classes={`${styles.formAddBtn}`} />
+      </form>
+      <div className={styles.panel}>
+        <div className={styles.sortTitle}>Sort by</div>
+        <Sorting
+          options={sortOptions}
+          sortObject='category'
+          classes={styles.categoriesSort}
+        />
       </div>
+      {isLoading
+        ? <Loader />
+        : !categories || categories?.length !== 0
+          ? <CategoriesList 
+              categories={categories}
+              classes={styles.categories}
+            />
+          : <div className={styles.message}>There are no categories</div>
+      }
     </AdminLayout>
-  )
-}
+  );
+};
