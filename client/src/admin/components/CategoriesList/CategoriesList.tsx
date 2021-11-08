@@ -5,12 +5,13 @@ import styles from './CategoriesList.module.scss';
 
 interface ICategoriesList {
   categories: ICategoryFromDB[],
-}
+  classes?: string,
+};
 
-export const CategoriesList: React.FC<ICategoriesList> = ({ categories }: ICategoriesList) => {
+export const CategoriesList: React.FC<ICategoriesList> = ({ categories, classes }: ICategoriesList) => {
 
   return (
-    <div className={styles.categories}>
+    <div className={`${styles.categories} ${classes}`}>
       <ul className={styles.categoriesList}>
         {categories && categories.map((category: ICategoryFromDB) => 
           <CategoriesListItem

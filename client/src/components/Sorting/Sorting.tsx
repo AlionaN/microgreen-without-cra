@@ -12,10 +12,11 @@ interface IOption {
 
 interface IProps {
   options: IOption[],
-  sortObject: 'product' | 'category'
+  sortObject: 'product' | 'category',
+  classes?: string
 }
 
-export const Sorting: React.FC<IProps> = ({ options, sortObject }: IProps) => {
+export const Sorting: React.FC<IProps> = ({ options, sortObject, classes }: IProps) => {
   const dispatch = useDispatch();
   const productFilters = useSelector((state: RootState) => state.productReducer.filters);
   const productPaginate = useSelector((state: RootState) => state.productReducer.paginate);
@@ -28,7 +29,7 @@ export const Sorting: React.FC<IProps> = ({ options, sortObject }: IProps) => {
   };
 
   return (
-    <div className={styles.sorting}>
+    <div className={`${styles.sorting} ${classes}`}>
       <select className={styles.sortingSelect} onChange={(e) => onSortChange(e)}>
         {options && options.map((option, index) => <option key={index} value={option.value}>{option.title}</option>)}
       </select>
