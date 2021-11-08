@@ -8,7 +8,6 @@ import * as actions from '@/store/actions';
 import { Filters } from '@/components/Filters';
 import { Sorting } from '@/components/Sorting';
 import { Pagination } from '@/components/Pagination';
-import { PRODUCTS_PER_PAGE } from '@/constants';
 import { Loader } from '@/components/Loader';
 
 export const Shop: React.FC = () => {
@@ -42,7 +41,10 @@ export const Shop: React.FC = () => {
             : <div className={styles.message}>There are no products yet</div>
         }
       </div>
-      <Pagination pagesQuantity={Math.ceil(productsQuantity / PRODUCTS_PER_PAGE)} />
+      <Pagination
+        pagesQuantity={Math.ceil(productsQuantity / 8)}
+        productsPerPage={8}
+      />
     </AppLayout>
   );
 }
