@@ -26,3 +26,15 @@
   width: 90%;
   margin: 20px auto;
 }
+
+@mixin contentBlock {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+@mixin input {
+  border: 1px solid #cacaca;
+  border-radius: 5px;
+  padding: 2px 5px;
+}
