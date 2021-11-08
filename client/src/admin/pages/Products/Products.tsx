@@ -9,7 +9,6 @@ import { Button } from '@/components/Button';
 import { Modal } from '@/components/Modal';
 import { Loader } from '@/components/Loader';
 import { AddProductForm } from '@/admin/components/AddProductForm';
-import { PRODUCTS_PER_PAGE } from '@/constants';
 import { Pagination } from '@/components/Pagination';
 import styles from './Products.module.scss';
 
@@ -39,25 +38,27 @@ export const Products: React.FC = () => {
 
   return (
     <AdminLayout>
-      <div>
-        <h1>Products</h1>
+      <h1 className={styles.title}>Products</h1>
+      <div className={styles.addProductBtnWrap}>
         <Button
           btnText="Add new product"
           onClick={onAddClick}
+          classes={styles.addProductBtn}
         />
-        {/* <ProductsList
-          products={products}
-        /> */}
-        {isLoading
-          ? <Loader />
-          : !products || products?.length !== 0
-            ? <ProductsList
-                products={products}
-              />
-            : <div className={styles.message}>There are no products yet</div>
-        }
-        <Pagination pagesQuantity={Math.ceil(productsQuantity / PRODUCTS_PER_PAGE)} />
       </div>
+      {isLoading
+        ? <Loader />
+        : !products || products?.length !== 0
+          ? <ProductsList
+              products={products}
+            />
+          : <div className={styles.message}>There are no products yet</div>
+      }
+      <Pagination 
+        pagesQuantity={Math.ceil(productsQuantity / 6)}
+        productsPerPage={6}
+        classes={styles.productsPagination}
+      />
       <Modal
         isModalOpen={isAddModalOpen}
         onCloseModal={onAddModalClose}
