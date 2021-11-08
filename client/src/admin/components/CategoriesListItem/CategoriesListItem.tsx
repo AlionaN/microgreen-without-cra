@@ -60,10 +60,10 @@ export const CategoriesListItem: React.FC<IProps> = ({ category }: IProps) => {
         : category.title}
       <div className={styles.btns}>
         {editMode
-          ? <Button btnText={<FiCheck />} onClick={() => onEditClick(category._id)} />
-          : <Button btnText={<MdModeEdit />} onClick={onEditModeClick} />
+          ? <Button btnText={<FiCheck />} classes={styles.checkBtn} onClick={() => onEditClick(category._id)} />
+          : <Button btnText={<MdModeEdit />} classes={styles.editBtn} onClick={onEditModeClick} />
         }
-        <Button btnText={<MdDelete />} onClick={() => onDeleteClick(category._id)} />
+        <Button btnText={<MdDelete />} classes={styles.deleteBtn} onClick={() => onDeleteClick(category._id)} />
       </div>
     </li>
   );

@@ -155,10 +155,10 @@ export const ProductListItem: React.FC<IProps> = ({ product }: IProps) => {
       <div className={styles.error}>{errors.price && "Field is required and minimal length is 2 characters"}</div>
       <div className={styles.btns}>
         {editMode
-          ? <Button btnText={<FiCheck />} onClick={onEditClick} />
-          : <Button btnText={<MdModeEdit />} onClick={onEditModeClick} />
+          ? <Button btnText={<FiCheck />} classes={styles.checkBtn} onClick={onEditClick} />
+          : <Button btnText={<MdModeEdit />} classes={styles.editBtn} onClick={onEditModeClick} />
         }
-        <Button btnText={<MdDelete />} onClick={onDeleteClick} />
+        <Button btnText={<MdDelete />} classes={styles.deleteBtn} onClick={onDeleteClick} />
       </div>
     </div>
   );
