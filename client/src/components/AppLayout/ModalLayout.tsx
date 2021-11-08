@@ -9,7 +9,7 @@ interface IModalLayout {
 
 export const ModalLayout: React.FC<IModalLayout> = ({ content, onCloseModal }: IModalLayout) => {
   return (
-    <div className={styles.window}>
+    <div className={`${styles.window} modalWindow`}>
       <div className={styles.windowHeader}>
         <div className={styles.windowHeaderClose} onClick={onCloseModal}><CgClose /></div>
       </div>
