@@ -71,8 +71,8 @@ export const Cart: React.FC<IProps> = () => {
           <div className={styles.total}>
             {cart !== null || guestCart !== null &&
               <>
-                <div className={styles.totalPrice}>Total price: {cartId ? (cart as ICart).totalPrice.toFixed(2) : guestCart?.totalPrice.toFixed(2)}$</div>
-                <div className={styles.totalQuantity}>Total quantity: {cartId ? (cart as ICart).totalQuantity : guestCart?.totalQuantity}</div>
+                <div className={styles.totalPrice}>Total price: {cartId && cart ? (cart as ICart).totalPrice.toFixed(2) : guestCart?.totalPrice.toFixed(2)}$</div>
+                <div className={styles.totalQuantity}>Total quantity: {cartId && cart ? (cart as ICart).totalQuantity : guestCart?.totalQuantity}</div>
                 <button className={styles.cartClearBtn} onClick={(e) => onClearCart(e)} disabled={(cart as ICart)?.items.length === 0 || guestCart?.items.length === 0}>Clear cart</button>
               </>
             }
