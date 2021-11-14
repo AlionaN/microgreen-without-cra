@@ -13,20 +13,15 @@ export const App: React.FC = () => {
   
   useEffect(() => {
     userId && userId !== null && dispatch(actions.getUser(userId));
-  }, []);
 
-  useEffect(() => {
-    if (user && user !== null) { 
-      dispatch(actions.getCart(user.cart));
-    } else if (!localStorage.getItem('cart')){
+    if (!user && !localStorage.getItem('cart')){
       localStorage.setItem('cart', JSON.stringify({
         items: [],
         totalPrice: 0,
         totalQuantity: 0
       }));
-      dispatch(actions.getGuestCart());
     }
-  }, []);
+  }, [userId]);
   
   if (token && userId) {
     dispatch(actions.loginSuccess());
