@@ -8,7 +8,7 @@ router.get(
   '',
   async (req, res) => {
     try {
-      const { minPrice, maxPrice, category, sortField = 'title', sortMethod = 'asc', page = 0, limit = 8 } = req.query;
+      const { minPrice, maxPrice, category, sortField = 'title', sortMethod = 'asc', page = 0, limit } = req.query;
 
       if (Number(minPrice) < 0 ||
           Number(minPrice) > Number.MAX_SAFE_INTEGER ||
