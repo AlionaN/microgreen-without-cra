@@ -30,7 +30,8 @@ export const Sorting: React.FC<IProps> = ({ options, sortObject, classes }: IPro
 
   return (
     <div className={`${styles.sorting} ${classes}`}>
-      <select className={styles.sortingSelect} onChange={(e) => onSortChange(e)}>
+      <label htmlFor="sortBy" className={styles.sortingLabel}>Sort By</label>
+      <select className={styles.sortingSelect} name="sortBy" onChange={(e) => onSortChange(e)}>
         {options && options.map((option, index) => <option key={index} value={option.value}>{option.title}</option>)}
       </select>
     </div>
