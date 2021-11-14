@@ -3,9 +3,13 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './AdminHeader.module.scss';
 
-export const AdminHeader: React.FC = () => {
+interface IProps {
+  isMobileShown?: boolean
+};
+
+export const AdminHeader: React.FC<IProps> = ({ isMobileShown }: IProps) => {
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${isMobileShown ? styles.active : ''}`}>
       <div className={styles.headerTitle}>Microgreen Admin Panel</div>
       <nav className={styles.headerNav}>
         <ul className={styles.headerNavList}>
