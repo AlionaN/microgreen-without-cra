@@ -76,7 +76,7 @@ export const AddProductForm: React.FC = () => {
       <div className={styles.error}>{errors.image && "It is allow to use only images in PNG, JPG and JPEG format"}</div>
       <label htmlFor='description' className={styles.formLabel}>Description:</label>
       <textarea 
-        className={styles.formInput} 
+        className={`${styles.formInput} ${styles.formTextarea}`} 
         {...register('description', { required: true, minLength: 10 })} 
         placeholder="Description" 
         value={productInputs.description}
