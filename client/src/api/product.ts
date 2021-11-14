@@ -3,6 +3,7 @@ import { apiURL } from './apiConfig';
 
 export const getProducts = async ( filters?: IProductFilters, sorting?: string, paginate?: IProductPaginate ) => {
   const query = [];
+  const limit = paginate?.limit || 6;
 
   if (filters) {
     const filtersObj = Object.entries(JSON.parse(JSON.stringify(filters)));
@@ -16,9 +17,9 @@ export const getProducts = async ( filters?: IProductFilters, sorting?: string, 
 
   const sortingQuery = filters && sorting ? `&${sorting}` : sorting;
   
-  const paginateQuery = `&page=${paginate?.page}&limit=${paginate?.limit}`;
+  const paginateQuery = `${sorting || query.length !== 0 ? '&' : ''}page=${paginate?.page}&limit=${limit}`;
 
-  const response = await fetch(`${apiURL}/products${filters || sorting || paginate ? '?' : ''}${query && query.join('&')}${sorting ? sortingQuery : ''}${paginate?.page && paginate?.limit ? paginateQuery : ''}`);
+  const response = await fetch(`${apiURL}/products${query.length !== 0 || sortingQuery || paginateQuery ? '?' : ''}${query && query.join('&')}${sorting ? sortingQuery : ''}${paginateQuery ? paginateQuery : ''}`);
   const result = await response.json();
 
   return result;
