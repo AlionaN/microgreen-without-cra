@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useCallback, MouseEvent } from 'react';
+import React, { useEffect, useState, MouseEvent } from 'react';
 import styles from './Cart.module.scss';
 import { FaShoppingCart } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/reducers';
 import * as actions from '@/store/actions';
-import { ICartItem, ICart, IGuestCart } from '@/interfaces';
+import { ICartItem, ICart } from '@/interfaces';
 import { CartItem } from '@/components/CartItem';
 import { MdClose } from 'react-icons/md';
 import { Loader } from '../Loader';
@@ -16,7 +16,7 @@ interface IProps {
 
 export const Cart: React.FC<IProps> = () => {
   const dispatch = useDispatch();
-  const cartId = useSelector((state: RootState) => state.userReducer.user)?.cart;
+  const user = useSelector((state: RootState) => state.userReducer.user);
   const cart: ICart = useSelector((state: RootState) => state.cartReducer.cart);
   const getCartStatus = useSelector((state: RootState) => state.cartReducer.getCartStatus);
   const updateProductInCartStatus = useSelector((state: RootState) => state.cartReducer.updateProductInCart); 
@@ -25,14 +25,16 @@ export const Cart: React.FC<IProps> = () => {
   const loadingStatus = [getCartStatus?.loading, updateProductInCartStatus?.loading, deleteProductFromCartStatus?.loading];
   const isLoading = loadingStatus.some((item) => item === true);
   const [isCartShown, setIsCartShown] = useState(false);
+  const cartId = user?.cart;
 
   useEffect(() => {
-    if (cartId && cartId !== undefined) {
+    if (cartId && cartId !== undefined && !cart) {
       dispatch(actions.getCart(cartId));
-    } else {
+      console.log(cart);
+    } else if (localStorage.getItem('cart')) {
       dispatch(actions.getGuestCart());
     }
-  }, []);
+  }, [cart]);
 
   const onCartClick = (): void => {
     setIsCartShown(true);
@@ -69,11 +71,18 @@ export const Cart: React.FC<IProps> = () => {
                 </ul>
           }
           <div className={styles.total}>
-            {cart !== null || guestCart !== null &&
+            {cart !== null && cart.totalPrice && cart.totalQuantity && 
               <>
-                <div className={styles.totalPrice}>Total price: {cartId && cart ? (cart as ICart).totalPrice.toFixed(2) : guestCart?.totalPrice.toFixed(2)}$</div>
-                <div className={styles.totalQuantity}>Total quantity: {cartId && cart ? (cart as ICart).totalQuantity : guestCart?.totalQuantity}</div>
-                <button className={styles.cartClearBtn} onClick={(e) => onClearCart(e)} disabled={(cart as ICart)?.items.length === 0 || guestCart?.items.length === 0}>Clear cart</button>
+                <div className={styles.totalPrice}>Total price: {(cart as ICart).totalPrice.toFixed(2)}$</div>
+                <div className={styles.totalQuantity}>Total quantity: {(cart as ICart).totalQuantity}</div>
+                <button className={styles.cartClearBtn} onClick={(e) => onClearCart(e)} disabled={(cart as ICart)?.items.length === 0}>Clear cart</button>
+              </>
+            }
+            {guestCart !== null &&
+              <>
+                <div className={styles.totalPrice}>Total price: {guestCart?.totalPrice.toFixed(2)}$</div>
+                <div className={styles.totalQuantity}>Total quantity: {guestCart?.totalQuantity}</div>
+                <button className={styles.cartClearBtn} onClick={(e) => onClearCart(e)} disabled={guestCart?.items.length === 0}>Clear cart</button>
               </>
             }
           </div>
