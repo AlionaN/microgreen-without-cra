@@ -2,6 +2,7 @@ import { IProductFromDB } from '@/interfaces';
 import React from 'react';
 import styles from './ProductsList.module.scss';
 import { ProductListItem } from '@/admin/components/ProductListItem';
+import { Grid } from '@mui/material';
 
 interface IProductsList {
   products: IProductFromDB[],
@@ -10,10 +11,14 @@ interface IProductsList {
 export const ProductsList: React.FC<IProductsList> = ({ products }: IProductsList) => {
   return (
     <div className={styles.products}>
-      <ul className={styles.productsList}>
+      <Grid container spacing={2} columns={{ xs: 1, md: 2, lg: 3 }} className={styles.productsList}>
         {products && products.map((product: IProductFromDB) => {
           return (
-            <li 
+            <Grid
+              item
+              xs={1}
+              md={1}
+              lg={1} 
               className={`${styles.productsListItem} productItem`}
               data-key={product._id}
               key={product._id} 
@@ -21,10 +26,10 @@ export const ProductsList: React.FC<IProductsList> = ({ products }: IProductsLis
               <ProductListItem
                 product={product}
               />
-            </li>
+            </Grid>
           );
         })}
-      </ul>
+      </Grid>
     </div>
   );
 };

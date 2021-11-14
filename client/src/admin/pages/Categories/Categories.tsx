@@ -10,19 +10,20 @@ import { useForm } from 'react-hook-form';
 import * as actions from '@/store/actions';
 import { Loader } from '@/components/Loader';
 import { Sorting } from '@/components/Sorting';
+import { Grid } from '@mui/material';
 
 interface IFormInput {
   title: string,
-}
+};
 
 
 export const Categories: React.FC = () => {
   const dispatch = useDispatch();
 
-
   const [categoryInputs, setCategoryInputs] = useState({
     title: ''
   });
+
   const { register, formState: { errors } } = useForm<IFormInput>();
   const categories: ICategoryFromDB[] = useSelector((state: RootState) => state.categoryReducer.categories);
   const getLoadingStatus: boolean = useSelector((state: RootState) => state.categoryReducer.getCategoriesStatus.loading);
@@ -34,7 +35,7 @@ export const Categories: React.FC = () => {
   const sortOptions = [
     {title: 'Title (A - Z)', value: 'sortField=title&sortMethod=asc'},
     {title: 'Title (Z - A)', value: 'sortField=title&sortMethod=desc'},
-  ]
+  ];
 
   useEffect(() => {
     dispatch(actions.getCategories());
@@ -61,39 +62,44 @@ export const Categories: React.FC = () => {
 
   return (
     <AdminLayout>
-      <h1 className={styles.title}>Categories</h1>
-      <form className={styles.formAdd}>
-        <p className={styles.formAddDescription}>To add category, just write title below and click Add Category button</p>
-        <div>
-          <input 
-            className={`${styles.formAddInput} addInput`} 
-            {...register('title', { required: true, minLength: 2 })} 
-            type="text" 
-            placeholder="Category title"
-            defaultValue={categoryInputs.title}
-            onChange={(e) => onChange(e)}
-          />
-          <div className={styles.error}>{errors.title && "Title is required and must be at least 2 characters length"}</div>
-        </div>
-        <Button btnText="Add category" onClick={(e) => onAddClick(e)} classes={`${styles.formAddBtn}`} />
-      </form>
-      <div className={styles.panel}>
-        <div className={styles.sortTitle}>Sort by</div>
-        <Sorting
-          options={sortOptions}
-          sortObject='category'
-          classes={styles.categoriesSort}
-        />
-      </div>
-      {isLoading
-        ? <Loader />
-        : !categories || categories?.length !== 0
-          ? <CategoriesList 
-              categories={categories}
-              classes={styles.categories}
+      <Grid item xs={12}><h1 className={styles.title}>Categories</h1></Grid>
+      <Grid item xs={12}>
+        <form className={styles.formAdd}>
+          <p className={styles.formAddDescription}>To add category, just write title below and click Add Category button</p>
+          <div>
+            <input 
+              className={`${styles.formAddInput} addInput`} 
+              {...register('title', { required: true, minLength: 2 })} 
+              type="text" 
+              placeholder="Category title"
+              defaultValue={categoryInputs.title}
+              onChange={(e) => onChange(e)}
             />
-          : <div className={styles.message}>There are no categories</div>
-      }
+            <div className={styles.error}>{errors.title && "Title is required and must be at least 2 characters length"}</div>
+          </div>
+          <Button btnText="Add category" onClick={(e) => onAddClick(e)} classes={`${styles.formAddBtn}`} />
+        </form>
+      </Grid>
+      <Grid item xs={12} md={2} alignSelf='stretch'>
+        <div className={styles.panel}>
+          <Sorting
+            options={sortOptions}
+            sortObject='category'
+            classes={styles.categoriesSort}
+          />
+        </div>
+      </Grid>
+      <Grid item xs={12} md={10}>
+        {isLoading
+          ? <Loader />
+          : !categories || categories?.length !== 0
+            ? <CategoriesList 
+                categories={categories}
+                classes={styles.categories}
+              />
+            : <div className={styles.message}>There are no categories</div>
+        }
+      </Grid>
     </AdminLayout>
   );
 };
