@@ -47,7 +47,7 @@ export const SignInForm: React.FC<IProps> = ({ onFormChange }: IProps) => {
   return (
     <>
     {isLogin && loginStatus.success
-      ? <div className={styles.message}>You are successfully logged in</div>
+      ? <div className={styles.successMessage}>You are successfully logged in</div>
       : <>
         <div className={styles.title}>Sign In</div>
         <form className={styles.form} onSubmit={handleSubmit(onSignInClick)}>
