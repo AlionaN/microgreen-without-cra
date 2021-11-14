@@ -8,6 +8,7 @@ import * as types from '@/store/actionTypes';
 import * as api from '@/api';
 import * as actions from '@/store/actions';
 import { Response } from 'express';
+import { toast } from 'react-hot-toast';
 
 interface IGetCart {
   type: typeof types.GET_CART,
@@ -35,10 +36,11 @@ interface IDeleteProductFromCart {
 export function* getCart({ type, cartId }: IGetCart) {
   try {
     const response: Response = yield call(api.getCart, cartId);
-    
+    console.log('sags', response);
     yield put(actions.getCartSuccess(response));
   } catch (error) {
     yield put(actions.getCartFailure());
+    toast.error('Something went wrong. Cart was not loaded');
   }
 }
 
@@ -47,8 +49,10 @@ export function* addProductToCart({ type, cartId, productId, quantity }: IUpdate
     const response: Response = yield call(api.addProductToCart, cartId, productId, quantity);
     yield put(actions.addProductToCartSuccess(response));
     yield put(actions.getCart(cartId));
+    toast.success('Product added to cart');
   } catch (error) {
     yield put(actions.addProductToCartFailure());
+    toast.error('Something went wrong. Product not added to cart');
   }
 }
 
@@ -59,6 +63,7 @@ export function* updateProductInCart({ type, cartId, productId, quantity }: IUpd
     yield put(actions.getCart(cartId));
   } catch (error) {
     yield put(actions.updateProductInCartFailure());
+    toast.error('Product in cart not updated');
   }
 }
 
@@ -69,6 +74,7 @@ export function* deleteProductFromCart({ type, cartId, productId }: IDeleteProdu
     yield put(actions.getCart(cartId));
   } catch (error) {
     yield put(actions.deleteProductFromCartFailure());
+    toast.error('Product not deleted from cart');
   }
 }
 
@@ -78,6 +84,7 @@ export function* clearCart({ type, cartId }: IClearCart) {
     yield put(actions.clearCartSuccess(response));
   } catch (error) {
     yield put(actions.clearCartFailure());
+    toast.error('Cart not cleared');
   }
 }
 

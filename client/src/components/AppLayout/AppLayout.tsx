@@ -6,6 +6,8 @@ import { Modal } from '@/components/Modal';
 import { RegistrationForm, SignInForm } from '@/components/Forms';
 import { useDispatch } from 'react-redux';
 import * as actions from '@/store/actions';
+import { Toaster } from 'react-hot-toast';
+// import 'react-toastify/dist/ReactToastify.min.css';
 
 export const AppLayout: React.FC = ({ children }) => {
   const dispatch = useDispatch();
@@ -37,6 +39,12 @@ export const AppLayout: React.FC = ({ children }) => {
           ? <RegistrationForm onFormChange={onFormChange} />
           : <SignInForm onFormChange={onFormChange} />}
       </Modal>
+      <Toaster
+        position='top-left'
+        toastOptions={{
+          duration: 4000
+        }}
+      />
     </section>
   );
 };
