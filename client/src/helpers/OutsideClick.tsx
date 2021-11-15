@@ -11,6 +11,6 @@ const OutsideClick: React.FC<IProps> = ({ children, callback }: IProps) => {
   useHandleClickOutside(wrapperRef, callback);
 
   return <div ref={wrapperRef}>{children}</div>;
-}
+};
 
 export default OutsideClick;

@@ -37,4 +37,4 @@ export const Payment: React.FC = () => {
       </div>
     </AppLayout>
   );
-}
+};

@@ -6,5 +6,5 @@ export const AdminFooter: React.FC = () => {
     <footer className={styles.footer}>
       <div className={styles.copyright}>2021</div>
     </footer>
-  )
-}
+  );
+};

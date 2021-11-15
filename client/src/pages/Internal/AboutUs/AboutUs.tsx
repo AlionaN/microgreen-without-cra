@@ -41,4 +41,4 @@ export const AboutUs: React.FC = () => {
       </div>
     </AppLayout>
   );
-}
+};

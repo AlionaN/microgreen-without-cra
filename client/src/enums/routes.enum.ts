@@ -1,5 +1,3 @@
-/* eslint-disable no-shadow */
-/* eslint-disable no-unused-vars */
 export enum Routes {
   Root = '/',
   Error404 = '/404',
@@ -10,10 +8,10 @@ export enum Routes {
   Payment = '/payment',
   Shop = '/shop',
   ProductId = '/shop/:productId'
-}
+};
 
 export enum AdminRoutes {
   Admin = '/admin',
   Categories = '/categories',
   Products = '/products',
-}
+};

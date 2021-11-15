@@ -11,21 +11,21 @@
   align-items: flex-start;
 
   &Input {
-    padding: 5px 5px 3px;
-    border-radius: 3px;
-    border: 1px solid #a1a1a1;
-    width: 100%;
     display: block;
+    width: 100%;
     box-sizing: border-box;
+    border: 1px solid #a1a1a1;
+    border-radius: 3px;
+    padding: 5px 5px 3px;
   }
 
   &Btn {
+    color: #fff;
     text-transform: capitalize;
     background-color: #92c98b;
     border: none;
     border-radius: 5px;
     padding: 7px 15px;
-    color: #fff;
     transition: .5s all;
 
     &:hover {

@@ -1,13 +1,12 @@
 import React from 'react';
 
-export const Main: React.FC<{ className?: string, children: JSX.Element }> = ({
-  className, children,
-}) => {
-  return (
-    <main className={className}>{children}</main>
-  );
+interface IProps {
+  classes?: string,
+  children: JSX.Element,
 };
 
-Main.defaultProps = {
-  className: '',
+export const Main: React.FC<IProps> = ({ classes, children }: IProps) => {
+  return (
+    <main className={classes}>{children}</main>
+  );
 };

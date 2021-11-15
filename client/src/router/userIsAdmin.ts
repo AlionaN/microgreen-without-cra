@@ -5,5 +5,5 @@ import { RootState } from '@/store/reducers';
 export const UserIsAdmin = connectedRouterRedirect({
   redirectPath: Routes.Error403,
   authenticatedSelector: (state: RootState) => state.userReducer.isLogIn && localStorage.getItem('role') === UserRoles.admin,
-  wrapperDisplayName: 'UserIsAuthenticated'
+  wrapperDisplayName: 'UserIsAuthenticated',
 });

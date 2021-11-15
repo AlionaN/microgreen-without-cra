@@ -22,7 +22,6 @@ const initialState: IInitialState = {
 };
 
 export const cartReducer: Reducer = (state = initialState, action: AnyAction) => {
-
   switch(action.type) {
     case types.GET_CART:
       return {
@@ -32,12 +31,13 @@ export const cartReducer: Reducer = (state = initialState, action: AnyAction) =>
     
     case types.GET_CART_SUCCESS: {
       const { payload } = action;
+
       return {
         ...state,
         getCartStatus: helpers.getSuccessState('Cart successfully found'),
         cart: payload,
       };
-    }
+    };
 
     case types.GET_CART_FAILURE:
       return {
@@ -59,12 +59,13 @@ export const cartReducer: Reducer = (state = initialState, action: AnyAction) =>
     
     case types.ADD_PRODUCT_TO_CART_SUCCESS: {
       const { payload } = action;
+
       return {
         ...state,
         addProductToCartStatus: helpers.getSuccessState('Cart successfully updated'),
         cart: payload
       };
-    }
+    };
       
     case types.ADD_PRODUCT_TO_CART_FAILURE:
       return {
@@ -86,12 +87,13 @@ export const cartReducer: Reducer = (state = initialState, action: AnyAction) =>
     
     case types.UPDATE_PRODUCT_IN_CART_SUCCESS: {
       const { payload } = action;
+
       return {
         ...state,
         updateProductInCartStatus: helpers.getSuccessState('Cart successfully updated'),
         cart: payload
       };
-    }
+    };
       
     case types.UPDATE_PRODUCT_IN_CART_FAILURE:
       return {
@@ -113,12 +115,13 @@ export const cartReducer: Reducer = (state = initialState, action: AnyAction) =>
       
       case types.DELETE_PRODUCT_FROM_CART_SUCCESS: {
         const { payload } = action;
+
         return {
           ...state,
           deleteProductFromCartStatus: helpers.getSuccessState('Cart successfully updated'),
           cart: payload
         };
-      }
+      };
         
       case types.DELETE_PRODUCT_FROM_CART_FAILURE:
         return {
@@ -140,12 +143,13 @@ export const cartReducer: Reducer = (state = initialState, action: AnyAction) =>
     
     case types.CLEAR_CART_SUCCESS: {
       const { payload } = action;
+
       return {
         ...state,
         clearCartStatus: helpers.getSuccessState('Cart successfully cleared'),
         cart: payload
       };
-    }
+    };
       
     case types.CLEAR_CART_FAILURE:
       return {
@@ -163,7 +167,7 @@ export const cartReducer: Reducer = (state = initialState, action: AnyAction) =>
       return {
         ...state,
         cart: null,
-      }
+      };
 
     default:
       return state;

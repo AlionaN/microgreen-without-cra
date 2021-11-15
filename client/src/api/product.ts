@@ -13,12 +13,10 @@ export const getProducts = async ( filters?: IProductFilters, sorting?: string, 
         query.push(`${key}=${value}`);
       }
     }
-  }
+  };
 
   const sortingQuery = filters && sorting ? `&${sorting}` : sorting;
-  
   const paginateQuery = `${sorting || query.length !== 0 ? '&' : ''}page=${paginate?.page}&limit=${limit}`;
-
   const response = await fetch(`${apiURL}/products${query.length !== 0 || sortingQuery || paginateQuery ? '?' : ''}${query && query.join('&')}${sorting ? sortingQuery : ''}${paginateQuery ? paginateQuery : ''}`);
   const result = await response.json();
 

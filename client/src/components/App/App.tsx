@@ -26,7 +26,7 @@ export const App: React.FC = () => {
   if (token && userId) {
     dispatch(actions.loginSuccess());
     localStorage.removeItem('cart');
-  }
+  };
 
   return (
     <AppRouter />

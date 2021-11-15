@@ -32,7 +32,7 @@ export const SignInForm: React.FC<IProps> = ({ onFormChange }: IProps) => {
       });
     } catch (e) {
       setLoginErrors(loginStatus.error);
-    }
+    };
   };
 
   const onInputChange = (e: ChangeEvent) => {
@@ -46,33 +46,33 @@ export const SignInForm: React.FC<IProps> = ({ onFormChange }: IProps) => {
 
   return (
     <>
-    {isLogin && loginStatus.success
-      ? <div className={styles.successMessage}>You are successfully logged in</div>
-      : <>
-        <div className={styles.title}>Sign In</div>
-        <form className={styles.form} onSubmit={handleSubmit(onSignInClick)}>
-          <input 
-            className={styles.formInput} 
-            {...register('email', { required: true })} 
-            type="email" 
-            placeholder="Email" 
-            onChange={(e) => onInputChange(e)}
-          />
-          <div className={styles.error}>{errors.email && "Field is required"}</div>
-          <input 
-            className={styles.formInput} 
-            {...register('password', { required: true })} 
-            type="password" 
-            placeholder="Password" 
-            onChange={(e) => onInputChange(e)}
-          />
-          <div className={styles.error}>{errors.password && "Field is required"}</div>
-          {loginStatus.error !== null && <div className={styles.error}>{loginStatus.error}</div>}
-          <input type="submit" className={styles.formBtn} disabled={loginStatus.loading} />
-        </form>
-        <div className={styles.message}>If you have not registered yet, go to the <span className={styles.linkToRegistration} onClick={onFormChange}>registration form</span></div>
-      </>
-    }
+      {isLogin && loginStatus.success
+        ? <div className={styles.successMessage}>You are successfully logged in</div>
+        : <>
+          <div className={styles.title}>Sign In</div>
+          <form className={styles.form} onSubmit={handleSubmit(onSignInClick)}>
+            <input 
+              className={styles.formInput} 
+              {...register('email', { required: true })} 
+              type="email" 
+              placeholder="Email" 
+              onChange={(e) => onInputChange(e)}
+            />
+            <div className={styles.error}>{errors.email && "Field is required"}</div>
+            <input 
+              className={styles.formInput} 
+              {...register('password', { required: true })} 
+              type="password" 
+              placeholder="Password" 
+              onChange={(e) => onInputChange(e)}
+            />
+            <div className={styles.error}>{errors.password && "Field is required"}</div>
+            {loginStatus.error !== null && <div className={styles.error}>{loginStatus.error}</div>}
+            <input type="submit" className={styles.formBtn} disabled={loginStatus.loading} />
+          </form>
+          <div className={styles.message}>If you have not registered yet, go to the <span className={styles.linkToRegistration} onClick={onFormChange}>registration form</span></div>
+        </>
+      }
     </>
   );
 };

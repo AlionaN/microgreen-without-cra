@@ -7,15 +7,12 @@ import { App } from '@/components/App';
 import '@/general.scss';
 
 ReactDOM.render(
-  <>
   <Provider store={appStore}>
     <BrowserRouter>
       <React.StrictMode>
         <App />
       </React.StrictMode>
     </BrowserRouter>
-  </Provider>
-  <script src="http://localhost:8097"></script>
-  </>,
+  </Provider>,
   document.getElementById('root'),
 );

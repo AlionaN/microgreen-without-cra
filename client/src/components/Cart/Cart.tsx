@@ -10,11 +10,7 @@ import { MdClose } from 'react-icons/md';
 import { Loader } from '../Loader';
 import OutsideClick from '@/helpers/OutsideClick';
 
-interface IProps {
-  
-};
-
-export const Cart: React.FC<IProps> = () => {
+export const Cart: React.FC = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.userReducer.user);
   const cart: ICart = useSelector((state: RootState) => state.cartReducer.cart);
@@ -46,6 +42,7 @@ export const Cart: React.FC<IProps> = () => {
 
   const onClearCart = (e: MouseEvent): void => {
     e.stopPropagation();
+    
     if (cartId) {
       dispatch(actions.clearCart(cartId));
     } else if (guestCart) {

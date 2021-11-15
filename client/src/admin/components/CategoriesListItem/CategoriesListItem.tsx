@@ -10,17 +10,19 @@ import { FiCheck } from 'react-icons/fi';
 
 interface IProps {
   category: ICategoryFromDB
-}
+};
 
 export const CategoriesListItem: React.FC<IProps> = ({ category }: IProps) => {
   const dispatch = useDispatch();
+  const [editMode, setEditMode] = useState<boolean>(false);
+
   const [categoryInfo, setCategoryInfo] = useState<ICategory>({
     title: category.title,
   });
-  const [editMode, setEditMode] = useState<boolean>(false); 
 
   const onInputChange = (e: ChangeEvent) => {
     const target = e.target as HTMLInputElement;
+
     setCategoryInfo({
       ...categoryInfo,
       [target.name]: target.value
@@ -36,6 +38,7 @@ export const CategoriesListItem: React.FC<IProps> = ({ category }: IProps) => {
       setEditMode(false);
       return;
     }
+
     dispatch(actions.editCategory(id, categoryInfo));
   };
 
@@ -57,7 +60,8 @@ export const CategoriesListItem: React.FC<IProps> = ({ category }: IProps) => {
             onChange={(e) => onInputChange(e)}
             className='addInput'
           />
-        : category.title}
+        : category.title
+      }
       <div className={styles.btns}>
         {editMode
           ? <Button btnText={<FiCheck />} classes={styles.checkBtn} onClick={() => onEditClick(category._id)} />
@@ -67,4 +71,4 @@ export const CategoriesListItem: React.FC<IProps> = ({ category }: IProps) => {
       </div>
     </li>
   );
-}
+};

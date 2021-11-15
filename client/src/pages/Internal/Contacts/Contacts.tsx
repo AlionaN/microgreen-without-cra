@@ -49,4 +49,4 @@ export const Contacts: React.FC = () => {
       </div>
     </AppLayout>
   );
-}
+};

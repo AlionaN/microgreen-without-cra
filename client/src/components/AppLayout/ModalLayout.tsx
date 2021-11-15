@@ -5,7 +5,7 @@ import { CgClose } from 'react-icons/cg';
 interface IModalLayout {
   content: JSX.Element;
   onCloseModal: () => void
-}
+};
 
 export const ModalLayout: React.FC<IModalLayout> = ({ content, onCloseModal }: IModalLayout) => {
   return (
@@ -15,5 +15,5 @@ export const ModalLayout: React.FC<IModalLayout> = ({ content, onCloseModal }: I
       </div>
       <div className={styles.windowBody}>{content}</div>
     </div>
-  )
+  );
 };

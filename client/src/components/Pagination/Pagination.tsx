@@ -14,6 +14,7 @@ export const Pagination: React.FC<IProps> = ({ pagesQuantity, productsPerPage, c
   const dispatch = useDispatch();
   const productSorting = useSelector((state: RootState) => state.productReducer.sorting);
   const productFilters = useSelector((state: RootState) => state.productReducer.filters);
+
   const [paginationConfig, setPaginationConfig] = useState({
     page: 0,
     limit: productsPerPage
@@ -24,6 +25,7 @@ export const Pagination: React.FC<IProps> = ({ pagesQuantity, productsPerPage, c
   }, [paginationConfig]);
 
   const pBtns: JSX.Element[] = [];
+  
   pagesQuantity > 1 && [...Array(pagesQuantity)]
     .map((item, index) => item = index)
     .forEach((page) => {

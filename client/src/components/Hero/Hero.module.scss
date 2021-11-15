@@ -6,11 +6,11 @@
   background-position: center;
 
   &Text {
+    display: flex;
     text-transform: uppercase;
     font-weight: bold;
     font-size: 5rem;
     letter-spacing: 30px;
-    display: flex;
 
     &Right {
       align-items: flex-end;

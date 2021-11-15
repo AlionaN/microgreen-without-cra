@@ -19,7 +19,7 @@ interface IGetProducts {
 interface IGetProduct {
   type: typeof types.GET_PRODUCT,
   productId: string
-}
+};
 
 interface IPostProduct {
   type: typeof types.POST_PRODUCT, 
@@ -44,53 +44,49 @@ export function* getProducts({ type, filters, paginate, sorting }: IGetProducts)
     yield put(actions.getProductsSuccess(response));
   } catch (error) {
     yield put(actions.getProductsFailure());
-  }
-}
+  };
+};
 
 export function* postProduct({ type, payload }: IPostProduct) {
   try {
     yield call(api.postProduct, payload);
-
     yield put(actions.postProductSuccess(payload));
     yield put(actions.getProducts());
   } catch (error) {
     yield put(actions.postProductFailure());
-  }
-}
+  };
+};
 
 export function* getProduct({ type, productId }: IGetProduct) {
   try {
     const response: IProductFromDB = yield call(api.getProduct, productId);
-
     yield put(actions.getProductSuccess(response));
   } catch (error) {
     yield put(actions.getProductFailure());
-  }
-}
+  };
+};
 
 export function* deleteProduct({type, payload }: IDeleteProduct) {
   try {
     yield call(api.deleteProduct, payload);
-
     yield put(actions.deleteProductSuccess());
     yield put(actions.clearDeleteProductStatus());
     yield put(actions.getProducts());
   } catch (error) {
     yield put(actions.deleteProductFailure());
-  }
-}
+  };
+};
 
 export function* editProduct({type, id, payload }: IEditProduct) {
   try {
     const response: IProduct = yield call(api.editProduct, id, payload);
-
     yield put(actions.editProductSuccess(response));
     yield put(actions.clearEditProductStatus());
     yield put(actions.getProducts());
   } catch (error) {
     yield put(actions.editProductFailure());
-  }
-}
+  };
+};
 
 export default function* productSaga() {
   yield all([
@@ -100,4 +96,4 @@ export default function* productSaga() {
     takeEvery(types.DELETE_PRODUCT, deleteProduct),
     takeEvery(types.EDIT_PRODUCT, editProduct),
   ]);
-}
+};

@@ -22,11 +22,12 @@ interface ILogin {
 interface IGetUser {
   type: typeof types.GET_USER,
   userId: string
-}
+};
 
 export function* register({ type, payload }: IRegister) {
   try {
     yield call(api.register, payload);
+
     const { email = '', password } = payload;
 
     yield put(actions.registerSuccess());
@@ -35,8 +36,8 @@ export function* register({ type, payload }: IRegister) {
     yield put(actions.getUser(response.userId));
   } catch (error) {
     yield put(actions.registerFailure());
-  }
-}
+  };
+};
 
 export function* login({ type, payload }: ILogin) {
   try {
@@ -44,12 +45,13 @@ export function* login({ type, payload }: ILogin) {
     yield put(actions.loginSuccess());
     
     const { token, userId } = response;
+
     token && localStorage.setItem('token', token);
     userId && localStorage.setItem('userId', userId);
   } catch (error) {
     yield put(actions.loginFailure());
-  }
-}
+  };
+};
 
 export function* getUser({ type, userId }: IGetUser) {
   try {
@@ -57,11 +59,10 @@ export function* getUser({ type, userId }: IGetUser) {
     yield put(actions.getUserSuccess(response));
     yield put(actions.getCart(response.cart));
     localStorage.setItem('role', response.role[0]);
-    
   } catch (error) {
     yield put(actions.getUserFailure());
-  }
-}
+  };
+};
 
 export default function* watch() {
   yield all([
@@ -69,4 +70,4 @@ export default function* watch() {
     takeLatest(types.LOGIN, login),
     takeLatest(types.GET_USER, getUser),
   ]);
-}
+};

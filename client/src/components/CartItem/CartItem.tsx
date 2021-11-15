@@ -20,9 +20,11 @@ export const CartItem: React.FC<IProps> = ({ item }: IProps) => {
   const onQuantityChange = (e: FormEvent) => {
     e.stopPropagation();
     const target = e.target as HTMLInputElement;
+
     if (target.value === '' || target.value === '0') {
       return;
     }
+
     if (cart && cart !== null) {
       dispatch(actions.updateProductInCart(cart._id, product._id, Number(target.value)));
     } else {
@@ -33,6 +35,7 @@ export const CartItem: React.FC<IProps> = ({ item }: IProps) => {
 
   const onDeleteClick = (e: MouseEvent) => {
     e.stopPropagation();
+    
     if (cart) {
       dispatch(actions.deleteProductFromCart(cart._id, product._id));
     } else {

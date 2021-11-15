@@ -17,7 +17,6 @@ export const Home: React.FC = () => {
   const filters = useSelector((state: RootState) => state.productReducer.filters);
   const sorting = useSelector((state: RootState) => state.productReducer.sorting);
 
-
   useEffect(() => {
     dispatch(actions.getProducts(filters, sorting, { page: 0, limit: 15 }));
   }, []);

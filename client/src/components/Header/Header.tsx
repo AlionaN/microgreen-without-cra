@@ -12,7 +12,7 @@ import { IoClose } from 'react-icons/io5';
 
 interface IHeader {
   onSignInClick?: () => void,
-}
+};
 
 export const Header: React.FC<IHeader> = ({ onSignInClick }: IHeader) => {
   const dispatch = useDispatch();
@@ -82,4 +82,4 @@ export const Header: React.FC<IHeader> = ({ onSignInClick }: IHeader) => {
       </div>
     </header>
   );
-}
+};

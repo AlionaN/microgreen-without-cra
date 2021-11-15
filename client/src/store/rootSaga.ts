@@ -7,4 +7,4 @@ import cartSaga from '@/store/sagas/cart';
 
 export function* rootSaga() {
   yield all([fork(categorySaga), fork(productSaga), fork(userSaga), fork(cartSaga)]);
-}
+};

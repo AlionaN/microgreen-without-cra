@@ -9,4 +9,4 @@ export const Logo: React.FC = () => {
       Micro
     </NavLink>
   );
-}
+};

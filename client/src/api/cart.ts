@@ -1,4 +1,3 @@
-import { ICartItem } from '@/interfaces';
 import { apiURL } from './apiConfig';
 
 export const getCart = async (cartId: string): Promise<Response> => {
@@ -16,6 +15,7 @@ export const addProductToCart = async (cartId: string, productId: string, quanti
     },
     body: JSON.stringify({ cartId, productId, quantity })
   });
+
   const result = await response.json();
   
   return result;
@@ -29,6 +29,7 @@ export const updateProductInCart = async (cartId: string, productId: string, qua
     },
     body: JSON.stringify({ cartId, productId, quantity })
   });
+
   const result = await response.json();
   
   return result;
@@ -42,6 +43,7 @@ export const deleteProductFromCart = async (cartId: string, productId: string): 
     },
     body: JSON.stringify({ cartId, productId })
   });
+  
   const result = await response.json();
   
   return result;

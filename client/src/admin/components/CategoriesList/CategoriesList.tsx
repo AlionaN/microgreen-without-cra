@@ -9,7 +9,6 @@ interface ICategoriesList {
 };
 
 export const CategoriesList: React.FC<ICategoriesList> = ({ categories, classes }: ICategoriesList) => {
-
   return (
     <div className={`${styles.categories} ${classes}`}>
       <ul className={styles.categoriesList}>

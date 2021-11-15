@@ -23,22 +23,28 @@ export const login = async (user: IUserLoginRequest) => {
     },
     body: JSON.stringify(user),
   });
+
   let result;
+
   if (response.ok) {
     result  = await response.json();
   } else {
     throw new Error('User not found');
   }
+
   return result;
 };
 
 export const getUser = async (userId: string) => {
   const response = await fetch(`${apiURL}/user/${userId}`);
+
   let result;
+
   if (response.ok) {
     result  = await response.json();
   } else {
     throw new Error('User not found');
   }
+  
   return result;
 };

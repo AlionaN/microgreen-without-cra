@@ -8,7 +8,7 @@ interface IModal {
   el: JSX.Element;
   isModalOpen: boolean;
   onCloseModal: () => void;
-}
+};
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -32,6 +32,6 @@ export class Modal extends React.Component {
         <ModalLayout content={this.props.children} onCloseModal={this.props.onCloseModal}/>,
         el
       )
-    )
+    );
   };
-}
+};

@@ -1,12 +1,12 @@
 .header {
   width: 230px;
   height: 100vh;
+  position: fixed;
+  color: #acacac;
   background-color: #185815;
   border-radius: 0 15px 15px 0;
-  color: #acacac;
-  padding: 20px;
   box-sizing: border-box;
-  position: fixed;
+  padding: 20px;
   transition: left .5s;
 
   &Title {
@@ -74,8 +74,8 @@
 @media (max-width: 600px) {
 
   .header {
-    left: -100%;
     width: 50%;
+    left: -100%;
     padding-left: 60px;
 
     &.active {

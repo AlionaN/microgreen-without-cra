@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '@/store/actions';
 import { ProductsList } from '@/admin/components/ProductsList';
-import { IProductFromDB, IStatus } from '@/interfaces';
+import { IProductFromDB } from '@/interfaces';
 import { Button } from '@/components/Button';
 import { Modal } from '@/components/Modal';
 import { Loader } from '@/components/Loader';

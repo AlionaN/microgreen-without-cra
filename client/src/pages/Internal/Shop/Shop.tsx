@@ -18,6 +18,7 @@ export const Shop: React.FC = () => {
   const getProductsStatus = useSelector((state: RootState) => state.productReducer.getProductsStatus);
   const filters = useSelector((state: RootState) => state.productReducer.filters);
   const sorting = useSelector((state: RootState) => state.productReducer.sorting);
+
   const sortOptions = [
     {title: 'Title (A - Z)', value: 'sortField=title&sortMethod=asc'},
     {title: 'Title (Z - A)', value: 'sortField=title&sortMethod=desc'},
@@ -62,4 +63,4 @@ export const Shop: React.FC = () => {
       />}
     </AppLayout>
   );
-}
+};

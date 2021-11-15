@@ -78,6 +78,7 @@ export const userReducer: Reducer = (state = initialState, action: AnyAction) =>
       localStorage.removeItem('token');
       localStorage.removeItem('userId');
       localStorage.removeItem('role');
+      
       return {
         ...state,
         logoutStatus: helpers.getRequestState(),

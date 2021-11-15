@@ -1,9 +1,9 @@
 
 .window {
   position: fixed;
+  min-width: 300px;
   background-color: #fff;
   border-radius: 10px;
-  min-width: 300px;
   padding: 20px;
 
   &Header {

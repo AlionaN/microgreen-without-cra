@@ -8,13 +8,13 @@ import { RootState } from '@/store/reducers';
 interface IOption {
   value: string,
   title: string
-}
+};
 
 interface IProps {
   options: IOption[],
   sortObject: 'product' | 'category',
   classes?: string
-}
+};
 
 export const Sorting: React.FC<IProps> = ({ options, sortObject, classes }: IProps) => {
   const dispatch = useDispatch();
@@ -35,5 +35,5 @@ export const Sorting: React.FC<IProps> = ({ options, sortObject, classes }: IPro
         {options && options.map((option, index) => <option key={index} value={option.value}>{option.title}</option>)}
       </select>
     </div>
-  )
+  );
 };

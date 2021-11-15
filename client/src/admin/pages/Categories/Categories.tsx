@@ -32,6 +32,7 @@ export const Categories: React.FC = () => {
   const editLoadingStatus: boolean = useSelector((state: RootState) => state.categoryReducer.editCategoryStatus.loading);
   const statuses = [getLoadingStatus, postLoadingStatus, deleteLoadingStatus, editLoadingStatus];
   const isLoading = statuses.some((item) => item === true);
+
   const sortOptions = [
     {title: 'Title (A - Z)', value: 'sortField=title&sortMethod=asc'},
     {title: 'Title (Z - A)', value: 'sortField=title&sortMethod=desc'},
@@ -44,6 +45,7 @@ export const Categories: React.FC = () => {
   const onAddClick = (e: MouseEvent<HTMLButtonElement | JSX.Element | MouseEvent>): void => {
     e.preventDefault();
     categoryInputs && dispatch(actions.postCategory(categoryInputs as ICategory));
+    
     setCategoryInputs({
       ...categoryInputs,
       title: ''

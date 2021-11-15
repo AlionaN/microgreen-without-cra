@@ -1,5 +1,4 @@
 import * as types from '../actionTypes';
-import { ICartItem } from '@/interfaces';
 
 export const getCart = (cartId: string) => ({ 
   type: types.GET_CART,

@@ -1,4 +1,4 @@
-import { IProductFromDB } from ".";
+import { IProductFromDB } from '.';
 
 export interface ICart {
   _id: string,

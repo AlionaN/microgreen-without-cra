@@ -10,7 +10,7 @@ import { Routes } from '@/enums';
 
 type IProps = {
   card: IProductFromDB
-}
+};
 
 export const Card: React.FC<IProps> = ({ card }: IProps) => {
   const dispatch = useDispatch();
@@ -20,6 +20,7 @@ export const Card: React.FC<IProps> = ({ card }: IProps) => {
 
   const onAddToCartClick = (e: MouseEvent<HTMLButtonElement | JSX.Element | MouseEvent>) => {
     e.stopPropagation();
+
     if (cart) {
       dispatch(actions.addProductToCart(cart._id, _id, 1))
     } else if (guestCart) {
@@ -45,4 +46,4 @@ export const Card: React.FC<IProps> = ({ card }: IProps) => {
       </Link>
     </div>
   );
-}
+};

@@ -13,10 +13,9 @@ import { compareObjects } from '@/helpers';
 
 interface IProps {
   product: IProductFromDB,
-}
+};
 
 export const ProductListItem: React.FC<IProps> = ({ product }: IProps) => {
-
   const dispatch = useDispatch();
   const categories = useSelector((state: RootState) => state.categoryReducer.categories);
   const category = categories.filter((item: ICategoryFromDB) =>  item._id === product.categoryId);
@@ -40,6 +39,7 @@ export const ProductListItem: React.FC<IProps> = ({ product }: IProps) => {
 
   const onInputChange = (e: ChangeEvent): void => {
     const target = e.target as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+
     setProductInfo({
       ...productInfo,
       [target.name]: target.value
@@ -52,10 +52,12 @@ export const ProductListItem: React.FC<IProps> = ({ product }: IProps) => {
 
   const onEditClick = (e: MouseEvent<HTMLButtonElement | JSX.Element | MouseEvent>): void => {
     e.preventDefault();
+
     if(compareObjects(product, productInfo)) {
       setEditMode(false);
       return;
     }
+
     dispatch(actions.editProduct(product._id, productInfo));
     setEditMode(false);
   };
@@ -71,18 +73,18 @@ export const ProductListItem: React.FC<IProps> = ({ product }: IProps) => {
         <img className={styles.cardImg} src={product.image || defaultImg} alt={product.title} />
         {editMode
           ? <>
-            <label htmlFor="image" className={styles.cardLabel}>Choose another image</label>
-            <input 
-              className={styles.cardInput}
-              {...register('image', { required: false })}
-              onChange={(e) => onInputChange(e)}
-              type="text"
-              value={productInfo.image}
-            />
+              <label htmlFor="image" className={styles.cardLabel}>Choose another image</label>
+              <input 
+                className={styles.cardInput}
+                {...register('image', { required: false })}
+                onChange={(e) => onInputChange(e)}
+                type="text"
+                value={productInfo.image}
+              />
             </>
-          : null}      
+          : null
+        }      
         <div className={styles.error}>{errors.image && "Field is required"}</div>
-        
       </div>
       <label htmlFor='title' className={styles.cardLabel}>Title</label>
       <input 

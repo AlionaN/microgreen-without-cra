@@ -6,17 +6,17 @@
   }
 
   &Window {
-    position: absolute;
     width: 350px;
     height: 500px;
-    z-index: 10;
+    position: absolute;
     top: 100%;
     right: 0;
     background-color: white;
     border-radius: 10px;
     box-shadow: 1px 1px 4px #ccc;
     padding: .5rem;
-  
+    z-index: 10;
+    
     &[data-hidden="true"] {
       display: block;
     }
@@ -31,16 +31,16 @@
   }
 
   &Close {
+    font-size: 1.2rem;
     background-color: transparent;
     border: none;
     cursor: pointer;
-    font-size: 1.2rem;
   }
 
   &Message {
-    padding: 1rem 0 2rem;
     text-align: center;
     font-weight: bold;
+    padding: 1rem 0 2rem;
   }
 
   &List {
@@ -49,26 +49,26 @@
   }
 
   &ClearBtn {
-    border: 1px solid #8d8d8d;
-    border-radius: 3px;
     color: #8d8d8d;
     background-color: transparent;
+    border: 1px solid #8d8d8d;
+    border-radius: 3px;
     padding: 3px 10px;
     transition: all .5s;
 
     &:hover {
-      background-color: #8d8d8d;
       color: #fff;
+      background-color: #8d8d8d;
       cursor: pointer;
     }
   }
 }
 
 .total {
+  width: calc(100% - 15px);
   position: absolute;
   bottom: 10px;
   background-color: #fff;
-  width: calc(100% - 15px);
 
   & > * + * {
     margin-top: 10px;

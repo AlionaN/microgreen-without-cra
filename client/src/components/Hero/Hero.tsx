@@ -21,4 +21,4 @@ export const Hero: React.FC = () => {
       </Grid>
     </Grid>
   );
-}
+};

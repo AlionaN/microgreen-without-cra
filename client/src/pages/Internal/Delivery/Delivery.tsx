@@ -46,4 +46,4 @@ export const Delivery: React.FC = () => {
       </div>
     </AppLayout>
   );
-}
+};

@@ -44,4 +44,4 @@ export const Footer: React.FC = () => {
       <div className={styles.copyright}>All rights reserved. 2021</div>
     </footer>
   );
-}
+};

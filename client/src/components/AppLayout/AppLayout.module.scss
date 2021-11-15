@@ -6,11 +6,11 @@
 }
 
 .container {
-  min-height: 100vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   position: relative;
+  min-height: 100vh;
 
   &.admin {
     background-color: #f2f2f2;
