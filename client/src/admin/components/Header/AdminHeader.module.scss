@@ -7,11 +7,14 @@
   padding: 20px;
   box-sizing: border-box;
   position: fixed;
+  transition: left .5s;
+
   &Title {
     text-transform: uppercase;
     text-align: center;
     font-size: 1.2rem;
     margin-bottom: 15px;
+
     &::after {
       content: '';
       display: block;
@@ -22,39 +25,62 @@
       margin-top: 15px;
     }
   }
+
   &Nav {
     &List {
       list-style-type: none;
+
       &Item {
         margin: 20px 0;
+
         & a {
           color: #acacac;
           text-decoration: none;
           transition: color .5s;
+
           &:hover {
             color: #fff;
           }
         }
+
         &Text {
           text-transform: uppercase;
         }
       }
     }
+
     &Sublist {
       list-style-type: none;
       margin-left: 20px;
       margin-top: 10px;
+
       &Item a{
         color: #acacac;
         text-decoration: none;
         transition: color .5s;
+
         &:hover {
           color: #fff;
         }
       }
+
       & > * + * {
         margin-top: 10px;
       }
     }
   }
+}
+
+@media (max-width: 600px) {
+
+  .header {
+    left: -100%;
+    width: 50%;
+    padding-left: 60px;
+
+    &.active {
+      left: 0;
+    }
+  }
+
 }

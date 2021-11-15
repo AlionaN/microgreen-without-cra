@@ -1,11 +1,15 @@
 
 .window {
+  position: fixed;
   background-color: #fff;
   border-radius: 10px;
+  min-width: 300px;
   padding: 20px;
+
   &Header {
     display: flex;
     justify-content: flex-end;
+
     &Close {
       cursor: pointer;
     }

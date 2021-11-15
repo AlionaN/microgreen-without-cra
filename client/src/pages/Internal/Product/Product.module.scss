@@ -1,0 +1,26 @@
+@import '@/mixins.scss';
+
+.product {
+  width: 90%;
+  margin: 20px auto;
+
+  &Image {
+    border-radius: 10px;
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+  }
+
+  &Info {
+    @include contentBlock;
+
+    & > * + * {
+      margin-top: 10px;
+    }
+  }
+
+  &Input {
+    @include input;
+    margin-right: 10px;
+  }
+}

@@ -1,26 +1,53 @@
+@import '@/mixins.scss';
+
 .card {
-  list-style-type: none;
+  @include contentBlock;
   border-radius: 5px;
-  padding: 8px;
-  transition: .5s all;
+  padding: 15px;
+  transition: all .5s;
+
+  &Link {
+    color: initial;
+    text-decoration: none;
+
+    & > * + * {
+      margin-top: .5rem;
+    }
+  }
+
   &:hover {
-    transform: scale(1.05);
-    box-shadow: 1px 1px 5px #acacac;
+    transform: scale(1.01);
+    box-shadow: 1px 1px 6px #acacac;
   }
-  & > * + * {
-    margin-top: .5rem;
-  }
+
   &Img {
     max-width: 100%;
     object-fit: cover;
     width: 100%;
     height: 250px;
+    border-radius: 5px;
   }
+
   &Info {
-    display: flex;
-    justify-content: space-between;
-    &Price {
+    text-align: left;
+
+    &Title {
       font-weight: bold;
     }
+
+    &Description {
+      color: #8d8d8d;
+      font-size: .9rem;
+      margin-top: 10px;
+    }
+  }
+
+  &Price {
+    font-weight: bold;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
   }
 }

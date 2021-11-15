@@ -1,30 +1,44 @@
 @import '../../../mixins.scss';
+
 .aboutUs {
   @include container;
 }
+
 .team {
   display: flex;
+
   &Info {
     margin-right: 20px;
+
     &Title {
       @include title;
       margin-bottom: 10px;
     }
+
+    &Text {
+      line-height: 1.5;
+    }
   }
+
   &Image {
-    width: 50%;
+    width: 100%;
+    border-radius: 5px;
   }
 }
+
 .history {
   padding: 20px 0;
+
   &Title {
     @include title;
     margin-bottom: 20px;
     text-align: center;
   }
+
   &Steps {
     display: flex;
     justify-content: space-around;
+
     &Item {
       border-radius: 100%;
       background-color: #e8f9d9;
@@ -34,12 +48,15 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      margin: 0 auto;
       padding: 25px;
+
       &Year {
         font-weight: bold;
         font-size: 2rem;
         margin-bottom: 20px;
       }
+
       &Descr {
         text-align: center;
       }

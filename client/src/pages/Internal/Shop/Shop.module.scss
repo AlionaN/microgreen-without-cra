@@ -1,4 +1,41 @@
 @import '../../../mixins.scss';
+
+.panel {
+  @include contentBlock;
+  width: 90%;
+  margin: 15px auto 0;
+
+  &Sorting {
+    margin-left: auto;
+  }
+
+  &Filters label,
+  &Sorting label{
+    font-size: .9rem;
+    color: #8d8d8d;
+    margin-bottom: 5px;
+  }
+
+  .sort {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
 .shop {
   @include container;
+
+  &Pagination {
+    margin-bottom: 25px;
+  }
+}
+
+@media (max-width: 599px) {
+
+  .panel {
+    .sort {
+      justify-content: flex-start;
+    }
+  }
+
 }

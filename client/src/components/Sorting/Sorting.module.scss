@@ -1,0 +1,11 @@
+@import '@/mixins.scss';
+
+.sorting {
+  &Label {
+    display: block;
+  }
+
+  &Select {
+    @include input;
+  }
+}

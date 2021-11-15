@@ -1,3 +1,5 @@
+@import '@/mixins.scss';
+
 .btn {
   background-color: #92c98b;
   border: none;
@@ -5,8 +7,28 @@
   padding: 7px 15px;
   color: #fff;
   transition: .5s all;
+
   &:hover {
     background-color: #6d9767;
     cursor: pointer;
+  }
+}
+
+.form {
+  min-width: 300px;
+
+  &Input {
+    @include input;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  &Label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  &Textarea {
+    resize: none;
   }
 }

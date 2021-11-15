@@ -1,23 +1,43 @@
 .header {
-  background-color: #e8f9d96e;
-  padding: 10px 0;
+  position: relative;
+  background-color: #fff;
+  box-shadow: 1px 1px 3px #ccc;
+  padding: 0 0 10px 0;
+  z-index: 1;
+
   &Inner {
-    width: 90%;
-    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  &Top {
+    display: flex;
+    justify-content: space-between;
+    background-color: #e8f9d9;
+    border-bottom: 1px solid #dddddd;
+    color: #8f8f8f;
+    font-size: .8rem;
+    margin-bottom: 10px;
+    padding: 8px 5%;
   }
 }
+
 .nav {
+  transition: all .5s;
+
   &List {
     display: flex;
     list-style: none;
+
     &Item {
       a {
         text-decoration: none;
         color: #121212;
         transition: 1s border;
+
         &::after {
           content: '';
           display: block;
@@ -28,21 +48,31 @@
           margin-top: 2px;
           transition: .5s all;
         }
+
         &:hover::after {
           opacity: 1;
         }
       }
     }
+
     & > * + * {
       margin-left: 20px;
     }
   }
 }
+
 .userFunc {
   display: flex;
   align-items: center;
+
   &Auth {
+    margin-right: 20px;
     cursor: pointer;
+  }
+
+  &SignOut {
+    color: #8f8f8f;
+    font-size: .8rem;
   }
 }
 
@@ -55,4 +85,59 @@
 
 .cart {
   margin-left: 20px;
+}
+
+.hamburger {
+  display: none;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 1;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .header {
+    &Top {
+      flex-direction: column;
+
+      & > * + * {
+        margin-top: 5px;
+      }
+    }
+  }
+  
+  .hamburger {
+    display: block;
+
+    &.active + .nav {
+      top: 100%;
+    }
+  }
+
+  .nav {
+    position: absolute;
+    width: 100%;
+    background-color: #fff;
+    top: -200%;
+    left: 0;
+    padding: 10px 0;
+    z-index: -1;
+
+    &List {
+      flex-direction: column;
+      align-items: center;
+
+      & > * + * {
+        margin-left: initial;
+        margin-top: 10px;
+      }
+    }
+  }
+
 }

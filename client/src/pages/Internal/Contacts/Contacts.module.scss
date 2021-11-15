@@ -1,39 +1,50 @@
 @import '../../../mixins.scss'; 
+
 .contacts {
   @include container;
-  display: flex;
+
   &Image {
-    width: 50%;
+    width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 5px;
   }
+
   &Info {
     margin-left: 20px;
-    width: 45%;
+    width: 100%;
+
     &Title {
       @include title;
     }
+    
     &Wrap {
       display: flex;
       justify-content: space-between;
       margin-top: 15px;
+
       a {
         color: #000;
       }
     }
   }
+
   &Follow {
     margin-top: 20px;
+
     &Title {
       @include title;
       font-size: 1.4rem;
     }
+
     &Socials {
       display: flex;
       margin-top: 10px;
+
       & > * + * {
         margin-left: 10px;
       }
+
       img {
         width: 40px;
       }
@@ -42,14 +53,18 @@
 }
 
 .form {
+  @include contentBlock;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: start;
-  background-color: #eeeeee;
-  border-radius: 5px;
-  padding: 20px;
   margin-top: 20px;
+
+  &Description {
+    font-size: .9rem;
+    color: #8d8d8d;
+  }
+
   &Input,
   &Textarea {
     background-color: transparent;
@@ -59,13 +74,12 @@
     width: 98%;
     display: block;
   }
+
   &Textarea {
     resize: none;
   }
+
   & > * + * {
     margin-top: 10px;
-  }
-  &Btn {
-    width: 50%;
   }
 }
