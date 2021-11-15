@@ -1,6 +1,5 @@
 import {
   put,
-  takeEvery,
   all,
   call,
   takeLatest
@@ -56,6 +55,7 @@ export function* getUser({ type, userId }: IGetUser) {
   try {
     const response: IUser = yield call(api.getUser, userId);
     yield put(actions.getUserSuccess(response));
+    yield put(actions.getCart(response.cart));
     localStorage.setItem('role', response.role[0]);
     
   } catch (error) {
