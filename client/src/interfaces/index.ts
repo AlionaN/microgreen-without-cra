@@ -8,3 +8,4 @@ export * from './IStatus';
 export * from './IProductQuery';
 export * from './IUserLogin';
 export * from './ICartItem';
+export * from './IStatistics';
