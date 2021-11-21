@@ -99,8 +99,8 @@ describe('Test case for Sign In component', () => {
     const signinComponent = component.find('SignInForm');
     const signinWrapper = signinComponent.dive();
 
-    expect(signinWrapper.find('.message').length).toBe(1);
-    expect(signinWrapper.find('.message').text()).toBe('You are successfully logged in');
+    expect(signinWrapper.find('.successMessage').length).toBe(1);
+    expect(signinWrapper.find('.successMessage').text()).toBe('You are successfully logged in');
   });
 
   it('Should appear failure message after failure login', () => {
