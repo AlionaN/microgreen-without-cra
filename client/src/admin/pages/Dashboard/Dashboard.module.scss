@@ -1,0 +1,32 @@
+@import '@/mixins.scss';
+
+.panel {
+  @include contentBlock;
+}
+
+.form {
+  &Input {
+    @include input;
+  }
+
+  &Label {
+    display: block;
+    font-size: .9rem;
+    color: #787878;
+    margin-bottom: 5px;
+  }
+
+  &Btn {
+    color: #fff;
+    background-color: #92c98b;
+    border: none;
+    border-radius: 5px;
+    padding: 7px 15px;
+    transition: .5s all;
+    
+    &:hover {
+      background-color: #6d9767;
+      cursor: pointer;
+    }
+  }
+}
