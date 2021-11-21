@@ -1,17 +1,10 @@
-import { runSaga } from 'redux-saga';
-import { call, select, take, put } from 'redux-saga/effects';
-import { expectSaga } from 'redux-saga-test-plan';
-import * as types from '@/store/actionTypes/product';
-import * as actions from '@/store/actions/product';
-import * as sagas from '@/store/sagas/product';
-import * as helpers from '@/store/helpers';
-import * as api from '@/api/product';
-import productReducer from '@/store/reducers/product';
-import { throwError } from 'redux-saga-test-plan/providers';
+import sagaHelper from 'redux-saga-testing';
+import { call, put } from 'redux-saga/effects';
+import { getProducts } from '../../api';
+import * as actions from '../actions';
+import * as sagas from '../sagas/product';
 
-const productsSelector = (state) => state.productReducer.products;
-
-const newProduct = {
+const product = {
   "id": 16,
   "categoryId": 1,
   "title": "Coconut Soil Brick",
@@ -40,51 +33,58 @@ const productsStore = [
     "image": "soilBricks.jpg",
     "price": 45.9
   },
-]
+];
 
-async function recordSaga(saga, initialAction) {
-  const dispatched = [];
+const api = jest.fn();
+const getProductsSuccessAction = () => ({ type: 'GET_PRODUCTS_SUCCESS', payload: productsStore });
 
-  await runSaga(
-    {
-      dispatch: (action) => dispatched.push(action)
-    },
-    saga,
-    initialAction
-  ).done;
-
-  return dispatched;
+function* successGetProducts() {
+  yield call(api);
+  yield put(getProductsSuccessAction());
 }
 
-describe('62105055', () => {
+describe('get products success saga', () => {
 
-  api.getProducts = jest.fn();
+  let it = sagaHelper(successGetProducts());
 
-  beforeEach(() => {
-    jest.resetAllMocks();
+  it('should be equal to call(api)', (result) => {
+    expect(result).toEqual(call(api));
+    expect(api).not.toHaveBeenCalled();
   });
 
-  it('fetchs get products failure', () => async () => {
-    productsSelector.mockImplementation(() => productsStore);
-  
-    const initialAction = {};
-    const dispatched = await recordSaga(
-      actions.getProducts,
-      initialAction
-    );
-
-    console.log(dispatched);
-  
-    expect(dispatched).toContainEqual(actions.getProductsFailure());
-    expect(api.getProducts).not.toHaveBeenCalled();
+  it('should be equal productsStore', (result) => {
+    expect(result.payload.action.payload).toBe(productsStore);
   });
 
-  // it('should test fetches posts', () => {
-  //   const posts = { posts: [] };
-  //   return expectSaga(watchPosts)
-  //     .provide([[call(api.post.getPosts), posts]])
-  //     .put({ type: types.GET_POSTS_SUCCESS, payload: { posts } })
-  //     .dispatch({ type: types.GET_POSTS_INIT })
-  //     .silentRun();
-  // });
+  it('should return undefined', (result) => {
+    expect(result).toBeUndefined();
+  });
 });
+
+
+const getProductsFailureAction = () => ({ type: 'GET_PRODUCTS_FAILURE', payload: 'Something went wrong' });
+
+function* failureGetProducts() {
+  yield call(api);
+  yield put(getProductsFailureAction());
+}
+
+describe('get products failure saga', () => {
+
+  let it = sagaHelper(failureGetProducts());
+
+  it('should be equal to call(api)', (result) => {
+    expect(result).toEqual(call(api));
+    expect(api).not.toHaveBeenCalled();
+  });
+
+  it('should be equal "Something went wrong"', (result) => {
+    expect(result.payload.action.payload).toBe('Something went wrong');
+  });
+
+  it('should return undefined', (result) => {
+    expect(result).toBeUndefined();
+  });
+});
+
+
