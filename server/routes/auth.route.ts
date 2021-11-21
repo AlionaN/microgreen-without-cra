@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { check, validationResult } from 'express-validator';
 import User from '../models/User';
+import StatisticsUser from '../models/StatisticsUser';
 import { StatusCodes } from 'http-status-codes';
 const router = Router();
 import Cart from '../models/Cart';
@@ -67,6 +68,13 @@ router.post(
       await user.save();
 
       const registeredUser = await User.findOne({ email });
+
+      const userStatisticsRequest = new StatisticsUser({
+        userId: registeredUser.id,
+        date: new Date(),
+      });
+
+      await userStatisticsRequest.save();
 
       res.status(StatusCodes.CREATED).send({ userId: registeredUser.id }).json({ message: 'User successfuly created' });
     } catch(e) {

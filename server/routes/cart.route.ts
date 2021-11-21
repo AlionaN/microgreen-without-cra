@@ -2,6 +2,8 @@ import { Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
 const router = Router();
 import Product from '../models/Product';
+import StatisticsProducts from '../models/StatisticsProducts';
+import Category from '../models/Category';
 import Cart, { ICart } from '../models/Cart';
 import { Types } from 'mongoose';
 
@@ -39,6 +41,7 @@ router.post(
       }
       
       const product = await Product.findOne({ _id: productId });
+      const category = await Category.findById({ _id: product.categoryId });
       const isProductInCart = cart.items.some((item) => item.product.title === product.title);
       const quantityNum = Number(quantity);
 
@@ -58,6 +61,15 @@ router.post(
       await Cart.findOneAndUpdate({ _id: cartId }, { ...cart });
 
       const result = await Cart.find({ _id: cartId });
+
+      const productStatisticsRequest = new StatisticsProducts ({
+        productId: product.id,
+        categoryId: product.categoryId,
+        categoryName: category.title,
+        date: new Date(),
+      });
+
+      productStatisticsRequest.save();
 
       res.status(StatusCodes.OK).send(result).json({ message: 'Product added to cart' });
 

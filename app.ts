@@ -8,6 +8,8 @@ import CategoryRoutes from './server/routes/category.route';
 import ProductRoutes from './server/routes/product.router';
 import CartRoutes from './server/routes/cart.route';
 import UserRoutes from './server/routes/user.route';
+import StatisticsUserRoutes from './server/routes/statisticsUser.route';
+import StatisticsProductRoutes from './server/routes/statisticsProduct.route';
 // import { StatusCodes } from 'http-status-codes';
 
 dotenv.config();
@@ -24,6 +26,8 @@ app.use('/api/categories', CategoryRoutes);
 app.use('/api/products', ProductRoutes);
 app.use('/api/cart', CartRoutes);
 app.use('/api/user', UserRoutes);
+app.use('/api/statistics-user', StatisticsUserRoutes);
+app.use('/api/statistics-product', StatisticsProductRoutes);
 
 // app.all('*', (req, res) => {
 //   res.sendStatus(StatusCodes.NOT_FOUND);
