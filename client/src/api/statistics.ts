@@ -21,7 +21,6 @@ export const getProductStatistics = async ( dateStart?: string, dateEnd?: string
   
   const response = await fetch(`${apiURL}/statistics-product${query}`);
   const result = await response.json();
-  console.log(result)
 
   return result;
 };

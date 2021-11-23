@@ -8,7 +8,6 @@ interface IDate {
 
 export const createDateString = (dateObj: IDate) => {
   const { day, month, year } = dateObj;
-  console.log(dateObj)
 
   return `${month && MONTHS[month - 1] || ''} ${day || ''} ${year}`;
 };

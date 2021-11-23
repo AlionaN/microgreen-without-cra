@@ -26,7 +26,6 @@ export const Cart: React.FC = () => {
   useEffect(() => {
     if (cartId && cartId !== undefined && !cart) {
       dispatch(actions.getCart(cartId));
-      console.log(cart);
     } else if (localStorage.getItem('cart')) {
       dispatch(actions.getGuestCart());
     }
