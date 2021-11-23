@@ -1,12 +1,12 @@
 @import '@/mixins.scss';
 
 .panel {
-  @include contentBlock;
+  @include contentBlock($dark-theme: false);
 }
 
 .form {
   &Input {
-    @include input;
+    @include input($dark-theme: false);
   }
 
   &Label {

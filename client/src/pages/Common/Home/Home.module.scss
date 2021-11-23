@@ -1,5 +1,33 @@
 @import '../../../mixins.scss';
 
+[data-theme="dark"] {
+  .about {
+    &Info {
+      &Title {
+        color: $primary-text-color-dark-mode;
+      }
+
+      &Text {
+        color: $primary-text-color-dark-mode;
+      }
+    }
+  }
+
+  .products {
+    &Title {
+      color: $primary-text-color-dark-mode;
+    }
+  }
+
+  .toShop {
+    @include shadowedBtn($dark-theme: true);
+  
+    &:hover {
+      @include shadowedBtnHover($dark-theme: true);
+    }
+  }
+}
+
 .about {
   @include container;
 
@@ -15,7 +43,12 @@
 
     &Title {
       @include title;
+      color: $primary-text-color-light-mode;
       margin-bottom: 10px;
+    }
+
+    &Text {
+      color: $primary-text-color-light-mode;
     }
   }
 }
@@ -27,16 +60,17 @@
 
   &Title {
     @include title;
+    color: $primary-text-color-light-mode;
     text-align: center;
     margin-bottom: 10px;
   }
 }
 
 .toShop {
-  @include shadowedBtn;
+  @include shadowedBtn($dark-theme: false);
   display: inline-block;
 
   &:hover {
-    @include shadowedBtnHover;
+    @include shadowedBtnHover($dark-theme: false);
   }
 }

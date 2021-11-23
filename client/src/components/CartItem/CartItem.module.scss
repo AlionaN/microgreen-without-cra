@@ -1,3 +1,13 @@
+@import '@/mixins.scss';
+
+[data-theme="dark"] {
+  .cartListItem {
+    &Input {
+      @include input($dark-theme: true);
+    }
+  }
+}
+
 .cartListItem {
   display: flex;
   align-items: center;
@@ -10,6 +20,7 @@
   }
 
   &Input {
+    @include input($dark-theme: false);
     max-width: 40px;
   }
 }

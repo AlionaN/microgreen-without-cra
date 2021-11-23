@@ -15,9 +15,11 @@ export const Hero: React.FC = () => {
       <Grid item xs={1} md={1}><div className={`${styles.heroText} ${styles.heroTextLeft}`}>Green</div></Grid>
       <Grid item xs={1} md={1}></Grid>
 
-      <Grid item xs={1} md={2} display='flex' direction='column' className={styles.toShop}>
-        <div className={styles.toShopText}>Alive food for you</div>
-        <NavLink to="/shop" className={styles.btn}>To Shop</NavLink>
+      <Grid item xs={1} md={2}>
+        <div className={styles.toShop}>
+          <div className={styles.toShopText}>Alive food for you</div>
+          <NavLink to="/shop" className={styles.btn}>To Shop</NavLink>
+        </div>
       </Grid>
     </Grid>
   );

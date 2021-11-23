@@ -1,13 +1,25 @@
+@import '@/theme-styles.scss';
+
+[data-theme="dark"] {
+  .btn {
+    background-color: $main-color-dark-mode;
+
+    &:hover {
+      background-color: $main-hover-color-dark-mode;
+    }
+  }
+}
+
 .btn {
   color: #fff;
-  background-color: #92c98b;
+  background-color: $main-color-light-mode;
   border: none;
   border-radius: 5px;
   padding: 7px 15px;
   transition: .5s all;
   
   &:hover {
-    background-color: #6d9767;
+    background-color: $main-hover-color-light-mode;
     cursor: pointer;
   }
 }

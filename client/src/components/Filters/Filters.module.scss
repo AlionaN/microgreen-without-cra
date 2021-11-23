@@ -1,5 +1,14 @@
 @import '@/mixins.scss';
 
+[data-theme="dark"] {
+  .filters {
+    &Input,
+    &Select {
+      @include input($dark-theme: true);
+    }
+  }
+}
+
 .filters {
   form {
     display: flex;
@@ -16,7 +25,7 @@
 
   &Input,
   &Select {
-    @include input;
+    @include input($dark-theme: false);
     width: 100%;
   }
 

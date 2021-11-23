@@ -9,6 +9,7 @@ import * as actions from '@/store/actions';
 import { Cart } from '@/components/Cart';
 import { HiMenu } from 'react-icons/hi';
 import { IoClose } from 'react-icons/io5';
+import { ThemeSwitcher } from '../ThemeSwitcher';
 
 interface IHeader {
   onSignInClick?: () => void,
@@ -66,11 +67,12 @@ export const Header: React.FC<IHeader> = ({ onSignInClick }: IHeader) => {
             </li>
           </ul>
         </nav>
+        <ThemeSwitcher />
         <div className={styles.userFunc}>
           {isSignIn && user !== null
             ? <>
               <div className={styles.userFuncAuth}>
-                <div>Hello, {user.firstName}</div>
+                <div className={styles.userFuncGreetings}>Hello, {user.firstName}</div>
                 <div onClick={onSignOutClick} className={styles.userFuncSignOut} >Sign out</div>
               </div>
               {user.img && <div className={styles.userImg}><img src={user.img}/></div>}

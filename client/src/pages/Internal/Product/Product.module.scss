@@ -1,5 +1,18 @@
 @import '@/mixins.scss';
 
+[data-theme="dark"] {
+  .product {
+    &Info {
+      @include contentBlock($dark-theme: true);
+      color: $primary-text-color-dark-mode;
+    }
+
+    &Input {
+      @include input($dark-theme: true);
+    }
+  }
+}
+
 .product {
   width: 90%;
   margin: 20px auto;
@@ -12,7 +25,8 @@
   }
 
   &Info {
-    @include contentBlock;
+    @include contentBlock($dark-theme: false);
+    color: $primary-text-color-light-mode;
 
     & > * + * {
       margin-top: 10px;
@@ -20,7 +34,7 @@
   }
 
   &Input {
-    @include input;
+    @include input($dark-theme: false);
     margin-right: 10px;
   }
 }

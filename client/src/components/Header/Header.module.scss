@@ -1,7 +1,46 @@
+@import '@/theme-styles.scss';
+
+[data-theme="dark"] {
+  .header {
+    background-color: $header-form-bg-color-dark-mode;
+    box-shadow: 1px 1px 3px $border-shadow-color-dark-mode;
+
+    &Top {
+      color: $secondary-text-color-dark-mode;
+      background-color: $primary-color-dark-mode;
+      border-bottom-color: $border-shadow-color-dark-mode;
+    }
+  }
+
+  .nav {
+    &List {
+      &Item {
+        a {
+          color: $primary-text-color-dark-mode;
+  
+          &::after {
+            background-color: $primary-text-color-dark-mode;
+          }
+        }
+      }
+    }
+  }
+
+  .userFunc {
+    &SignOut {
+      color: $secondary-text-color-dark-mode;
+    }
+
+    &Greetings {
+      color: $primary-text-color-dark-mode;
+    }
+  }
+}
+
 .header {
   position: relative;
-  background-color: #fff;
-  box-shadow: 1px 1px 3px #ccc;
+  background-color: $header-form-bg-color-light-mode;
+  box-shadow: 1px 1px 3px $border-shadow-color-light-mode;
   padding: 0 0 10px 0;
   z-index: 1;
 
@@ -16,10 +55,10 @@
   &Top {
     display: flex;
     justify-content: space-between;
-    color: #8f8f8f;
+    color: $secondary-text-color-light-mode;
     font-size: .8rem;
-    background-color: #e8f9d9;
-    border-bottom: 1px solid #dddddd;
+    background-color: $primary-color-light-mode;
+    border-bottom: 1px solid $border-shadow-color-light-mode;
     margin-bottom: 10px;
     padding: 8px 5%;
   }
@@ -35,7 +74,7 @@
     &Item {
       a {
         text-decoration: none;
-        color: #121212;
+        color: $primary-text-color-light-mode;
         transition: 1s border;
 
         &::after {
@@ -43,7 +82,7 @@
           display: block;
           width: 100%;
           height: 2px;
-          background-color: #121212;
+          background-color: $primary-text-color-light-mode;
           opacity: 0;
           margin-top: 2px;
           transition: .5s all;
@@ -65,13 +104,17 @@
   display: flex;
   align-items: center;
 
+  &Greetings {
+    color: $primary-text-color-light-mode;
+  }
+
   &Auth {
     margin-right: 20px;
     cursor: pointer;
   }
 
   &SignOut {
-    color: #8f8f8f;
+    color: $secondary-text-color-light-mode;
     font-size: .8rem;
   }
 }
@@ -102,6 +145,12 @@
 
 @media (max-width: 600px) {
 
+  [data-theme="dark"] {
+    .nav {
+      background-color: $header-form-bg-color-dark-mode;
+    }
+  }
+
   .header {
     &Top {
       flex-direction: column;
@@ -125,7 +174,7 @@
     position: absolute;
     top: -200%;
     left: 0;
-    background-color: #fff;
+    background-color: $header-form-bg-color-light-mode;
     padding: 10px 0;
     z-index: -1;
 

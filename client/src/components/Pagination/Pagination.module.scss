@@ -1,11 +1,30 @@
 @import '@/mixins.scss';
+@import '@/theme-styles.scss';
+
+[data-theme="dark"] {
+  .pagination {
+    &List {
+      @include contentBlock($dark-theme: true);
+    }
+
+    &Btn {
+      &:not(.current):hover {
+        color: $main-hover-color-dark-mode;
+      }
+    }
+  }
+
+  .current {
+    color: $main-color-dark-mode;
+  }
+}
 
 .pagination {
   display: flex;
   justify-content: center;
 
   &List {
-    @include contentBlock;
+    @include contentBlock($dark-theme: false);
     display: flex;
     list-style-type: none;
     border-radius: 20px;
@@ -20,8 +39,8 @@
     cursor: pointer;
     transition: all .5s;
 
-    &:hover {
-      color: #41be3a;
+    &:not(.current):hover {
+      color: $main-hover-color-light-mode;
     }
 
     &[disabled] {
@@ -31,5 +50,5 @@
 }
 
 .current {
-  color: #41be3a;
+  color: $main-color-light-mode;
 }

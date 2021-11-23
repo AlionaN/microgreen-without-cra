@@ -1,5 +1,17 @@
 @import '../../mixins.scss';
 
+[data-theme="dark"] {
+  .toShop {
+    .btn {
+      @include shadowedBtn($dark-theme: true);
+  
+      &:hover {
+        @include shadowedBtnHover($dark-theme: true);
+      }
+    }
+  }
+}
+
 .hero {
   height: 90vh;
   background-size: cover;
@@ -33,10 +45,10 @@
   }
 
   .btn {
-    @include shadowedBtn;
+    @include shadowedBtn($dark-theme: false);
 
     &:hover {
-      @include shadowedBtnHover;
+      @include shadowedBtnHover($dark-theme: false);
     }
   }
 }

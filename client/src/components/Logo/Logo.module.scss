@@ -1,6 +1,14 @@
+@import '@/theme-styles.scss';
+
+[data-theme="dark"] {
+  .logo {
+    color: $primary-text-color-dark-mode;
+  }
+}
+
 .logo {
   font-weight: bold;
-  color: #121212;
+  color: $primary-text-color-light-mode;
   text-decoration: none;
   text-transform: uppercase;
   font-size: 1.2rem;

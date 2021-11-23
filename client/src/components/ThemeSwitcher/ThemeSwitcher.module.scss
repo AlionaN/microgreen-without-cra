@@ -1,0 +1,14 @@
+.switch {
+  background-color: transparent;
+  border: none;
+  padding: 2px 5px;
+  transition: background-color .5s;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  img {
+    display: block;
+  }
+}

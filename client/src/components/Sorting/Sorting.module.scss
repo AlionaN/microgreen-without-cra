@@ -1,11 +1,19 @@
 @import '@/mixins.scss';
 
+[data-theme="dark"] {
+  .sorting {
+    &Select {
+      @include input($dark-theme: true);
+    }
+  }
+}
+
 .sorting {
   &Label {
     display: block;
   }
 
   &Select {
-    @include input;
+    @include input($dark-theme: false);
   }
 }

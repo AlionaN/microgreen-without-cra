@@ -1,7 +1,13 @@
 @import '../../../mixins.scss';
 
+[data-theme="dark"] {
+  .panel {
+    @include contentBlock($dark-theme: true);
+  }
+}
+
 .panel {
-  @include contentBlock;
+  @include contentBlock($dark-theme: false);
   width: 90%;
   margin: 15px auto 0;
 

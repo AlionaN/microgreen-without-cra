@@ -1,7 +1,7 @@
 @import '@/mixins.scss';
 
 .card {
-  @include contentBlock;
+  @include contentBlock($dark-theme: false);
 
   &Img {
     width: 100%;

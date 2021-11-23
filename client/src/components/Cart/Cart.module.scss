@@ -1,5 +1,43 @@
+@import '@/theme-styles.scss';
+
+[data-theme="dark"] {
+  .cart {
+    svg {
+      color: $primary-text-color-dark-mode;
+    }
+
+    &Window {
+      color: $primary-text-color-dark-mode;
+      background-color: $header-form-bg-color-dark-mode;
+      box-shadow: 1px 1px 4px $border-shadow-color-dark-mode;
+    }
+
+    &Close {
+      color: $primary-text-color-dark-mode;
+    }
+
+    &ClearBtn {
+      color: $secondary-text-color-dark-mode;
+      border-color: $secondary-text-color-dark-mode;
+
+      &:hover {
+        background-color: $secondary-text-color-dark-mode;
+        color: #000;
+      }
+    }
+  }
+
+  .total {
+    background-color: $header-form-bg-color-dark-mode;
+  }
+}
+
 .cart {
   cursor: pointer;
+
+  svg {
+    color: $primary-text-color-light-mode;
+  }
 
   &Wrapper {
     position: relative;
@@ -11,9 +49,10 @@
     position: absolute;
     top: 100%;
     right: 0;
-    background-color: white;
+    color: $primary-text-color-light-mode;
+    background-color: $header-form-bg-color-light-mode;
     border-radius: 10px;
-    box-shadow: 1px 1px 4px #ccc;
+    box-shadow: 1px 1px 4px $border-shadow-color-light-mode;
     padding: .5rem;
     z-index: 10;
     
@@ -31,6 +70,7 @@
   }
 
   &Close {
+    color: $primary-text-color-light-mode;
     font-size: 1.2rem;
     background-color: transparent;
     border: none;
@@ -49,16 +89,16 @@
   }
 
   &ClearBtn {
-    color: #8d8d8d;
+    color: $secondary-text-color-light-mode;
     background-color: transparent;
-    border: 1px solid #8d8d8d;
+    border: 1px solid $secondary-text-color-light-mode;
     border-radius: 3px;
     padding: 3px 10px;
     transition: all .5s;
 
     &:hover {
       color: #fff;
-      background-color: #8d8d8d;
+      background-color: $secondary-text-color-light-mode;
       cursor: pointer;
     }
   }
@@ -68,7 +108,7 @@
   width: calc(100% - 15px);
   position: absolute;
   bottom: 10px;
-  background-color: #fff;
+  background-color: $header-form-bg-color-light-mode;
 
   & > * + * {
     margin-top: 10px;

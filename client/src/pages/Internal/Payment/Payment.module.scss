@@ -1,10 +1,32 @@
-@import '../../../mixins.scss';
+@import '@/mixins.scss';
+@import '@/theme-styles.scss';
+
+[data-theme="dark"] {
+  .payment {
+    &Title {
+      color: $primary-text-color-dark-mode;
+    }
+
+    &Vars {
+      &Item {
+        &Title {
+          color: $primary-text-color-dark-mode;
+        }
+
+        &Descr {
+          color: $primary-text-color-dark-mode;
+        }
+      }
+    }
+  }
+}
 
 .payment {
   @include container;
 
   &Title {
     @include title;
+    color: $primary-text-color-light-mode;
     text-align: center;
     margin-bottom: 20px;
   }
@@ -24,11 +46,13 @@
       }
 
       &Title {
+        color: $primary-text-color-light-mode;
         font-weight: bold;
         margin-top: 10px;
       }
 
       &Descr {
+        color: $primary-text-color-light-mode;
         text-align: center;
         margin-top: 10px;
       }

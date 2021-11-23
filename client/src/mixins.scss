@@ -1,24 +1,36 @@
+@import '@/theme-styles.scss';
+
 @mixin title {
   font-weight: bold;
   font-size: 2rem;
   text-transform: capitalize;
 }
 
-@mixin shadowedBtn {
-  color: #121212;
+@mixin shadowedBtn ($dark-theme: false) {
+  @if $dark-theme {
+    color: $primary-text-color-dark-mode;
+    background-color: #767676;
+    box-shadow: 1px 1px 4px $border-shadow-color-dark-mode;
+  } @else {
+    color: $primary-text-color-light-mode;
+    background-color: #fff;
+    box-shadow: 1px 1px 4px $border-shadow-color-light-mode;
+  }
   text-decoration: none;
-  background-color: #ffffff;
   border: none;
   border-radius: 5px;
-  box-shadow: 1px 1px 4px #8d8d8d;
   margin-top: 10px;
   padding: 7px 15px;
   transition: .5s all;
 }
 
-@mixin shadowedBtnHover {
-  color: #fff;
-  background-color: #6d9767;
+@mixin shadowedBtnHover ($dark-theme: false) {
+  @if $dark-theme {
+    background-color: #fff;
+    color: #767676;
+  } @else {
+    background-color: $main-hover-color-light-mode;
+  }
   cursor: pointer;
 }
 
@@ -27,14 +39,24 @@
   margin: 20px auto;
 }
 
-@mixin contentBlock {
-  background-color: #fff;
+@mixin contentBlock ($dark-theme) {
+  @if $dark-theme {
+    background-color: $header-form-bg-color-dark-mode;
+  } @else {
+    background-color: $header-form-bg-color-light-mode;
+  }
   border-radius: 10px;
   padding: 15px;
 }
 
-@mixin input {
-  border: 1px solid #cacaca;
+@mixin input ($dark-theme){
+  @if $dark-theme {
+    border: 1px solid #cecece;
+    color: #cecece;
+  } @else {
+    border: 1px solid $border-shadow-color-light-mode;
+  }
+  background-color: transparent;
   border-radius: 5px;
   padding: 2px 5px;
 }
