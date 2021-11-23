@@ -5,6 +5,10 @@ import { IMG_PATH } from '@/constants';
 import { Button } from '@/components/Button';
 import { AppLayout } from '@/components/AppLayout';
 import { Grid } from '@mui/material';
+import { MdFacebook } from 'react-icons/md';
+import { AiFillInstagram } from 'react-icons/ai';
+import { IoLogoLinkedin } from 'react-icons/io';
+import { FaTelegram } from 'react-icons/fa';
 
 export const Contacts: React.FC = () => {
 
@@ -37,10 +41,10 @@ export const Contacts: React.FC = () => {
               <div className={styles.contactsFollow}>
                 <div className={styles.contactsFollowTitle}>Follow us</div>
                 <div className={styles.contactsFollowSocials}>
-                  <Link className={styles.contactsFollowSocialsItem} to="https://www.facebook.com/"><img src={`${IMG_PATH}facebook.png`} alt="Facebook" /></Link>
-                  <Link className={styles.contactsFollowSocialsItem} to="https://www.instagram.com/"><img src={`${IMG_PATH}instagram.png`} alt="Instagram" /></Link>
-                  <Link className={styles.contactsFollowSocialsItem} to="https://www.linkedin.com/"><img src={`${IMG_PATH}linkedin.png`} alt="LinkedIn" /></Link>
-                  <Link className={styles.contactsFollowSocialsItem} to="https://twitter.com/?lang=en"><img src={`${IMG_PATH}twitter.png`} alt="Twitter" /></Link>
+                  <Link className={styles.contactsFollowSocialsItem} to="https://www.facebook.com/"><MdFacebook /></Link>
+                  <Link className={styles.contactsFollowSocialsItem} to="https://www.instagram.com/"><AiFillInstagram /></Link>
+                  <Link className={styles.contactsFollowSocialsItem} to="https://www.linkedin.com/"><IoLogoLinkedin /></Link>
+                  <Link className={styles.contactsFollowSocialsItem} to="https://telegram.com/"><FaTelegram /></Link>
                 </div>
               </div>
             </div>
